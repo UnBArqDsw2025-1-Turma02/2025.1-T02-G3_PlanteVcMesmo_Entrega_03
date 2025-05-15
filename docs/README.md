@@ -1,41 +1,46 @@
-# RepositorioTemplate
-Esse repositório é para ser utilizado pelos grupos como um template inicial.
-As seções do Template NÃO DEVEM SER OMITIDAS, sendo TODAS RELEVANTES.
-Demais diretrizes constam no Moodle.
+# Grupo 03 - Plante Vc Mesmo
 
-**!! Atenção: Renomeie o seu repositório para (Ano.Semestre)_(Grupo)_(NomeDoProjeto)_(Entrega_03)*. !!** 
-
-**!! *Não coloque os nomes dos alunos no título do repositório*. !!**
-
-**!! *Exemplo de título correto: 2024.2_G1_Jogo_Entrega_03*. !!** 
- 
- (Apague esses comentários)
-
-# Nome do Projeto
+## Plante Vc Mesmo
 
 **Código da Disciplina**: FGA0208<br>
-**Número do Grupo**: XX<br>
+**Número do Grupo**: 03<br>
 **Entrega**: 03<br>
 
 ## Alunos
+
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 22/1007850 | Arthur Ribeiro e Sousa |
+| 22/1021868 | Caio Falcão Habibe |
+| 22/1007920 | Caio Felipe Rocha |
+| 22/2031045 | Caio Magalhães Lamego |
+| 21/1031682 | Davi Araújo Bady Casseb |
+| 22/2022162 | Gabriel Fernando De Jesus Silva |
+| 22/1008703 | Mateus Vieira Rocha da Silva |
+| 22/2037737 | Matheus de Siqueira Brant |
+| 22/1031354 | Pedro Henrique Fernandino da Silva |
+| 22/2006383 | Rafael Melo Matuda |
 
-## Sobre 
-Contextualize, usando referências, links, e outros materiais como fontes.
+## Sobre
 
-## Screenshots da Terceira Entrega
-Adicione 2 ou mais screenshots em termos de artefatos realizados na entrega.
+Plante Vc Mesmo é uma plataforma web que ajuda no cuidado com plantas de forma simples e prática. Com ela, você cadastra suas plantas, recebe lembretes via Google Agenda e conta com um chat de IA especializado em jardinagem para tirar dúvidas.
+
+A plataforma também oferece guias, dicas, um FAQ interativo e recomenda produtos e lojas perto de você. Tudo pensado para facilitar sua rotina e criar uma comunidade apaixonada por plantas.
+
+<!-- ## Screenshots da Primeira Entrega -->
 
 ## Há algo a ser executado?
 
-( ) SIM
+<input type="checkbox" disabled /> SIM
 
-( ) NÃO
+<input type="checkbox" checked disabled /> NÃO
 
-Se SIM, insira um manual (ou um script) para auxiliar ainda mais os interessados na execução.
+## Histórico de Versão
 
-## Informações Complementares 
-Quaisquer outras informações adicionais podem ser descritas nessa seção.
+| Versão | Data       | Alterações Principais                             | Autor(es)        |
+|--------|------------|---------------------------------------------------|:----------------:|
+| 1.0.0  | 02-05-2025 | Criação do documento                              | Arthur Ribeiro |
+
+<!-- ## Informações Complementares
+
+Quaisquer outras informações adicionais podem ser descritas nessa seção. --> 
