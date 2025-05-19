@@ -22,16 +22,34 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 
-const languages = [
-  { label: 'English', value: 'en' },
-  { label: 'French', value: 'fr' },
-  { label: 'German', value: 'de' },
-  { label: 'Spanish', value: 'es' },
-  { label: 'Portuguese', value: 'pt' },
-  { label: 'Russian', value: 'ru' },
-  { label: 'Japanese', value: 'ja' },
-  { label: 'Korean', value: 'ko' },
-  { label: 'Chinese', value: 'zh' },
+const brazilStates = [
+  { label: 'Acre', value: 'AC' },
+  { label: 'Alagoas', value: 'AL' },
+  { label: 'Amapá', value: 'AP' },
+  { label: 'Amazonas', value: 'AM' },
+  { label: 'Bahia', value: 'BA' },
+  { label: 'Ceará', value: 'CE' },
+  { label: 'Distrito Federal', value: 'DF' },
+  { label: 'Espírito Santo', value: 'ES' },
+  { label: 'Goiás', value: 'GO' },
+  { label: 'Maranhão', value: 'MA' },
+  { label: 'Mato Grosso', value: 'MT' },
+  { label: 'Mato Grosso do Sul', value: 'MS' },
+  { label: 'Minas Gerais', value: 'MG' },
+  { label: 'Pará', value: 'PA' },
+  { label: 'Paraíba', value: 'PB' },
+  { label: 'Paraná', value: 'PR' },
+  { label: 'Pernambuco', value: 'PE' },
+  { label: 'Piauí', value: 'PI' },
+  { label: 'Rio de Janeiro', value: 'RJ' },
+  { label: 'Rio Grande do Norte', value: 'RN' },
+  { label: 'Rio Grande do Sul', value: 'RS' },
+  { label: 'Rondônia', value: 'RO' },
+  { label: 'Roraima', value: 'RR' },
+  { label: 'Santa Catarina', value: 'SC' },
+  { label: 'São Paulo', value: 'SP' },
+  { label: 'Sergipe', value: 'SE' },
+  { label: 'Tocantins', value: 'TO' },
 ];
 
 const values = ref({
@@ -54,7 +72,7 @@ const values = ref({
               role='combobox'
               class='h-0 justify-start text-white'
             >
-              {{ values.language ? languages.find(
+              {{ values.language ? brazilStates.find(
                 (language) => language.value === values.language,
               )?.label : 'Escolha seu estado...' }}
               <Icon
@@ -70,7 +88,7 @@ const values = ref({
             <CommandList>
               <CommandGroup>
                 <CommandItem
-                  v-for='language in languages'
+                  v-for='language in brazilStates'
                   :key='language.value'
                   :value='language.label'
                   @select='() => {
