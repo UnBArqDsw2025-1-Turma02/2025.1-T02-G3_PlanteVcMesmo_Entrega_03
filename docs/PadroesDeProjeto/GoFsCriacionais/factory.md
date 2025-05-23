@@ -12,9 +12,15 @@ O método Factory é um padrão de projeto criacional que permite a criação de
 
 ## Aplicação no Projeto
 
+O padrão de design Factory demonstrou ser uma solução eficaz para o chat com IA utilizado no projeto. Sua aplicação se dá na integração de diferentes modelos, como o ChatGPT e o Gemini, que exigem formas distintas de comunicação. [3] [4]. Dessa forma, o padrão permite encapsular essas variações por meio de uma interface unificada.
+
 ## Vantagens e Justificativas
 
-<!-- pq é bom usar e pq vamos usar, seja claro pf -->
+A utilização do padrão de projeto Factory oferece uma vantagem significativa ao promover o desacoplamento entre o código que cria objetos e o código que os utiliza. Essa separação não só simplifica a padronização da instanciação de diferentes tipos de objetos que implementam a mesma interface ou herdam de uma classe abstrata, mas também facilita a extensibilidade. Isso significa que é possível introduzir novos tipos de produtos ou serviços dentro do mesmo contexto sem a necessidade de modificar o código cliente existente, tornando o sistema mais flexível e fácil de manter. [1].
+
+Apesar dos benefícios evidentes em termos de padronização na criação de novos serviços, a implementação do padrão Factory pode, por vezes, introduzir uma camada adicional de complexidade na arquitetura do sistema. Essa complexidade se manifesta na adição de novas classes, subclasses e interfaces, o que pode aumentar a curva de aprendizado para desenvolvedores que estão se familiarizando com o código-base. É um trade-off a ser considerado: a flexibilidade e manutenibilidade a longo prazo em troca de uma potencial complexidade inicial. [1].
+
+Com isso em mente, nosso principal objetivo ao aplicar o padrão Factory é estabelecer uma interface unificada para a utilização de LLMs. Essa abordagem nos permitirá, no futuro, integrar diversas APIs de LLM de diferentes provedores, garantindo que o modo de utilização permaneça consistente. Dessa forma, o código existente que já faz chamadas para o serviço de LLM não precisará ser alterado, otimizando o desenvolvimento e a manutenção, e permitindo uma fácil substituição ou adição de novos modelos de linguagem.
 
 ## Modelagem
 
@@ -24,9 +30,12 @@ O método Factory é um padrão de projeto criacional que permite a criação de
 
 1. Refactoring Guru. Factory Method. Disponível em: [https://refactoring.guru/design-patterns/factory-method](https://refactoring.guru/design-patterns/factory-method). Acesso em: 22 mai. 2025.
 2. Manik. The Factory Pattern In TypeScript. Cloudaffle. Disponível em: [https://cloudaffle.com/series/creational-design-patterns/factory-pattern/](https://cloudaffle.com/series/creational-design-patterns/factory-pattern/). Acesso em: 22 mai. 2025.
+3. OpenAI. API Reference. Disponível em: [https://openai.com/api/](https://openai.com/api/). Acesso em: 22 maio 2025.
+4. Google. Gemini API reference. Disponível em: [https://ai.google.dev/api?hl=pt-br&lang=python](https://ai.google.dev/api?hl=pt-br&lang=python). Acesso em: 22 maio. 2025.
 
 ## Histórico de Versões
 
 | Versão | Data       | Alterações Principais                             | Autor(es)                   |
 |--------|------------|---------------------------------------------------| --------------------------- |
-| 0.0.1  | 22-05-2025 | Descrição                                         | Caio Felipe e Mateus Vieira |
+| 0.0.1  | 22-05-2025 | Introdução                                        | Caio Felipe e Mateus Vieira |
+| 0.0.2  | 22-05-2025 | Aplicação no Projeto & Vantagens e Justificativas | Caio Felipe e Mateus Vieira |
