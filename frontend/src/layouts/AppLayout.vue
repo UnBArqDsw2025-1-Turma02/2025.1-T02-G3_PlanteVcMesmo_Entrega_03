@@ -5,7 +5,7 @@ import FooterIconLink from '@/components/base/Footer/FooterIconLink.vue';
 
 <template>
     <div
-      class='grid grid-rows-10 h-screen'
+      class='grid grid-rows-10 grid-cols-[minmax(0,1fr)] h-screen'
     >
     <slot />
     <Footer>
