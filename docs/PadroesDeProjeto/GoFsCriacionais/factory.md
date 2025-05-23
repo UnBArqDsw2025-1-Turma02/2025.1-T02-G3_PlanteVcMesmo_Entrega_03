@@ -1,11 +1,5 @@
 # 3.1.1. Factory
 
-<!-- COLOQUE AS REFERÊNCIAS POR PARÁGRAFO ESCRITO, PODE ENUMERAR E COLOCAR POR NÚMERO, TIPO EM ARTIGO MSM -->
-
-<!-- ESCREVA PELO MENOS 3 PARÁGRAFOS DE CADA TÓPICO, CADA UM COM NO MíNIMO 70 PALAVRAS -->
-
-<!-- NÂO SE LIMITE A ESSES TÓPICOS, MAS MANTENHA A ORDEM RELATIVA -->
-
 ## Introdução
 
 O método Factory é um padrão de projeto criacional que permite a criação de objetos de diferentes tipos a partir de uma `interface` ou `classe abstrata`, o seu objetivo é manter o modelo de utilização, uma vez que todos vão ter métodos comuns que chegam em um mesmo resultado esperado, apesar de poderem passar por diferentes implementações internas. No projeto vigente, tal design será utilizado para desacoplar os diferentes serviços de LLM, que podem ser de empresas distintas com maneiras de utilização não padronizadas. [1] [2].
@@ -24,7 +18,7 @@ Com isso em mente, nosso principal objetivo ao aplicar o padrão Factory é esta
 
 ## Modelagem
 
-<!-- pode fazer um protótipo do que podemos utilizar, tipo um rascunho, mas tente usar o máximo das regras UML -->
+![model-factory](../../assets/modelagem_factory.png)
 
 ## Referências
 
@@ -39,3 +33,4 @@ Com isso em mente, nosso principal objetivo ao aplicar o padrão Factory é esta
 |--------|------------|---------------------------------------------------| --------------------------- |
 | 0.0.1  | 22-05-2025 | Introdução                                        | Caio Felipe e Mateus Vieira |
 | 0.0.2  | 22-05-2025 | Aplicação no Projeto & Vantagens e Justificativas | Caio Felipe e Mateus Vieira |
+| 0.0.3  | 22-05-2025 | Imagem da Modelagem                               | Caio Felipe e Mateus Vieira |
