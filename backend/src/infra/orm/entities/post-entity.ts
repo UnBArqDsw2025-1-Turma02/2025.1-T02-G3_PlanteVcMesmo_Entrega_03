@@ -26,5 +26,21 @@ export const PostEntity = new EntitySchema<Post>({
         name: 'user_id',
       },
     },
+    labels: {
+      type: 'many-to-many',
+      target: 'label',
+      inverseSide: 'posts',
+      joinTable: {
+        name: 'post_labels',
+        joinColumn: {
+          name: 'post_id',
+          referencedColumnName: 'id',
+        },
+        inverseJoinColumn: {
+          name: 'label_id',
+          referencedColumnName: 'id',
+        },
+      },
+    },
   },
 })

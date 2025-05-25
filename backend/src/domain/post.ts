@@ -1,10 +1,12 @@
 import { User } from "@/domain";
+import { Label } from "@/domain";
 
 export type Post = {
   id: String,
-  createdAt: Date,
-  updatedAt: Date,
+  user: User,
   title: String,
   description: String,
-  user: User,
+  labels: Label[],
+  createdAt: Date,
+  updatedAt: Date,
 };
