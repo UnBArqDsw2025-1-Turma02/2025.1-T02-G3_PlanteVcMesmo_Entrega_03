@@ -1,14 +1,8 @@
 # 3.2.1. Composite
 
-<!-- COLOQUE AS REFERÊNCIAS POR PARÁGRAFO ESCRITO, PODE ENUMERAR E COLOCAR POR NÚMERO, TIPO EM ARTIGO MSM -->
-
-<!-- ESCREVA PELO MENOS 3 PARÁGRAFOS DE CADA TÓPICO, CADA UM COM NO MíNIMO 70 PALAVRAS -->
-
-<!-- NÂO SE LIMITE A ESSES TÓPICOS, MAS MANTENHA A ORDEM RELATIVA -->
-
 ## Introdução
 
-O Padrão de Projeto Composite visa organizar as estruturas de um projeto, tendo como objetivo agrupar objetos de uma relação parte-todo afim de que sejam tratados de maneira uniforme, ou seja, sem distinção.Este padrão é utilizado neste projeto para facilitar a componentização de elementos na interface do usuário. Ele permite que componentes sejam divididos em subpartes menores, promovendo a reutilização e a organização do código. Por exemplo, no contexto deste projeto, botões, formulários e outros elementos da interface são implementados como componentes independentes que podem ser compostos para formar estruturas mais complexas, da mesma forma que subcomponentes são utilizados para estruturar um componente maior.    
+O Padrão de Projeto Composite visa organizar as estruturas de um projeto, tendo como objetivo agrupar objetos de uma relação parte-todo afim de que sejam tratados de maneira uniforme, ou seja, sem distinção.Este padrão é utilizado neste projeto para facilitar a componentização de elementos na interface do usuário. Ele permite que componentes sejam divididos em subpartes menores, promovendo a reutilização e a organização do código. Por exemplo, no contexto deste projeto, botões, formulários e outros elementos da interface são implementados como componentes independentes que podem ser compostos para formar estruturas mais complexas, da mesma forma que subcomponentes são utilizados para estruturar um componente maior.
 
 ## Vantagens e Justificativas
 
@@ -23,9 +17,10 @@ Por fim, a coesão é aprimorada, uma vez que o Composite incentiva a organizaç
 Concretizando este contexto de uso numa representação UML, teríamos, por exemplo, uma classe abstrata 'DialogElement', as Leafs: DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogScrollContent, DialogTitle, DialogTrigger e por fim o Composite: Dialog. Cada Leaf representa uma parte específica do Dialog, enquanto o Composite agrega essas partes para formar um Dialog completo. Essa estrutura permite que o componente seja tratado como uma única entidade, simplificando a manipulação e a renderização na interface do usuário.
 
 Esboço UML:
-![UML Composite](./composite.png)
+![UML Composite](../../assets/composite.png)
 
 ## Implementação
+
 A implementação do Composite é feita em diversos componentes do projeto, seguindo um padrão estrutural como no exemplo a seguir:
 
 ```vue
@@ -35,16 +30,16 @@ A implementação do Composite é feita em diversos componentes do projeto, segu
     </FormHeader>
 </Form>
 ```
+
 Com isso, o projeto segue este padrão organizacional com todos os componentes, permitindo uma melhor manutenção e legibilidade do código. A imagem a seguir ilustra a implementação do exemplo Dialog citado anteriormente:
 
-[![UML Composite](./dialogComposite.png)](https://github.com/UnBArqDsw2025-1-Turma02/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/tree/dev/frontend/src/components/ui/dialog)
+[![UML Composite](../../assets/dialogComposite.png)](https://github.com/UnBArqDsw2025-1-Turma02/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/tree/dev/frontend/src/components/ui/dialog)
 
 ## Referências
 
 1. LUQUE, LEANDRO; SILVA, RODRIGO ROCHA. *Builder e Composite: padrões para a sua caixa de ferramentas*. 2014.
 2. ROBERTO, Jones. Desing Patterns: Parte 10 — Composite. Medium, 11 out. 2017. Disponível em: <https://medium.com/@jonesroberto/desing-patterns-parte-10-composite-f7600cb3aad7>. Acesso em: 22 maio 2025.
 3. Materiais de Aula - Arquitetura e Desenho de Software - 2025.1 - UnB
-
 
 ## Histórico de Versões
 
