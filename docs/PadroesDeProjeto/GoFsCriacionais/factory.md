@@ -2,7 +2,7 @@
 
 ## Introdução
 
-O método Factory é um padrão de projeto criacional que permite a criação de objetos de diferentes tipos a partir de uma `interface` ou `classe abstrata`, o seu objetivo é manter o modelo de utilização, uma vez que todos vão ter métodos comuns que chegam em um mesmo resultado esperado, apesar de poderem passar por diferentes implementações internas. No projeto vigente, tal design será utilizado para desacoplar os diferentes serviços de LLM, que podem ser de empresas distintas com maneiras de utilização não padronizadas. [1] [2].
+O método Factory é um padrão de projeto criacional que permite a criação de objetos de diferentes tipos a partir de uma `interface` ou `classe abstrata`. Seu objetivo é padronizar a utilização dos objetos, já que todos terão métodos em comum que entregam o mesmo resultado esperado, ainda que possam ter implementações internas distintas. No projeto vigente, esse design será utilizado para desacoplar os diferentes serviços de LLM, que podem ser de empresas distintas e com formas de uso não padronizadas. [1] [2].
 
 ## Aplicação no Projeto
 
