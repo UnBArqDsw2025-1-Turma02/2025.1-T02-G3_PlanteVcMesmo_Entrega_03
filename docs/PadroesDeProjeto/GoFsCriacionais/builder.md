@@ -12,11 +12,12 @@ Builder é um padrão de projeto criacional que ajuda a construir objetos comple
 
 ## Vantagens e Justificativas
 
-O uso do padrão de projeto Builder, em particular, permite que um objeto e sua representação final sejam separados em processos diferentes e facilita a flexibilidade e reutilização de código promovendo a construção de diferentes objetos por meio de um único processo. Os Builders também melhoram a legibilidade do código, já que cada etapa de construção é autoexplicativa e pode ser facilmente implementada, o que torna a manutenção mais ágil e o entendimento mais rápido.
+O uso do padrão de projeto Builder, em particular, permite que um objeto e sua representação final sejam separados em processos diferentes. Essa característica facilita a flexibilidade e a reutilização de código pois promove a construção de diferentes objetos por meio de um único processo. Além disso, os Builders melhoram a legibilidade do código, visto que cada etapa de construção é autoexplicativa e pode ser facilmente implementada, o que torna a manutenção mais ágil e o entendimento mais rápido.
 
-Para o projeto, o foco e motivação em adotar o padrão Builder foi um pouco diferente e se concentrou na criação de objetos durante a execução de testes. Em ambientes de testes automatizados, é muito comum a criação de diversos objetos que podem ter diferentes configurações. Nesse caso, o uso do padrão Builder simplifica e aumenta a declaratividade do código, reduz a repetição e diminui as chances de erro, especialmente nos casos em que muitos atributos obrigatórios precisam ser preenchidos.
+Em ambientes de testes automatizados, é muito comum a criação de diversos objetos que podem ter diferentes configurações.
+Por isso, para o projeto o foco e a motivação em adotar o padrão Builder concentrou-se na criação de objetos durante a execução de teste. Nesse caso, o uso do padrão Builder simplifica e aumenta a declaratividade do código, reduz a repetição e diminui as chances de erro, especialmente nos casos em que muitos atributos obrigatórios precisam ser preenchidos.
 
-O padrão Builder leva finalmente a um código mais limpo e modular, o que é útil durante a manutenção e escalabilidade do sistema. Desde que a estrutura encapsulada cuida da construção do objeto, mudanças podem ser feitas com impacto mínimo no resto do sistema. Isso aumenta a velocidade no desenvolvimento e na execução dos testes, tornando o processo.
+Dessa forma, o padrão Builder leva a um código mais limpo e modular, o que é útil durante a manutenção e escalabilidade do sistema. Assim, desde que a estrutura encapsulada cuide da construção do objeto, mudanças podem ser feitas com impacto mínimo no resto do sistema, de forma a aumentar a velocidade no desenvolvimento e na execução dos testes, tornando o processo mais fluido.
 
 ## Modelagem
 
