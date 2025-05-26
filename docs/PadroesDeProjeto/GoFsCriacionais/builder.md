@@ -1,10 +1,4 @@
-# 3.1.1. Builder
-
-<!-- COLOQUE AS REFERÊNCIAS POR PARÁGRAFO ESCRITO, PODE ENUMERAR E COLOCAR POR NÚMERO, TIPO EM ARTIGO MSM -->
-
-<!-- ESCREVA PELO MENOS 3 PARÁGRAFOS DE CADA TÓPICO, CADA UM COM NO MíNIMO 70 PALAVRAS -->
-
-<!-- NÂO SE LIMITE A ESSES TÓPICOS, MAS MANTENHA A ORDEM RELATIVA -->
+# 3.1.2. Builder
 
 ## Introdução
 
@@ -33,15 +27,11 @@ Dessa forma, o padrão Builder leva a um código mais limpo e modular, o que é 
 
 ![Uso do Builder](../../assets/builder-usage.png)
 
-<!-- pode fazer um protótipo do que podemos utilizar, tipo um rascunho, mas tente usar o máximo das regras UML -->
-
 ## Referências
 
 1. **Builder**. Disponível em: <https://refactoring.guru/design-patterns/builder>. Acesso em: 25 maio. 2025.
 
 2. NUZZI, **J. R. Design patterns — Parte 6 — Builder - Jones Roberto Nuzzi**. Disponível em: <https://medium.com/@jonesroberto/desing-patterns-parte-6-builder-f20752fb0c35>. Acesso em: 25 maio. 2025.
-
-<!-- padrão mais próximo do ABNT possível -->
 
 ## Histórico de Versões
 
