@@ -1,6 +1,6 @@
 import { EntitySchema } from 'typeorm';
 import { BaseEntity } from '@/infra/orm/entities';
-import { Post } from "@/domain";
+import { Post } from '@/domain';
 
 export const PostEntity = new EntitySchema<Post>({
   name: 'post',
@@ -43,4 +43,4 @@ export const PostEntity = new EntitySchema<Post>({
       },
     },
   },
-})
+});

@@ -21,7 +21,7 @@ export const LabelEntity = new EntitySchema<Label>({
     posts: {
       type: 'many-to-many',
       target: 'post',
-      inverseSide: 'labels'
+      inverseSide: 'labels',
     },
   },
-})
+});

@@ -1,10 +1,10 @@
 import { Post } from '@/domain';
 
 export type Label = {
-  id: String;
-  name: String;
-  color: String;
+  id: string;
+  name: string;
+  color: string;
   posts: Post[];
   createdAt: Date;
   updatedAt: Date;
-}
+};

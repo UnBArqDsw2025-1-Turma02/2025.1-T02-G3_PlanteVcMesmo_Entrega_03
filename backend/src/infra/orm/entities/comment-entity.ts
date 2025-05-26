@@ -5,10 +5,10 @@ export const CommentEntity = new EntitySchema({
   name: 'comment',
   columns: {
     ...BaseEntity,
-    description: {
+    content: {
       name: 'description',
       type: 'varchar',
       nullable: false,
     },
   },
-})
+});
