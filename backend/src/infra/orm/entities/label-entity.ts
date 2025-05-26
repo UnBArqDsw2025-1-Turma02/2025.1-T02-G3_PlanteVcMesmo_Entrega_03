@@ -1,7 +1,8 @@
 import { EntitySchema } from 'typeorm';
 import { BaseEntity } from '@/infra/orm/entities';
+import { Label } from '@/domain';
 
-export const LabelEntity = new EntitySchema({
+export const LabelEntity = new EntitySchema<Label>({
   name: 'label',
   columns: {
     ...BaseEntity,
@@ -10,10 +11,17 @@ export const LabelEntity = new EntitySchema({
       type: 'varchar',
       nullable: false,
     },
-    code: {
+    color: {
       name: 'code',
       type: 'varchar',
       nullable: false,
     },
   },
-})
+  relations: {
+    posts: {
+      type: 'many-to-many',
+      target: 'post',
+      inverseSide: 'labels',
+    },
+  },
+});

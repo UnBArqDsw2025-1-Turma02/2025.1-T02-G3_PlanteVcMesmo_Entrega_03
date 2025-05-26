@@ -1,12 +1,12 @@
 import { EntitySchema } from 'typeorm';
 import { BaseEntity } from '@/infra/orm/entities';
-import { User } from "@/domain";
+import { User } from '@/domain';
 
 export enum UserRole {
   USER = 'user',
   ADMIN = 'admin',
   MOD = 'mod',
-};
+}
 
 export const UserEntity = new EntitySchema<User>({
   name: 'user',
@@ -43,6 +43,6 @@ export const UserEntity = new EntitySchema<User>({
       name: 'role',
       enum: UserRole,
       default: UserRole.USER,
-    }
+    },
   },
-})
+});
