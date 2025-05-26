@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
     "lint:fix": "eslint --ext .ts src --fix",
-    "dev": "tsx watch --env-file=./env/.env.local src/server.ts"
+    "dev": "tsx watch --env-file=./env/.env.local src/server.ts",
+    "migration:generate": "export $(cat ./env/.env.local | xargs) && tsx ./node_modules/typeorm/cli.js migration:generate -d ./src/infra/orm/datasource.ts"
   },
   "keywords": [],
   "author": "",

@@ -7,7 +7,7 @@ import {
   CommentEntity,
   LabelEntity,
 } from '@/infra/orm/entities';
-import { InitDb } from '@/infra/orm/migrations';
+import { InitDb, AddPostLabelRelations } from '@/infra/orm/migrations';
 
 export const dataSource = new DataSource({
   type: 'postgres',
@@ -16,7 +16,7 @@ export const dataSource = new DataSource({
   url: env.POSTGRES_URL,
   migrationsRun: true,
   entities: [UserEntity, PostEntity, CommentEntity, LabelEntity],
-  migrations: [InitDb],
+  migrations: [InitDb, AddPostLabelRelations],
 });
 
 export async function dbConnection() {

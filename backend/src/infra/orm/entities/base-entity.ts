@@ -4,8 +4,8 @@ export const BaseEntity = {
   id: {
     type: 'uuid',
     name: 'id',
+    generated: 'uuid',
     primary: true,
-    generated: true,
   } as EntitySchemaColumnOptions,
   createdAt: {
     type: 'timestamp',
