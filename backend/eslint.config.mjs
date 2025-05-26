@@ -22,6 +22,7 @@ export default [
     rules: {
       ...tseslint.configs.recommended.rules,
       ...prettierConfig.rules,
+      "@typescript-eslint/no-namespace": "off",
       "@typescript-eslint/no-unused-vars": "warn",
       "no-console": "warn",
       "semi": ["error", "always"],
