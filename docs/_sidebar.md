@@ -5,7 +5,7 @@
 
 - **Padrões de Projeto**
   - [3. Desenho de Software](./PadroesDeProjeto/3.PadroesDeProjeto.md)
-    - [3.1. GoFs Criacionais](./PadroesDeProjeto/3.1.GoFsCriacionais.md)
+    - [3.1. GoFs Criacionais](./PadroesDeProjeto/GoFsCriacionais/index.md)
       - [3.1.1. Factory](./PadroesDeProjeto/GoFsCriacionais/factory.md)
       - [3.1.2. Builder](./PadroesDeProjeto/GoFsCriacionais/builder.md)
     - [3.2. GoFs Estruturais](./PadroesDeProjeto/GoFsEstruturais/index.md)
