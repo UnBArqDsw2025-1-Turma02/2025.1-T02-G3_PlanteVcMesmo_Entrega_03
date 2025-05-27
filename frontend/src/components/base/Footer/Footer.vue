@@ -6,7 +6,9 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 const slot = useTemplateRef('slot');
 
+const active = ref(true);
 const indicatorX = ref(0);
+
 const toggles = ref<Map<string, HTMLElement>>(new Map());
 
 const updateIndicator = async () => {
@@ -18,7 +20,11 @@ const updateIndicator = async () => {
   if (el && el.offsetParent) {
     const rect = el.getBoundingClientRect();
     const containerRect = el.offsetParent.getBoundingClientRect();
+
     indicatorX.value = rect.left - containerRect.left + rect.width / 2 - 10;
+    active.value = true;
+  } else {
+    active.value = false;
   }
 };
 
@@ -49,6 +55,7 @@ onMounted(() => {
     <section ref='slot' class='flex justify-around gap-12 items-start relative pb-3'>
       <slot />
       <span
+        v-if="active"
         class='bg-secondary-green rounded-full h-2 absolute bottom-0 left-0 transition-all duration-500 w-5'
         :style='{
           transform: `translateX(${indicatorX}px)`,
