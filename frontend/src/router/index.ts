@@ -20,9 +20,31 @@ const appLayoutRoutes: RouteRecordRaw[] = [
   }
 ];
 
-appLayoutRoutes.forEach(route => {
-  route.meta = { ...(route.meta || {}), layout: 'app' };
-});
+const protectedLayoutRoutes: RouteRecordRaw[] = [
+  {
+    path: '/profile',
+    name: 'profile',
+    component: () => import('../views/ProfileView.vue'),
+  }
+];
+
+const routes: {
+  layoutRoutes: RouteRecordRaw[];
+  layoutName: string;
+}[] = [{
+  layoutRoutes: appLayoutRoutes,
+  layoutName: 'app'
+},
+{
+  layoutRoutes: protectedLayoutRoutes,
+  layoutName: 'protected'
+}];
+
+routes.forEach(({ layoutRoutes, layoutName }) =>
+  layoutRoutes.forEach(route => {
+    route.meta = { ...(route.meta || {}), layout: layoutName };
+  }
+));
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,6 +58,7 @@ const router = createRouter({
       }
     },
     ...appLayoutRoutes,
+    ...protectedLayoutRoutes,
     {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
