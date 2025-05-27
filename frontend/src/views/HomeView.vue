@@ -1,8 +1,14 @@
 <script setup lang="ts">
+import { useAuth } from '@/hooks/use-auth';
+
 import { Button } from '@/components/ui/button';
+
 import router from '@/router';
 
+const { user } = useAuth();
+
 const googleLogin = () => {
+  user.value = true;
   return router.push('/about');
 };
 </script>

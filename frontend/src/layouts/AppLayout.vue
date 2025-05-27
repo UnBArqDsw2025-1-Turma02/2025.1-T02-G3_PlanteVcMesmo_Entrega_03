@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Footer from '@/components/base/Footer/Footer.vue';
-import FooterIconLink from '@/components/base/Footer/FooterIconLink.vue';
+import FooterLink from '@/components/base/Footer/FooterLink.vue';
+import FooterIcon from '@/components/base/Footer/FooterIcon.vue';
 </script>
 
 <template>
@@ -9,21 +10,24 @@ import FooterIconLink from '@/components/base/Footer/FooterIconLink.vue';
     >
     <slot />
     <Footer>
-      <FooterIconLink
-        target='about'
-        normal='fluent:home-12-regular'
-        active='fluent:home-12-filled'
-      />
-      <FooterIconLink
-        target='shopping'
-        normal='solar:bag-4-outline'
-        active='solar:bag-4-bold'
-      />
-      <FooterIconLink
-        target='news'
-        normal='majesticons:note-text-line'
-        active='majesticons:note-text'
-      />
+      <FooterLink target='about'>
+        <FooterIcon
+          normal='fluent:home-12-regular'
+          active='fluent:home-12-filled'
+        />
+      </FooterLink>
+      <FooterLink target='shopping'>
+        <FooterIcon
+          normal='solar:bag-4-outline'
+          active='solar:bag-4-bold'
+        />
+      </FooterLink>
+      <FooterLink target='news'>
+        <FooterIcon
+          normal='majesticons:note-text-line'
+          active='majesticons:note-text'
+        />
+      </FooterLink>
     </Footer>
   </div>
 </template>
