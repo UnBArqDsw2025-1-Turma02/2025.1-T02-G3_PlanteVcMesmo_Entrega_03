@@ -34,7 +34,13 @@ No contexto do projeto, caso surjam novas ideias relacionadas aos cuidados com p
 
 ## Modelagem
 
-![Strategy Model](../../assets/diagrama_Estrategia.png)
+Com base na seção Aplicação no Projeto, foi elaborada uma modelagem semelhante a um Diagrama de Classes, que servirá como protótipo para a futura implementação do sistema. Nessa modelagem, o padrão Strategy é aplicado para permitir diferentes formas de agendamento, através da interface *SchedulerStrategy* e suas implementações: *ManualStrategy* e *AutomaticStrategy*.
+
+A classe *Scheduler* define os métodos para configurar e executar a estratégia escolhida. A classe *AutomaticStrategy* utiliza o *LLMProvider* para apoiar decisões automáticas no agendamento, baseando-se em algum sistema de IA. O provedor da IA será instanciado por meio de classes Factory, conforme o identificador do modelo utilizado. Para entender melhor a utilização do Factory no projeto, acesse: [3.1.1. Factory](./PadroesDeProjeto/GoFsCriacionais/factory.md)
+
+![Strategy Model](../../assets/strategy.png)
+
+<font size="3"><p style="text-align: center"><b>Autor:</b> [Mateus Vieira Rocha da Silva](https://github.com/mateusvrs), 2025 </p></font>
 
 ## Referências
 
