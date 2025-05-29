@@ -1,8 +1,12 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { Input } from '@/components/ui/input';
 
 import Header from '@/components/base/Header/Header.vue';
 import Main from '@/components/base/Main/Main.vue';
+import Tutorial from '@/components/base/Tutorial/Tutorial.vue';
+
+const Admin = ref(true); // variável arbitrária de admin
 </script>
 
 <template>
@@ -17,28 +21,17 @@ import Main from '@/components/base/Main/Main.vue';
       class="h-[110px] flex flex-col justify-between text-white"
     >
       <span>Fulano da Silva</span>
-      <span
-        class="font-thin"
-      >fulanodasilva@gmail.com</span>
-      <span
-        class="font-thin"
-      >Brasília, DF</span>
+      <span class="font-thin">fulanodasilva@gmail.com</span>
+      <span class="font-thin">Brasília, DF</span>
     </section>
   </Header>
-  <Main
-    class="flex flex-col gap-5 p-5"
-  >
-    <section
-      class="flex flex-col gap-2"
-    >
-      <span
-        class="text-primary-green font-semibold"
-      >
+
+  <Main class="flex flex-col gap-5 p-5">
+    <section class="flex flex-col gap-2">
+      <span class="text-primary-green font-semibold">
         Minha Galeria
       </span>
-      <div
-          class='flex gap-4 justify-between items-center'
-      >
+      <div class='flex gap-4 justify-between items-center'>
         <div>
           <img
             class='rounded-2xl'
@@ -61,18 +54,19 @@ import Main from '@/components/base/Main/Main.vue';
           >
         </div>
       </div>
-    </section>
-    <section
-      class="h-full"
-    >
-      <span
-        class="flex gap-1 text-primary-green font-semibold"
+
+      <div
+        v-if="Admin"
+        class="flex justify-center items-center w-full p-5"
       >
+        <Tutorial />
+      </div>
+    </section>
+    <section class="h-full">
+      <span class="flex gap-1 text-primary-green font-semibold">
         Converse com nossa IA <img src="../../public/happy-plant.png" />
       </span>
-      <div
-        class="relative flex items-end h-[95%] rounded-lg border-2 border-primary-green"
-      >
+      <div class="relative flex items-end h-[95%] rounded-lg border-2 border-primary-green">
         <Input
           type='text'
           placeholder='Faça sua pergunta...'
