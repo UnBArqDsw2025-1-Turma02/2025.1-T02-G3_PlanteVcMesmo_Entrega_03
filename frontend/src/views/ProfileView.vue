@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { Input } from '@/components/ui/input';
 
 import Header from '@/components/base/Header/Header.vue';
 import Main from '@/components/base/Main/Main.vue';
 import Tutorialbutton from '@/components/base/Tutorial/Tutorial.vue';
+
+const Admin = ref(true); //variavel arbirtrária de admin 
 </script>
 
 <template>
@@ -52,7 +55,10 @@ import Tutorialbutton from '@/components/base/Tutorial/Tutorial.vue';
         </div>
       </div>
       
-      <div class="flex justify-center items-center w-full p-5">
+      <div
+        v-if="Admin"
+        class="flex justify-center items-center w-full p-5"
+      >
         <Tutorialbutton />
       </div>
       
