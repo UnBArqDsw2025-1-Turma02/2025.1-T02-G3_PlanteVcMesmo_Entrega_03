@@ -1,17 +1,19 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const showModal = ref(false)
+import Button from '@/components/ui/button/Button.vue';
+
+const showModal = ref(false);
 </script>
 
 <template>
     <div>
-        <button
-            class="bg-green-700 text-white rounded-full px-6 py-3 text-base font-bold shadow-lg transition hover:-translate-y-0.5 hover:scale-105"
+        <Button
+            class="bg-primary-green"
             @click="showModal = true"
         >
             Criar Tutorial
-        </button>
+        </Button>
         <div
             v-if="showModal"
             class="fixed inset-0 flex items-center justify-center z-50"
@@ -21,10 +23,13 @@ const showModal = ref(false)
             @click.self="showModal = false"
         >
             <div class="bg-white p-8 rounded-lg min-w-[300px] shadow-xl">
-                <h2 class="mb-4">Criar formulario de tutorial</h2>
-                <button class="text-gray-500 hover:text-gray-700" @click="showModal = false">
+                <h2 class="mb-4">Criar formulário de tutorial</h2>
+                <Button
+                  variant="ghost"
+                  @click="showModal = false"
+                >
                     Fechar
-                </button>
+                </Button>
             </div>
         </div>
     </div>

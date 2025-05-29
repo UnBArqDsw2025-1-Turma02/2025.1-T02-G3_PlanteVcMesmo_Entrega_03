@@ -4,9 +4,9 @@ import { Input } from '@/components/ui/input';
 
 import Header from '@/components/base/Header/Header.vue';
 import Main from '@/components/base/Main/Main.vue';
-import Tutorialbutton from '@/components/base/Tutorial/Tutorial.vue';
+import Tutorial from '@/components/base/Tutorial/Tutorial.vue';
 
-const Admin = ref(true); //variavel arbirtrária de admin 
+const Admin = ref(true); // variável arbitrária de admin
 </script>
 
 <template>
@@ -54,14 +54,13 @@ const Admin = ref(true); //variavel arbirtrária de admin
           >
         </div>
       </div>
-      
+
       <div
         v-if="Admin"
         class="flex justify-center items-center w-full p-5"
       >
-        <Tutorialbutton />
+        <Tutorial />
       </div>
-      
     </section>
     <section class="h-full">
       <span class="flex gap-1 text-primary-green font-semibold">
