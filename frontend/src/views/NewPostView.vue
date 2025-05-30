@@ -13,9 +13,14 @@ const subject = ref('');
 const photo = ref(null);
 
 const options = [
-  { value: 'assunto1', text: 'Assunto 1' },
-  { value: 'assunto2', text: 'Assunto 2' },
-  { value: 'assunto3', text: 'Assunto 3' },
+  { value: 'Adubos', text: 'Adubos' },
+  { value: 'Arranjos', text: 'Arranjos' },
+  { value: 'Cuidados', text: 'Cuidados' },
+  { value: 'Ferramentas', text: 'Ferramentas' },
+  { value: 'Flores', text: 'Flores' },
+  { value: 'Outros', text: 'Outros' },
+  { value: 'Plantas', text: 'Plantas' },
+  { value: 'Sementes', text: 'Sementes' }
 ];
 </script>
 
