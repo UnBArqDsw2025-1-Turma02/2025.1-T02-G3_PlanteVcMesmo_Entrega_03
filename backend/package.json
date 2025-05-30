@@ -15,6 +15,7 @@
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.27.0",
+    "@faker-js/faker": "^9.8.0",
     "@tsconfig/node22": "^22.0.1",
     "@types/express": "^5.0.1",
     "@types/node": "^22.15.15",
