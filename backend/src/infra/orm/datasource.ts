@@ -9,14 +9,18 @@ import {
 } from '@/infra/orm/entities';
 import { InitDb, AddPostLabelRelations } from '@/infra/orm/migrations';
 
+const defaultConfig = {
+  migrationsRun: true,
+  entities: [UserEntity, PostEntity, CommentEntity, LabelEntity],
+  migrations: [InitDb, AddPostLabelRelations],
+};
+
 export const dataSource = new DataSource({
   type: 'postgres',
   host: 'localhost',
   port: env.DB_PORT,
   url: env.POSTGRES_URL,
-  migrationsRun: true,
-  entities: [UserEntity, PostEntity, CommentEntity, LabelEntity],
-  migrations: [InitDb, AddPostLabelRelations],
+  ...defaultConfig,
 });
 
 export async function dbConnection() {
