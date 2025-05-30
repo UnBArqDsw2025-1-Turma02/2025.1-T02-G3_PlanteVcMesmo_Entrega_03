@@ -28,6 +28,8 @@ Diante deste contexto de uso tem-se, por exemplo, analogamente ao UML: uma class
 Esboço:
 ![UML Composite](../../assets/compositeDiagram.png)
 
+<font size="3"><p style="text-align: center"><b>Autor:</b> [Caio Magalhães Lamego](https://github.com/caiolamego), 2025 </p></font>
+
 ## Implementação
 A implementação do Composite é feita em diversos componentes do projeto, seguindo um padrão estrutural como no exemplo a seguir:
 
