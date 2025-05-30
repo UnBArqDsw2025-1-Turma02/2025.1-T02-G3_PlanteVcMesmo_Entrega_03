@@ -13,9 +13,17 @@ Além disso, a reutilização de componentes é significativamente facilitada. S
 
 Por fim, a coesão é aprimorada, uma vez que o Composite incentiva a organização lógica e hierárquica dos elementos. Isso resulta em um código mais limpo e legível o que contribui para posteriores alterações.
 
+## Discussões da equipe
+
+Diante do entendimento do Padrão Composite, ficou sob critério da equipe a decisão de onde e como seria aplicado no projeto. O Composite é usado principalmente na parte de Backend, onde a estrutura é organizada em uma hierarquia de classes, permitindo que objetos sejam tratados de forma uniforme. Entretanto, o fato de prevalecer no Backend não impede que seja utilizado no Frontend, onde a estrutura de componentes Vue é organizada de forma que um componente é "dividido em subpartes", permitindo que cada parte seja tratada como um componente independente, mas que, quando unidas, formam um componente maior e mais complexo.
+
+Também discutiu-se a possibilidade de aplicar o Composite na parte de filtros de pesquisa na aba de Shopping, onde cada produto em específico seria tratado como uma leaf, ao passo que quando agrupados, formariam um Composite que representa uma coleção de produtos, por exemplo: os produtos Girassol, Rosa, Orquídea, Lírio, etc seriam leafs e quando agrupados formariam o Composite Flores, que seria um dos filtros possíveis. No entanto, essa abordagem foi considerada mais complexa do que o necessário para o escopo atual do projeto e, apesar de possuir um conceito parecido, ficou entendido que não se tratava de um Padrão de Design Composite, de fato, por não ter nenhum impacto estruturalmente no projeto.
+
+Com isso, definiu-se que a melhor aplicação do Composite seria, realmente, na parte de Frontend, permitindo que componentes (Composite) sejam compostos de subcomponentes (leafs).
+
 ## Modelagem
 
-Diante deste contexto de uso tem-se, por exemplo, analogamente ao UML: uma classe abstrata 'FooterElement', as Leafs: FooterLink e FooterIcon e por fim o Composite: Footer. Cada Leaf representa uma parte específica do componente, enquanto o Composite agrega essas partes para formar um Footer completo [1]. Essa estrutura permite que o componente seja tratado como uma única entidade, simplificando a manipulação e a renderização na interface do usuário.
+Diante deste contexto de uso tem-se, por exemplo, analogamente ao UML: uma classe abstrata 'FooterElement', as Leafs: FooterLink e FooterIcon e por fim o Composite: Footer. Cada Leaf representa uma parte específica do componente, enquanto o Composite agrega essas partes para formar um Footer completo [1]. É importante ressaltar que o Composite pode ser formado por qualquer combinação das leafs. Essa estrutura permite que o componente seja tratado como uma única entidade, simplificando a manipulação e a renderização na interface do usuário.
 
 Esboço:
 ![UML Composite](../../assets/compositeDiagram.png)
@@ -34,6 +42,37 @@ Com isso, o projeto segue este padrão organizacional com todos os componentes, 
 
 [![UML Composite](../../assets/FooterComposite.png)](https://github.com/UnBArqDsw2025-1-Turma02/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/blob/dev/frontend/src/layouts/AppLayout.vue)
 
+Sendo aplicado desta maneira:
+
+```vue
+ <div
+      class='grid grid-rows-10 h-screen'
+  >
+    <slot />
+    <Footer>
+      <FooterLink target='about'>
+        <FooterIcon
+          normal='fluent:home-12-regular'
+          active='fluent:home-12-filled'
+        />
+      </FooterLink>
+      <FooterLink target='shopping'>
+        <FooterIcon
+          normal='solar:bag-4-outline'
+          active='solar:bag-4-bold'
+        />
+      </FooterLink>
+      <FooterLink target='news'>
+        <FooterIcon
+          normal='majesticons:note-text-line'
+          active='majesticons:note-text'
+        />
+      </FooterLink>
+    </Footer>
+  </div>
+```
+O commit completo desta implementação pode ser encontrado aqui: [AppLayout.vue](https://github.com/UnBArqDsw2025-1-Turma02/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/commit/304e3f4f1087c6e578c69702039e3648be0f9591)
+
 ## Referências
 
 1. LUQUE, LEANDRO; SILVA, RODRIGO ROCHA. *Builder e Composite: padrões para a sua caixa de ferramentas*. 2014.
@@ -46,3 +85,4 @@ Com isso, o projeto segue este padrão organizacional com todos os componentes, 
 | Versão | Data       | Alterações Principais                             | Autor(es)        |
 |--------|------------|---------------------------------------------------| ---------------- |
 | 0.0.1  | 24-05-2025 | Adição do Padrão Composite na Docmentação         | Caio Magalhães Lamego
+| 0.0.2  | 30-05-2025 | Revisão e detalhamento na documentação do Composite   | Caio Magalhães Lamego |
