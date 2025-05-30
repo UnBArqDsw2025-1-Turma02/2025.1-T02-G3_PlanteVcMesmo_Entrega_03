@@ -2,12 +2,14 @@
 import Footer from '@/components/base/Footer/Footer.vue';
 import FooterLink from '@/components/base/Footer/FooterLink.vue';
 import FooterIcon from '@/components/base/Footer/FooterIcon.vue';
+
+import { Toaster } from '@/components/ui/sonner';
 </script>
 
 <template>
-    <div
+  <div
       class='grid grid-rows-10 h-screen'
-    >
+  >
     <slot />
     <Footer>
       <FooterLink target='about'>
@@ -30,4 +32,5 @@ import FooterIcon from '@/components/base/Footer/FooterIcon.vue';
       </FooterLink>
     </Footer>
   </div>
+  <Toaster />
 </template>
