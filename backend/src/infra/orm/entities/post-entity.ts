@@ -21,6 +21,11 @@ export const PostEntity = new EntitySchema<PostSchema>({
       type: 'varchar',
       nullable: false,
     },
+    userId: {
+      name: 'user_id',
+      type: 'uuid',
+      nullable: false,
+    },
   },
   relations: {
     user: {
