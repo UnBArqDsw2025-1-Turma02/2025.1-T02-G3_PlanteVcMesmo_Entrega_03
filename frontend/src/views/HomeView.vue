@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import router from '@/router';
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { GoogleOAuthUrl } from '@/utils/google';
 
 const route = useRoute();
 const { user } = useAuth();
@@ -19,7 +20,10 @@ const googleLogin = async () => {
   };
 
   const redirect_uri = 'http://localhost:5173';
-  window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${import.meta.env.VITE_APP_GOOGLE_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code&scope=openid%20email%20profile%20https://www.googleapis.com/auth/calendar&access_type=offline&prompt=consent`;
+  window.location.href = GoogleOAuthUrl({
+    client_id: import.meta.env.VITE_APP_GOOGLE_CLIENT_ID,
+    redirect_uri: redirect_uri
+  });
 };
 
 onMounted(() => {
