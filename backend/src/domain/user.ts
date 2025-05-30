@@ -1,9 +1,7 @@
-import { Post } from '@/domain';
-
 export const UserRoles = {
-  USER: 'user',
-  ADMIN: 'admin',
-  MOD: 'mod',
+  user: 'user',
+  admin: 'admin',
+  mod: 'mod',
 };
 
 export type UserRole = keyof typeof UserRoles;
@@ -18,5 +16,4 @@ export type User = {
   encryptedRefreshToken: string;
   encryptionIV: string;
   role: UserRole;
-  posts: Array<Post>;
 };
