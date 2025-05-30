@@ -65,7 +65,7 @@ const { user } = useAuth();
     </section>
     <section class="h-full">
       <span class="flex gap-1 text-primary-green font-semibold">
-        Converse com nossa IA <img src="../../public/happy-plant.png" />
+        Converse com nossa IA <img src="/happy-plant.png" />
       </span>
       <div class="relative flex items-end h-[95%] rounded-lg border-2 border-primary-green">
         <Input
