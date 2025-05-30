@@ -9,6 +9,10 @@ const schema = z.object({
   ENV: z.enum(['development', 'production', 'test']),
   AES_KEY: z.string().length(64),
   ALGORITHM: z.string().default('aes-256-cbc'),
+  ACCESS_TOKEN_SECRET: z.string(),
+  REFRESH_TOKEN_SECRET: z.string(),
+  JWT_EXPIRES_IN: z.string().default('15m'),
+  JWT_REFRESH_EXPIRES_IN: z.string().default('7d'),
 });
 
 const parsed = schema.safeParse(process.env);
