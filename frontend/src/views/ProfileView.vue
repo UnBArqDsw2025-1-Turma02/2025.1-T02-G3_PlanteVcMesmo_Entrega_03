@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { useAuth } from '@/hooks/use-auth';
+
 import { Input } from '@/components/ui/input';
 
 import Header from '@/components/base/Header/Header.vue';
 import Main from '@/components/base/Main/Main.vue';
 import Tutorial from '@/components/base/Tutorial/Tutorial.vue';
 
-const Admin = ref(true); // variável arbitrária de admin
+const { user } = useAuth();
 </script>
 
 <template>
@@ -15,13 +16,13 @@ const Admin = ref(true); // variável arbitrária de admin
   >
     <img
       class="rounded-lg"
-      src="https://picsum.photos/110"
+      :src="user?.pictureUrl"
     />
     <section
       class="h-[110px] flex flex-col justify-between text-white"
     >
-      <span>Fulano da Silva</span>
-      <span class="font-thin">fulanodasilva@gmail.com</span>
+      <span>{{ user?.name }}</span>
+      <span class="font-thin">{{ user?.email }}</span>
       <span class="font-thin">Brasília, DF</span>
     </section>
   </Header>
@@ -56,7 +57,7 @@ const Admin = ref(true); // variável arbitrária de admin
       </div>
 
       <div
-        v-if="Admin"
+        v-if="user?.role === 'admin'"
         class="flex justify-center items-center w-full p-5"
       >
         <Tutorial />
@@ -64,7 +65,7 @@ const Admin = ref(true); // variável arbitrária de admin
     </section>
     <section class="h-full">
       <span class="flex gap-1 text-primary-green font-semibold">
-        Converse com nossa IA <img src="../../public/happy-plant.png" />
+        Converse com nossa IA <img src="/happy-plant.png" />
       </span>
       <div class="relative flex items-end h-[95%] rounded-lg border-2 border-primary-green">
         <Input
