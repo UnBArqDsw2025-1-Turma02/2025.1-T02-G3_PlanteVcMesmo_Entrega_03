@@ -1,8 +1,12 @@
 import { EntitySchema } from 'typeorm';
 import { BaseEntity } from '@/infra/orm/entities';
-import { Label } from '@/domain';
+import { Label, Post } from '@/domain';
 
-export const LabelEntity = new EntitySchema<Label>({
+export type LabelSchema = Label & {
+  posts: Post[];
+};
+
+export const LabelEntity = new EntitySchema<LabelSchema>({
   name: 'label',
   columns: {
     ...BaseEntity,

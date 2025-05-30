@@ -1,8 +1,13 @@
 import { EntitySchema } from 'typeorm';
 import { BaseEntity } from '@/infra/orm/entities';
-import { Post } from '@/domain';
+import { Label, Post, User } from '@/domain';
 
-export const PostEntity = new EntitySchema<Post>({
+export type PostSchema = Post & {
+  user: User;
+  labels: Label[];
+};
+
+export const PostEntity = new EntitySchema<PostSchema>({
   name: 'post',
   columns: {
     ...BaseEntity,
