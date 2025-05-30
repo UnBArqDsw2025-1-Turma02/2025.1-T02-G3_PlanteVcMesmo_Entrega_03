@@ -17,7 +17,7 @@ const showModal = ref(false);
 <template>
     <div>
         <Button
-            class="bg-primary-green"
+            class="bg-primary-green hover:bg-darker-green"
             @click="navigateToNewPost"
         >
             Criar Tutorial

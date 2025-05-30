@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+
 import Header from '@/components/base/Header/Header.vue';
 import Main from '@/components/base/Main/Main.vue';
 import InputText from '@/components/base/Input/InputText.vue';
@@ -22,6 +23,10 @@ const options = [
   { value: 'Plantas', text: 'Plantas' },
   { value: 'Sementes', text: 'Sementes' }
 ];
+
+const photoUrl = computed(() => {
+  return photo.value ? URL.createObjectURL(photo.value) : '';
+});
 </script>
 
 <template>
@@ -29,7 +34,8 @@ const options = [
     <div class="flex gap-4 items-center">
       <div class="flex flex-col items-center">
         <InputPhoto v-model="photo">
-          <Icon icon="mdi:upload" style="color: white;" class="w-6 h-6" />
+          <img v-if="photo" :src="photoUrl" />
+          <Icon v-else icon="mdi:upload" style="color: white;" class="w-6 h-6" />
         </InputPhoto>
       </div>
       <div class="flex flex-col flex-1">
@@ -59,11 +65,8 @@ const options = [
         ></textarea>
       </div>
       <div class="flex justify-center mt-5">
-        <Button
-          class="bg-primary-green"
-          @click="navigateToNewPost"
-        >
-          Publicar Post
+        <Button class="bg-primary-green hover:bg-darker-green">
+          Publicar Tutorial
         </Button>
       </div>
     </section>
