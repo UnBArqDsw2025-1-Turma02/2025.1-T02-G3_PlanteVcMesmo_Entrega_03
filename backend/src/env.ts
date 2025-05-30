@@ -7,12 +7,13 @@ const schema = z.object({
   DB_PORT: z.coerce.number().min(1000),
   POSTGRES_URL: z.string(),
   ENV: z.enum(['development', 'production', 'test']),
+  AES_KEY: z.string().length(64),
+  ALGORITHM: z.string().default('aes-256-cbc'),
 });
 
 const parsed = schema.safeParse(process.env);
 
 if (!parsed.success) {
-  logger.info(process.env);
   logger.error(parsed.error.format());
 
   throw new Error('Error on parsing env variables.');
