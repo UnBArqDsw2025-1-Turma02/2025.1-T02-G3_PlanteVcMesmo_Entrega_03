@@ -27,6 +27,7 @@ export default [
       "semi": ["error", "always"],
       "quotes": ["error", "single"],
       "prettier/prettier": "error",
+      "@typescript-eslint/no-namespace": "off",
     },
   },
 ];
