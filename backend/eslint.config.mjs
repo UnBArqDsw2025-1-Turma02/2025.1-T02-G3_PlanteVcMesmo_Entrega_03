@@ -28,6 +28,7 @@ export default [
       "quotes": ["error", "single"],
       "prettier/prettier": "error",
       "@typescript-eslint/no-namespace": "off",
+      "@typescript-eslint/no-explicit-any": "off"
     },
   },
 ];
