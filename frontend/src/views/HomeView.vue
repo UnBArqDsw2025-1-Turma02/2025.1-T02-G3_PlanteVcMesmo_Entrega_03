@@ -8,7 +8,12 @@ import router from '@/router';
 const { user } = useAuth();
 
 const googleLogin = () => {
-  user.value = true;
+  user.value = {
+    name: 'Fulano da Silva',
+    email: 'fulanodasilva@gmail.com',
+    pictureUrl: 'https://picsum.photos/110',
+    role: 'user'
+  };
   return router.push('/about');
 };
 </script>
