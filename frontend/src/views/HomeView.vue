@@ -4,18 +4,38 @@ import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
 
 import router from '@/router';
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
+const route = useRoute();
 const { user } = useAuth();
 
-const googleLogin = () => {
+const googleLogin = async () => {
   user.value = {
     name: 'Fulano da Silva',
     email: 'fulanodasilva@gmail.com',
     pictureUrl: 'https://picsum.photos/110',
     role: 'user'
   };
-  return router.push('/about');
+
+  const redirect_uri = 'http://localhost:5173';
+  window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${import.meta.env.VITE_APP_GOOGLE_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code&scope=openid%20email%20profile%20https://www.googleapis.com/auth/calendar&access_type=offline&prompt=consent`;
 };
+
+onMounted(() => {
+  const code = route.query.code;
+
+  if (code) {
+    console.log(`[CODE]: ${code}`);
+    user.value = {
+      name: 'Fulano da Silva',
+      email: 'fulanodasilva@gmail.com',
+      pictureUrl: 'https://picsum.photos/110',
+      role: 'user'
+    };
+    router.push('/about');
+  }
+});
 </script>
 
 <template>
