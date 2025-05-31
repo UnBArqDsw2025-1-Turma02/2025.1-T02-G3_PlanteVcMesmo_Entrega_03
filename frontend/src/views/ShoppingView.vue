@@ -105,6 +105,12 @@ onMounted(() => {
 const handleFilterChange = (selectedFilterIds: (string | number)[]) => {
   activeFilters.value = selectedFilterIds;
 };
+
+// Função para limitar o título a 5 palavras
+const truncateTitle = (title: string) => {
+  const words = title.split(' ');
+  return words.length > 5 ? words.slice(0, 5).join(' ') + '...' : title;
+};
 </script>
 
 <template>
@@ -191,7 +197,7 @@ const handleFilterChange = (selectedFilterIds: (string | number)[]) => {
     <section class='p-4 md:p-8'>
       <h2 class="text-xl font-semibold mb-4">Produtos</h2>
       <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <div
+        <div  
           v-for="(product, index) in filteredProducts"
           :key="index"
           class="flex flex-col items-center bg-white rounded-lg shadow-md p-4"
@@ -201,8 +207,14 @@ const handleFilterChange = (selectedFilterIds: (string | number)[]) => {
             :alt="product.title"
             class="w-full h-40 object-cover rounded-lg mb-4"
           />
-          <h3 class="text-lg font-medium text-gray-800">{{ product.title }}</h3>
-          <p class="text-primary-green font-semibold">{{ product.price }}</p>
+          <p 
+            class="text-xs text-primary-green font-semibold text-left w-full" 
+            style="margin-top: 10px;"
+          >
+            {{ product.price }}
+          </p>
+          <hr />
+          <h3 class="text-sm font-medium text-gray-800">{{ truncateTitle(product.title) }}</h3>
         </div>
       </div>
     </section>
