@@ -38,7 +38,6 @@ const sendPost = async () => {
   form.value.title = form.value.title.trim();
   form.value.description = form.value.description.trim();
 
-  console.log(JSON.stringify(form.value));
   if (!form.value.title || !form.value.description || !form.value.labels.length) {
     errorToast('O post deve ter título, assunto e corpo.');
   } else {
