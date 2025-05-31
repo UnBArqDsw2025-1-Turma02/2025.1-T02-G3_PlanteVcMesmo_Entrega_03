@@ -16,6 +16,11 @@ export namespace LabelRepository {
     export type Output = Label | null;
   }
 
+  export namespace FindByNames {
+    export type Input = { names: string[] };
+    export type Output = Label[];
+  }
+
   export namespace List {
     export type Input = {
       filters?: {
@@ -48,6 +53,8 @@ export interface LabelRepository {
   create(input: LabelRepository.Create.Input): Promise<LabelRepository.Create.Output>;
 
   findBy(input: LabelRepository.FindBy.Input): Promise<LabelRepository.FindBy.Output>;
+
+ findByNames(input: LabelRepository.FindByNames.Input): Promise<LabelRepository.FindByNames.Output>;
 
   list(input: LabelRepository.List.Input): Promise<LabelRepository.List.Output>;
 
