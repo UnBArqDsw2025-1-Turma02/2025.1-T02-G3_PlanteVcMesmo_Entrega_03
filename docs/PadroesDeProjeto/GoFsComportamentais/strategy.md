@@ -2,7 +2,7 @@
 
 ## Introdução
 
-O padrão Strategy é um padrão de design comportamental que permite definir uma família de algoritmos, encapsulá-los e torná-los intercambiáveis durante a execução do programa (1). Este padrão é especialmente útil quando existe a necessidade de alternar entre diferentes abordagens para resolver um mesmo problema, sem modificar o código cliente que utiliza esses algoritmos. No contexto do Plante Vc Mesmo, o Strategy se mostra fundamental para gerenciar as diferentes estratégias de cuidado que variam conforme o tipo de planta, estação do ano, condições ambientais e preferências do usuário, proporcionando flexibilidade e extensibilidade ao sistema.
+O padrão Strategy é um padrão de design comportamental que permite definir uma família de algoritmos, encapsulá-los e torná-los intercambiáveis durante a execução do programa (Gamma et al., 1994, p. 315)<sup><a href="https://unbarqdsw2025-1-turma02.github.io/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/#/./PadroesDeProjeto/GoFsComportamentais/strategy?id=referências"><b>1</b></a></sup>. Este padrão é especialmente útil quando existe a necessidade de alternar entre diferentes abordagens para resolver um mesmo problema, sem modificar o código cliente que utiliza esses algoritmos. No contexto do Plante Vc Mesmo, o Strategy se mostra fundamental para gerenciar as diferentes estratégias de cuidado que variam conforme o tipo de planta, estação do ano, condições ambientais e preferências do usuário, proporcionando flexibilidade e extensibilidade ao sistema.
 
 ## Aplicação no Projeto
 
@@ -28,9 +28,9 @@ Os campos definidos para o perfil da planta, até o momento, são:
 
 ## Vantagens e Justificativas
 
-A adoção do padrão de projeto Strategy oferece uma vantagem significativa ao possibilitar a troca de algoritmos de forma dinâmica, durante a execução do sistema. Essa característica contribui diretamente para a flexibilidade e adaptabilidade da aplicação, permitindo a inclusão de novas estratégias de maneira simples e sem a necessidade de grandes alterações no código existente. [2]
+A adoção do padrão de projeto Strategy oferece uma vantagem ao possibilitar a troca de algoritmos de forma dinâmica, sendo uma alternativa ao uso de condicionais para escolha de comportamentos desejados (Gamma et al., 1994, p. 317)<sup><a href="https://unbarqdsw2025-1-turma02.github.io/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/#/./PadroesDeProjeto/GoFsComportamentais/strategy?id=referências"><b>1</b></a></sup>. Essa característica contribui diretamente para a flexibilidade e adaptabilidade da aplicação, permitindo a inclusão de novas estratégias de maneira simples e sem a necessidade de grandes alterações no código existente<sup><a href="https://unbarqdsw2025-1-turma02.github.io/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/#/./PadroesDeProjeto/GoFsComportamentais/strategy?id=referências"><b>2</b></a></sup>. 
 
-No contexto do projeto, caso surjam novas ideias relacionadas aos cuidados com plantas, como perfis pré-definidos, elas poderão ser facilmente atendidas por meio da implementação de novas classes que sigam a interface Strategy. Assim, o sistema permanece extensível e preparado para futuras evoluções.
+No contexto do projeto, caso surjam novas ideias relacionadas aos cuidados com plantas, como perfis pré-definidos, elas poderão ser facilmente atendidas por novas classes com diferentes implementações da interface da Strategy. Assim, o sistema permanece extensível e preparado para futuras evoluções.
 
 ## Modelagem
 
@@ -44,7 +44,7 @@ A classe *Scheduler* define os métodos para configurar e executar a estratégia
 
 ## Referências
 
-1. GAMMA, Erich et al. Padrões de Projeto: Soluções Reutilizáveis de Software Orientado a Objetos. Porto Alegre: Bookman, 2000. p. 292-302.
+1. <a id="#ref1"></a>Gamma, E., Helm, R., Johnson, R., & Vlissides, J.. Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley, 1994. p. 315-324. Disponível em: https://www.javier8a.com/itc/bd1/articulo.pdf. Acesso em: 30 mai. 2025
 2. Refactoring Guru. Strategy Pattern. Disponível em: [https://refactoring.guru/design-patterns/strategy](https://refactoring.guru/design-patterns/strategy). Acesso em: 28 mai. 2025.
 
 ## Histórico de Versões
@@ -53,3 +53,4 @@ A classe *Scheduler* define os métodos para configurar e executar a estratégia
 |--------|------------|---------------------------------------------------| ---------------- |
 | 1.0.0  | 22-05-2025 | Criação do Documento do padrão de projeto Strategy| Davi Casseb      |
 | 1.1.0  | 28-05-2025 | Recriação dos textos e referências                | Caio Felipe      |
+| 1.1.1  | 30-05-2025 | Conferindo bibliografia e atribuindo citações     | Gabriel Fernando |
