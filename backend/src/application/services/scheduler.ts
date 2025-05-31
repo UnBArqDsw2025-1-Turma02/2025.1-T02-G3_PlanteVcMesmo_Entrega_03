@@ -14,6 +14,6 @@ export class Scheduler {
   async execute(
     input: SchedulerStrategy.Input,
   ): Promise<SchedulerStrategy.Output> {
-    return this.strategy.schedule(input);
+    return await this.strategy.schedule(input);
   }
 }
