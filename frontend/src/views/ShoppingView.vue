@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import axios from 'axios';
 import { cn } from '@/lib/utils';
 import { Icon } from '@iconify/vue';
 import { Check } from 'lucide-vue-next';
@@ -54,24 +55,56 @@ const values = ref({
   language: ''
 });
 
-// Filtros
+interface Product {
+  image: string;
+  title: string;
+  price: string;
+  filter: string | number;
+}
+
+const products = ref<Product[]>([]);
+
+// Filtros 
 const productFilters = ref([
-  { id: 'vasos', label: 'Vasos' },
-  { id: 'flores', label: 'Flores' },
-  { id: 'graos', label: 'Grãos' },
-  { id: 'plantas', label: 'Plantas' },
-  { id: 'sementes', label: 'Sementes' },
-  { id: 'suculentas', label: 'Suculentas' },
-  { id: 'adubos', label: 'Adubos e Fertilizantes' },
-  { id: 'ferramentas', label: 'Ferramentas de Jardinagem' },
+  { id: 'Novidades', label: 'Novidades' },
+  { id: 'Mudas', label: 'Mudas' },
+  { id: 'Bulbos de Flores', label: 'Bulbos de Flores' },
+  { id: 'Vasos e Cachepôs', label: 'Vasos e Cachepôs' },
+  { id: 'Fertilizantes', label: 'Fertilizantes' },
+  { id: 'Substratos', label: 'Substratos' },
+  { id: 'Suportes e Acessórios', label: 'Suportes e Acessórios' },
 ]);
 
-const activeFilters = ref<(string | number)[]>(['plantas']); // Inicia com 'plantas' ativo
 
-const handleFilterChange = (selectedFilterIds: (string | number)[]) => {
-  console.log('Filtros selecionados:', selectedFilterIds);
+const activeFilters = ref<(string | number)[]>([]);
+
+const filteredProducts = computed(() => {
+  if (activeFilters.value.length === 0) {
+    return products.value; // Mostra todos os produtos se nenhum filtro estiver ativo
+  }
+  return products.value.filter((product: { filter: string | number }) =>
+    activeFilters.value.includes(product.filter)
+  );
+});
+
+// carrega JSON
+const loadProducts = async () => {
+  try {
+    const response = await axios.get('/script/products.json');
+    products.value = response.data;
+  } catch (error) {
+    console.error('Erro ao carregar os produtos:', error);
+  }
 };
 
+onMounted(() => {
+  loadProducts();
+});
+
+// Função para atualizar os filtros ativos
+const handleFilterChange = (selectedFilterIds: (string | number)[]) => {
+  activeFilters.value = selectedFilterIds;
+};
 </script>
 
 <template>
@@ -157,9 +190,20 @@ const handleFilterChange = (selectedFilterIds: (string | number)[]) => {
   <main class='row-span-6 bg-gray-50 overflow-y-auto'>
     <section class='p-4 md:p-8'>
       <h2 class="text-xl font-semibold mb-4">Produtos</h2>
-      <p>Filtros ativos: {{ activeFilters.join(', ') }}</p>
-      <div class="h-[1000px]">
-        Conteúdo da página de shopping...
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div
+          v-for="(product, index) in filteredProducts"
+          :key="index"
+          class="flex flex-col items-center bg-white rounded-lg shadow-md p-4"
+        >
+          <img
+            :src="product.image"
+            :alt="product.title"
+            class="w-full h-40 object-cover rounded-lg mb-4"
+          />
+          <h3 class="text-lg font-medium text-gray-800">{{ product.title }}</h3>
+          <p class="text-primary-green font-semibold">{{ product.price }}</p>
+        </div>
       </div>
     </section>
   </main>
