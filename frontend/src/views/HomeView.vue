@@ -4,13 +4,42 @@ import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
 
 import router from '@/router';
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import { GoogleOAuthUrl } from '@/utils/google';
 
+const route = useRoute();
 const { user } = useAuth();
 
-const googleLogin = () => {
-  user.value = true;
-  return router.push('/about');
+const googleLogin = async () => {
+  user.value = {
+    name: 'Fulano da Silva',
+    email: 'fulanodasilva@gmail.com',
+    pictureUrl: 'https://picsum.photos/110',
+    role: 'user'
+  };
+
+  const redirect_uri = 'http://localhost:5173';
+  window.location.href = GoogleOAuthUrl({
+    client_id: import.meta.env.VITE_APP_GOOGLE_CLIENT_ID,
+    redirect_uri: redirect_uri
+  });
 };
+
+onMounted(() => {
+  const code = route.query.code;
+
+  if (code) {
+    console.log(`[CODE]: ${code}`);
+    user.value = {
+      name: 'Fulano da Silva',
+      email: 'fulanodasilva@gmail.com',
+      pictureUrl: 'https://picsum.photos/110',
+      role: 'user'
+    };
+    router.push('/about');
+  }
+});
 </script>
 
 <template>

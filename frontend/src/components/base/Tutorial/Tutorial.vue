@@ -3,14 +3,22 @@ import { ref } from 'vue';
 
 import Button from '@/components/ui/button/Button.vue';
 
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const navigateToNewPost = () => {
+  router.push({ name: 'newpost' });
+};
+
 const showModal = ref(false);
 </script>
 
 <template>
     <div>
         <Button
-            class="bg-primary-green"
-            @click="showModal = true"
+            class="bg-primary-green hover:bg-darker-green"
+            @click="navigateToNewPost"
         >
             Criar Tutorial
         </Button>
