@@ -1,4 +1,4 @@
-# 3.1.2. Singleton
+# 3.1.3. Singleton
 
 ## Introdução
 
