@@ -1,4 +1,4 @@
-import { Label } from './label';
+import { Label } from '@/domain/label';
 
 export namespace LabelRepository {
   export const name = 'LabelRepository';
