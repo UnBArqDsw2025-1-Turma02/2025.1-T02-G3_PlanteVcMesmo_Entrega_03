@@ -13,6 +13,9 @@ const schema = z.object({
   REFRESH_TOKEN_SECRET: z.string(),
   JWT_EXPIRES_IN: z.string().default('15m'),
   JWT_REFRESH_EXPIRES_IN: z.string().default('7d'),
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_CLIENT_SECRET: z.string(),
+  GOOGLE_REDIRECT_URI: z.string(),
 });
 
 const parsed = schema.safeParse(process.env);
