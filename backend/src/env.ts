@@ -16,6 +16,19 @@ const schema = z.object({
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
   GOOGLE_REDIRECT_URI: z.string(),
+  CHAT_API_KEY: z.string().default(''),
+  CHAT_API_URL: z
+    .string()
+    .url()
+    .default('https://api.openai.com/v1/chat/completions'),
+  CHAT_MODEL: z.string().default('gpt-4o-mini'),
+  GEMINI_API_KEY: z.string().default(''),
+  GEMINI_API_URL: z
+    .string()
+    .url()
+    .default(
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
+    ),
 });
 
 const parsed = schema.safeParse(process.env);
