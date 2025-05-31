@@ -13,6 +13,19 @@ const schema = z.object({
   REFRESH_TOKEN_SECRET: z.string(),
   JWT_EXPIRES_IN: z.string().default('15m'),
   JWT_REFRESH_EXPIRES_IN: z.string().default('7d'),
+  CHAT_API_KEY: z.string().default(''),
+  CHAT_API_URL: z
+    .string()
+    .url()
+    .default('https://api.openai.com/v1/chat/completions'),
+  CHAT_MODEL: z.string().default('gpt-4o-mini'),
+  GEMINI_API_KEY: z.string().default(''),
+  GEMINI_API_URL: z
+    .string()
+    .url()
+    .default(
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
+    ),
 });
 
 const parsed = schema.safeParse(process.env);
