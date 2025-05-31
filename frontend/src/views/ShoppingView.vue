@@ -77,14 +77,28 @@ const productFilters = ref([
 
 
 const activeFilters = ref<(string | number)[]>([]);
+const searchQuery = ref('');
 
 const filteredProducts = computed(() => {
-  if (activeFilters.value.length === 0) {
-    return products.value; // Mostra todos os produtos se nenhum filtro estiver ativo
+  let filtered = products.value;
+
+  // Filtra por texto de pesquisa
+  if (searchQuery.value) {
+    const query = searchQuery.value.toLowerCase();
+    filtered = filtered.filter((product) =>
+      product.title.toLowerCase().includes(query) ||
+      product.filter.toString().toLowerCase().includes(query)
+    );
   }
-  return products.value.filter((product: { filter: string | number }) =>
-    activeFilters.value.includes(product.filter)
-  );
+
+  // Filtra por filtros ativos
+  if (activeFilters.value.length > 0) {
+    filtered = filtered.filter((product) =>
+      activeFilters.value.includes(product.filter)
+    );
+  }
+
+  return filtered;
 });
 
 // carrega JSON
@@ -169,9 +183,10 @@ const truncateTitle = (title: string) => {
           class='absolute top-1/2 left-3 transform -translate-y-1/2 w-6 h-6 text-gray-400'
         />
         <Input
-          type='text'
-          placeholder='Buscar um produto'
-          class='bg-white w-full h-12 rounded-lg pl-10 text-gray-700'
+          type="text"
+          placeholder="Buscar um produto"
+          class="bg-white w-full h-12 rounded-lg pl-10 text-gray-700"
+          v-model="searchQuery"
         />
       </div>
       <Button
