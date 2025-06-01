@@ -71,3 +71,4 @@ A responsabilidade de instanciar os provedores é da classe *LLMFactory*, que ut
 | 0.0.3  | 22-05-2025 | Imagem da Modelagem                               | Caio Felipe e Mateus Vieira |
 | 0.0.4  | 24-05-2025 | Refatoração da Modelagem                          | Caio Felipe e Mateus Vieira |
 | 0.1.0  | 25-05-2025 | Melhora da escrita da introdução                  | Caio Habibe e Mateus Vieira |
+| 0.1.1  | 01-06-2025 | Adição da Aplicação/Conformidade no projeto        | Rafael Melo Matuda                          |
