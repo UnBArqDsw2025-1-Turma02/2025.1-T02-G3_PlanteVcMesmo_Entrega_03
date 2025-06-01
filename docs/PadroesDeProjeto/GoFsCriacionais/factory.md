@@ -8,13 +8,7 @@ O método Factory é um padrão de projeto criacional que permite a criação de
 
 O padrão de design Factory demonstrou ser uma solução eficaz para o chat com IA utilizado no projeto. Sua aplicação se dá na integração de diferentes modelos, como o ChatGPT e o Gemini, que exigem formas distintas de comunicação. [3] [4]. Dessa forma, o padrão permite encapsular essas variações por meio de uma interface unificada.
 
-## Conformidade com os Padrões de Projeto GoF
-
-A implementação da classe `LLMFactory` no projeto "Plante Você Mesmo" segue os princípios do padrão de projeto GoF Criacional Factory. Este padrão é aplicado para desacoplar a lógica de criação de objetos específicos, como os provedores de LLM (Large Language Models), da lógica de uso desses objetos. 
-
-A classe `LLMFactory` encapsula a criação de instâncias de diferentes provedores, como `ChatGPTProvider` e `GeminiProvider`, utilizando um mapeamento baseado em um identificador (`LLMType`). Essa abordagem garante que o código cliente não precise conhecer os detalhes de implementação de cada provedor, promovendo flexibilidade e extensibilidade. 
-
-Além disso, a utilização do padrão Factory no projeto está alinhada com as boas práticas de design de software, permitindo a adição de novos provedores de LLM no futuro sem a necessidade de alterar o código existente, o que reforça a manutenibilidade e escalabilidade do sistema.
+## Aplicação do Padrão Factory no Projeto
 
 ![Aplicação Factory](../../assets/factoryGofs.png)
 
