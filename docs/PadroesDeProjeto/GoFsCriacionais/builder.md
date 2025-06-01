@@ -13,6 +13,58 @@ Por isso, para o projeto o foco e a motivação em adotar o padrão Builder conc
 
 Dessa forma, o padrão Builder leva a um código mais limpo e modular, o que é útil durante a manutenção e escalabilidade do sistema. Assim, desde que a estrutura encapsulada cuide da construção do objeto, mudanças podem ser feitas com impacto mínimo no resto do sistema, de forma a aumentar a velocidade no desenvolvimento e na execução dos testes, tornando o processo mais fluido.
 
+**Aplicação no Projeto Plante Você Mesmo**
+
+No contexto do projeto "Plante Você Mesmo", o padrão Builder foi implementado para facilitar a criação de entidades complexas, especialmente em cenários de teste. Um exemplo concreto é o `PostBuilder` (localizado em `backend/src/test/helpers/post-builder.ts`), que permite a construção de objetos `Post` de maneira declarativa e flexível. Esta abordagem está alinhada com as vantagens mencionadas, simplificando a configuração de objetos com múltiplas variações e melhorando a legibilidade e manutenção dos testes automatizados.
+
+```ts
+export class PostBuilder {
+  private dataSource: DataSource;
+  private data: Post;
+
+  private constructor() {
+    this.dataSource = dataSource;
+    this.data = {
+      id: faker.string.uuid(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      title: faker.lorem.sentence(),
+      description: faker.lorem.paragraph(),
+      userId: 'empty',
+    };
+  }
+
+  public static aPost(): PostBuilder {
+    return new PostBuilder();
+  }
+
+  public customParameters(params: Partial<Post>): PostBuilder {
+    this.data = {
+      ...this.data,
+      ...params,
+    };
+
+    return this;
+  }
+
+  public getData(): Post {
+    return this.data;
+  }
+
+  public async build(): Promise<Post> {
+    if (this.data.userId === 'empty') {
+      const { id: userId } = await UserBuilder.anUser().build();
+      this.data.userId = userId;
+    }
+
+    const postRepo = this.dataSource.getRepository(PostEntity);
+    const postEntity = postRepo.create(this.data);
+
+    return await postRepo.save(postEntity);
+  }
+}
+```
+
 ## Modelagem
 
 > Diagrama de classes do builder
