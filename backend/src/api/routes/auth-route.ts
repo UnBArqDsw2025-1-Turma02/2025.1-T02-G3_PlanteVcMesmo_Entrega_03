@@ -11,14 +11,16 @@ router.post('/login', async (req: Request, res: Response): Promise<any> => {
     code: req.body.code,
   });
 
-  req.cookies.set('refresh_token', refresh, {
+  res.cookie('refresh_token', refresh, {
     httpOnly: true,
     secure: env.ENV === 'production',
     sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 5,
+    maxAge: 1000 * 60 * 60 * 24 * 5,
   });
 
-  return res.send(200).json(token);
+  return res.status(201).json({
+    access_token: token,
+  });
 });
 
 export { router as authRoute };
