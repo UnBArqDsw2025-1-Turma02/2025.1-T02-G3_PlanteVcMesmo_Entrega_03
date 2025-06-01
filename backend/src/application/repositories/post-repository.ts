@@ -39,7 +39,7 @@ export namespace PostRepository {
   }
 
   export namespace Update {
-    export type Input = Partial<Omit<Post, 'createdAt'>>;
+    export type Input = Partial<Omit<Post, 'createdAt' | 'labels'>>;
     export type Output = Post;
   }
 
