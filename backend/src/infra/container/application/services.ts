@@ -6,6 +6,8 @@ import {
   GoogleAuthService,
 } from '@/infra/application/services';
 import { JwtServiceImpl } from '@/infra/services';
+import { SchedulerStrategyExecutor } from '@/application/services';
+import { StrategyFactory } from '@/infra/factory';
 
 export function configureServices(container: InfraDI) {
   return container
@@ -15,7 +17,13 @@ export function configureServices(container: InfraDI) {
     })
     .add('EncryptionService', () => new EncryptionCryptoService())
     .add('GoogleAuthService', () => new GoogleAuthService())
-    .add('JwtService', () => new JwtServiceImpl());
+    .add('JwtService', () => new JwtServiceImpl())
+    .add(
+      'SchedulerStrategyExecutor',
+      ({ ManualSchedulerStrategy }) =>
+        new SchedulerStrategyExecutor(ManualSchedulerStrategy),
+    )
+    .add('StrategyFactory', () => new StrategyFactory());
 }
 
 export type ServicesDI = ReturnType<typeof configureServices>;
