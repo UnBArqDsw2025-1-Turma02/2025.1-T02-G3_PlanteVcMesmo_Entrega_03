@@ -79,6 +79,7 @@ export class AutomaticSchedulerStrategy implements SchedulerStrategy {
       }
 
       return suggestion;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_error) {
       throw new ApiError(
         'Failed to parse watering suggestion from LLM',
