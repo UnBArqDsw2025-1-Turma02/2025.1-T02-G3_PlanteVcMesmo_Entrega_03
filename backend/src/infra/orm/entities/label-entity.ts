@@ -14,9 +14,10 @@ export const LabelEntity = new EntitySchema<LabelSchema>({
       name: 'name',
       type: 'varchar',
       nullable: false,
+      unique: true,
     },
     color: {
-      name: 'code',
+      name: 'color',
       type: 'varchar',
       nullable: false,
     },

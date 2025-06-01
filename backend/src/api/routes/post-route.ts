@@ -1,12 +1,16 @@
 import express, { Request, Response, Router } from 'express';
 import { container } from '@/infra/container';
-import { authenticationMiddleware } from '@/api/middlewares';
+import {
+  authenticationMiddleware,
+  authorizationMiddleware,
+} from '@/api/middlewares';
 
 const router: Router = express.Router();
 
 router.post(
   '/',
   authenticationMiddleware,
+  authorizationMiddleware(['admin']),
   async (req: Request, res: Response) => {
     const usecase = container.get('CreatePostUsecase');
 
@@ -54,6 +58,7 @@ router.get(
 router.delete(
   '/:postId',
   authenticationMiddleware,
+  authorizationMiddleware(['admin']),
   async (req: Request, res: Response) => {
     const usecase = container.get('DeletePostUsecase');
 
@@ -68,6 +73,7 @@ router.delete(
 router.put(
   '/:postId',
   authenticationMiddleware,
+  authorizationMiddleware(['admin']),
   async (req: Request, res: Response) => {
     const usecase = container.get('UpdatePostUsecase');
 
