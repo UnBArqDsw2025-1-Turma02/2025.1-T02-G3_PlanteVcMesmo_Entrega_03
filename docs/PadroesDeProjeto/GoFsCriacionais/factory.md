@@ -16,25 +16,7 @@ A classe `LLMFactory` encapsula a criação de instâncias de diferentes provedo
 
 Além disso, a utilização do padrão Factory no projeto está alinhada com as boas práticas de design de software, permitindo a adição de novos provedores de LLM no futuro sem a necessidade de alterar o código existente, o que reforça a manutenibilidade e escalabilidade do sistema.
 
-``` ts
-export class LLMFactory {
-  constructor() {}
-
-  public getModuleInstance(item: LLMType): LLMProvider {
-    const itemsMap: Record<LLMType, LLMProvider> = {
-      [LLMTypes.CHATGPT]: new ChatGPTProvider(),
-      [LLMTypes.GEMINI]: new GeminiProvider(),
-    };
-
-    if (!itemsMap[item]) {
-      throw new Error('Invalid Type');
-    }
-
-    return itemsMap[item];
-  }
-}
-
-```
+![Aplicação Factory](../../assets/factoryGofs.png)
 
 ## Vantagens e Justificativas
 
