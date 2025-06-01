@@ -1,12 +1,13 @@
 import { Post } from '@/domain';
-import { PostRepository } from '../../../domain/postRepository';
-import { Validator } from '../../services/validator.interface';
+import { PostRepository } from '@/application/repositories';
+import { Validator } from '@/application/services';
 
 export namespace CreatePostUsecase {
   export type Input = {
     title: string;
-    content: string;
-    authorId: string;
+    description: string;
+    userId: string;
+    labels: string[];
   };
 
   export type Output = Post;
@@ -21,16 +22,9 @@ export class CreatePostUsecase {
   public async execute(
     input: CreatePostUsecase.Input,
   ): Promise<CreatePostUsecase.Output> {
-    await this.postInputValidator.validate(input);
+    const validatedInput = await this.postInputValidator.validate(input);
 
-    const postDataToCreate: PostRepository.Create.Input = {
-      title: input.title,
-      content: input.content,
-      authorId: input.authorId,
-    };
-
-    const newPost = await this.postRepository.create(postDataToCreate);
-
+    const newPost = await this.postRepository.create(validatedInput);
     return newPost;
   }
 }
