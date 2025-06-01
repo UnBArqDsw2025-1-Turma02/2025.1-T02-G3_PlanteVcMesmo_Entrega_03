@@ -1,12 +1,21 @@
 import { Post } from '@/domain';
+import { PostRepository } from '@/application/repositories';
+import { Validator } from '@/application/services';
 
 export class FindPostUsecase {
-  constructor() {}
+  constructor(
+    private readonly findPostInputValidator: Validator<FindPostUsecase.Input>,
+    private readonly postRepository: PostRepository,
+  ) {}
 
   public async execute(
     input: FindPostUsecase.Input,
   ): Promise<FindPostUsecase.Output> {
-    throw new Error('Method not implemented.');
+    const validatedInput = await this.findPostInputValidator.validate(input);
+    const post = await this.postRepository.findBy({
+      id: validatedInput.postId,
+    });
+    return post;
   }
 }
 

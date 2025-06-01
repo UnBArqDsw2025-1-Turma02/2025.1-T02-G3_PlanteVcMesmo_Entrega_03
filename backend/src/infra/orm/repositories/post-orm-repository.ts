@@ -2,6 +2,7 @@ import { PostRepository } from '@/application/repositories';
 import { DataSource, Repository } from 'typeorm';
 import { PostEntity, UserEntity } from '@/infra/orm/entities';
 import { Post } from '@/domain';
+import { NotFoundError } from '@/application/errors';
 
 export class PostOrmRepository implements PostRepository {
   private readonly repo: Repository<Post>;
@@ -27,10 +28,16 @@ export class PostOrmRepository implements PostRepository {
     const user = await userRepo.findOne({ where: { id: input.userId } });
 
     if (!user) {
-      throw new Error('User not found');
+      throw new NotFoundError('User not found');
     }
 
-    const post = this.repo.create(input);
+    const post = this.repo.create({
+      title: input.title,
+      description: input.description,
+      userId: input.userId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
     await this.repo.save(post);
     return post;
   }
@@ -54,7 +61,7 @@ export class PostOrmRepository implements PostRepository {
     const post = await this.repo.findOne({ where: { id } });
 
     if (!post) {
-      throw new Error('Post not found');
+      throw new NotFoundError('Post not found');
     }
 
     const postUpdated = await this.repo.save({
@@ -64,5 +71,17 @@ export class PostOrmRepository implements PostRepository {
     });
 
     return postUpdated;
+  }
+
+  async delete(
+    input: PostRepository.Delete.Input,
+  ): Promise<PostRepository.Delete.Output> {
+    const post = await this.repo.findOne({ where: { id: input.id } });
+
+    if (!post) {
+      throw new NotFoundError('Post not found');
+    }
+
+    await this.repo.remove(post);
   }
 }

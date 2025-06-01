@@ -1,16 +1,7 @@
-import { CalendarPeriod } from '@/domain';
+import { CalendarPeriod, CalendarPlant } from '@/domain';
 
 export namespace SchedulerStrategy {
-  export type Input = {
-    plantName: string;
-    speciesName: string;
-    isOutdoor: boolean;
-    isIlluminated: boolean;
-    state: string;
-    period?: CalendarPeriod;
-    timesPerPeriod?: number;
-  };
-
+  export type Input = CalendarPlant;
   export type Output = {
     period: CalendarPeriod;
     timesPerPeriod: number;
