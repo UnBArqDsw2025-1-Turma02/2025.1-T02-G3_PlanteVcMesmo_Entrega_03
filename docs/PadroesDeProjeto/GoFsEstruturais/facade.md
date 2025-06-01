@@ -54,76 +54,11 @@ De forma análoga, o <code><b>ChatGPTProvider</b></code> pode ser modelado como 
 </center>
 
 <font size="3"><p style="text-align: center"><b>Autores:</b> [Matheus Brant][MatheussBrant], 2025</p></font>
-### Implementação
 
-```ts
-import { LLMProvider } from '@/application/services';
-import { HTTPBase } from '@/infra/services';
-import { LLMProviderError } from '@/application/errors';
-import logger from '@/infra/logger';
-import env from '@/env';
+## Implementação
 
-export class ChatGPTProvider extends HTTPBase implements LLMProvider {
-  private apiKey: string;
-  private apiUrl: string;
-  private model: string;
+![Facade - ChatGPTProvider](../../assets/codigo-facade.png)
 
-  constructor() {
-    super();
-    this.apiKey = env.CHAT_API_KEY;
-    this.apiUrl = env.CHAT_API_URL;
-    this.model = env.CHAT_MODEL;
-  }
-
-  async chat(input: LLMProvider.Chat.Input): Promise<LLMProvider.Chat.Output> {
-    const response = await this.request({
-      method: 'POST',
-      url: this.apiUrl,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.apiKey}`,
-      },
-      data: {
-        model: this.model,
-        messages: [
-          {
-            role: 'system',
-            content:
-              'You are a helpful assistant that provides watering suggestions for plants.',
-          },
-          {
-            role: 'user',
-            content: `Provide an answer to the following question: ${input.question}`,
-          },
-        ],
-        max_tokens: 100,
-        temperature: 0.7,
-      },
-    });
-
-    if (!response.success) {
-      logger.info(`LLM response error: ${JSON.stringify(response.data)}`);
-      throw new LLMProviderError(
-        'Failed to fetch response from LLM provider',
-        'LLMProviderError',
-        response.status,
-        response.data,
-      );
-    }
-
-    logger.info(`LLM response: ${JSON.stringify(response.data)}`);
-
-    const answer = response.data.choices?.[0]?.message?.content?.trim();
-    if (!answer) {
-      throw new LLMProviderError('No answer provided by the LLM');
-    }
-
-    return {
-      answer,
-    };
-  }
-}
-```
 <p style="text-align:justify">
 O código mostra a implementação da classe <code>ChatGPTProvider</code>, que atua como uma fachada para encapsular toda a complexidade da integração com a API de um modelo de linguagem natural. Essa classe estende <code>HTTPBase</code>, herdando funcionalidades genéricas de requisição HTTP, e implementa a interface <code>LLMProvider</code>, garantindo que siga um contrato comum com outros possíveis provedores. Através do método <code>chat</code>, ela oferece uma única porta de entrada para o consumo do serviço de IA, ocultando detalhes como headers de autenticação, estrutura da requisição e tratamento de erros. Com isso, os módulos da aplicação que precisam utilizar esse serviço lidam apenas com uma interface simples e de alto nível, representando fielmente o padrão <i>Facade</i>.
 </p>
