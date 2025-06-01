@@ -17,6 +17,7 @@ const schema = z.object({
   GOOGLE_CLIENT_SECRET: z.string(),
   GOOGLE_REDIRECT_URI: z.string(),
   CHAT_API_KEY: z.string().default(''),
+  CORS_ORIGIN: z.string().default('http://localhost:5173'),
   CHAT_API_URL: z
     .string()
     .url()
