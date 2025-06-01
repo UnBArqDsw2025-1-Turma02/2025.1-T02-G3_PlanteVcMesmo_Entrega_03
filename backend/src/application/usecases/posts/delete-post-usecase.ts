@@ -1,6 +1,5 @@
-import { Post } from '@/domain';
-import { PostRepository } from '../../../domain/postRepository';
-import { Validator } from '../../services/validator.interface';
+import { PostRepository } from '@/domain/postRepository';
+import { Validator } from '@/application/services/validator.interface';
 
 export namespace DeletePostUsecase {
   export type Input = {

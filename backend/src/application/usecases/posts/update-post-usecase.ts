@@ -1,11 +1,16 @@
-import { PostRepository } from '@/application/repositories';
-import { Validator } from '@/application/services';
+import { Post } from '@/domain';
+import { PostRepository } from '@/domain/postRepository';
+import { Validator } from '@/application/services/validator.interface'; 
+
+// Namespace definido ANTES da classe
 export namespace UpdatePostUsecase {
   export type Input = {
     id: string;
-    fields: PostRepository.Update.Input;
+    title?: string;
+    content?: string;
   };
-  export type Output = PostRepository.Update.Output;
+
+  export type Output = Post | null; 
 }
 
 export class UpdatePostUsecase {
@@ -17,13 +22,14 @@ export class UpdatePostUsecase {
   public async execute(
     input: UpdatePostUsecase.Input,
   ): Promise<UpdatePostUsecase.Output> {
-    const validatedInput = await this.updatePostInputValidator.validate(input);
+    await this.updatePostInputValidator.validate(input);
 
+    const { id, ...fieldsToUpdate } = input;
 
-    const updatedPost = await this.postRepository.update(
-      validatedInput.id,
-      validatedInput.fields,
-    );
+    if (Object.keys(fieldsToUpdate).length === 0) {
+    }
+    const updatedPost = await this.postRepository.update(id, fieldsToUpdate as Partial<Post>); // Cast se necessário
+
     return updatedPost;
   }
 }

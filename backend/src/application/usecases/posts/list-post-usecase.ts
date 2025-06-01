@@ -1,13 +1,12 @@
-import { Post } from '@/domain'; 
-import { PostRepository } from '@/application/repositories'; 
-import { Validator } from '@/application/services';
+import { Post } from '@/domain';
+import { PostRepository } from '@/domain/postRepository'; 
+import { Validator } from '@/application/services/validator.interface'; 
 
 export namespace ListPostUsecase {
   export type Input = {
     page?: number;
     limit?: number;
-    filters?: {
-    };
+    filters?: { /* seus filtros aqui */ };
   };
 
   export type Output = {
@@ -31,27 +30,26 @@ export class ListPostUsecase {
   public async execute(
     input: ListPostUsecase.Input,
   ): Promise<ListPostUsecase.Output> {
-    await this.listPostInputValidator.validate(input);
+    if (this.listPostInputValidator) {
+      await this.listPostInputValidator.validate(input);
+    }
 
     const page = input.page || this.DEFAULT_PAGE;
     const limit = input.limit || this.DEFAULT_LIMIT;
 
     const repositoryInput: PostRepository.List.Input = {
-      pagination: {
-        page,
-        limit,
-      },
-      filters: input.filters || {}, 
+      pagination: { page, limit },
+      filters: input.filters || {},
     };
 
-    const repositoryOutput = await this.postRepository.list(repositoryInput);
+    const result = await this.postRepository.list(repositoryInput);
 
     return {
-      posts: repositoryOutput.posts,
-      total: repositoryOutput.total,
-      page, 
-      limit, 
-      totalPages: Math.ceil(repositoryOutput.total / limit),
+      posts: result.posts,
+      total: result.total,
+      page,
+      limit,
+      totalPages: Math.ceil(result.total / limit),
     };
   }
 }

@@ -1,3 +1,5 @@
+import { Label } from './label';
+
 export type Post = {
   id: string;
   userId: string;
@@ -5,4 +7,5 @@ export type Post = {
   description: string;
   createdAt: Date;
   updatedAt: Date;
+  labels: Label[];
 };

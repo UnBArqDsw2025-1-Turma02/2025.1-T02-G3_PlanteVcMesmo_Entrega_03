@@ -1,12 +1,13 @@
 import { Post } from '@/domain';
-import { PostRepository } from '../../../domain/postRepository';
-import { Validator } from '../../services/validator.interface';
+import { PostRepository, LabelRepository } from '@/application/repositories';
+import { Validator } from '@/application/services';
 
 export namespace CreatePostUsecase {
   export type Input = {
     title: string;
-    content: string;
-    authorId: string;
+    description: string;
+    userId: string;
+    labels: string[];
   };
 
   export type Output = Post;
@@ -16,20 +17,28 @@ export class CreatePostUsecase {
   constructor(
     private readonly postInputValidator: Validator<CreatePostUsecase.Input>,
     private readonly postRepository: PostRepository,
+    private readonly labelRepository: LabelRepository,
   ) {}
 
   public async execute(
     input: CreatePostUsecase.Input,
   ): Promise<CreatePostUsecase.Output> {
-    await this.postInputValidator.validate(input);
+    const validatedInput = await this.postInputValidator.validate(input);
 
-    const postDataToCreate: PostRepository.Create.Input = {
-      title: input.title,
-      content: input.content,
-      authorId: input.authorId,
-    };
+    const existingLabels = await this.labelRepository.list({
+      filter: {
+        names: validatedInput.labels,
+      },
+    });
 
-    const newPost = await this.postRepository.create(postDataToCreate);
+    const labelObjectsToAssociate = existingLabels.labels;
+
+    const newPost = await this.postRepository.create({
+      title: validatedInput.title,
+      description: validatedInput.description,
+      userId: validatedInput.userId,
+      labels: labelObjectsToAssociate,
+    });
 
     return newPost;
   }

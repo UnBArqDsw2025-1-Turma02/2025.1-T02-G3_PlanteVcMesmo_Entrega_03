@@ -1,6 +1,6 @@
 import { Post } from '@/domain';
-import { PostRepository } from '@/application/repositories';
-import { Validator } from '@/application/services';
+import { PostRepository } from '@/domain/postRepository';
+import { Validator } from '@/application/services/validator.interface';
 
 export namespace FindPostUsecase {
   export type Input = {

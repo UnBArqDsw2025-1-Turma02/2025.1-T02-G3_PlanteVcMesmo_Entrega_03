@@ -1,4 +1,4 @@
-import { Post } from '@/domain/post';
+import { Post, Label } from '@/domain';
 
 export namespace PostRepository {
   export const name = 'PostRepository';
@@ -12,7 +12,12 @@ export namespace PostRepository {
   }
 
   export namespace Create {
-    export type Input = Post;
+    export type Input = {
+      userId: string;
+      title: string;
+      description: string;
+      labels: Label[];
+    };
     export type Output = Post;
   }
 
@@ -37,6 +42,13 @@ export namespace PostRepository {
     export type Input = Partial<Omit<Post, 'createdAt'>>;
     export type Output = Post;
   }
+
+  export namespace Delete {
+    export type Input = {
+      id: string;
+    };
+    export type Output = void;
+  }
 }
 
 export interface PostRepository {
@@ -51,4 +63,7 @@ export interface PostRepository {
     input: PostRepository.Create.Input,
   ): Promise<PostRepository.Create.Output>;
   list(input: PostRepository.List.Input): Promise<PostRepository.List.Output>;
+  delete(
+    input: PostRepository.Delete.Input,
+  ): Promise<PostRepository.Delete.Output>;
 }
