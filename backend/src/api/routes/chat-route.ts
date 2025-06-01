@@ -4,7 +4,7 @@ import { authenticationMiddleware } from '@/api/middlewares';
 
 const router: Router = express.Router();
 
-router.get(
+router.post(
   '/',
   authenticationMiddleware,
   async (req: Request, res: Response) => {
