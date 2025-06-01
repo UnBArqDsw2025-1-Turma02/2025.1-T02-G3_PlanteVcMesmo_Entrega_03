@@ -13,6 +13,12 @@ Por isso, para o projeto o foco e a motivação em adotar o padrão Builder conc
 
 Dessa forma, o padrão Builder leva a um código mais limpo e modular, o que é útil durante a manutenção e escalabilidade do sistema. Assim, desde que a estrutura encapsulada cuide da construção do objeto, mudanças podem ser feitas com impacto mínimo no resto do sistema, de forma a aumentar a velocidade no desenvolvimento e na execução dos testes, tornando o processo mais fluido.
 
+## Aplicação no Projeto Plante Você Mesmo
+
+No contexto do projeto "Plante Você Mesmo", o padrão Builder foi implementado para facilitar a criação de entidades complexas, especialmente em cenários de teste. Um exemplo concreto é o `PostBuilder` (localizado em `backend/src/test/helpers/post-builder.ts`), que permite a construção de objetos `Post` de maneira declarativa e flexível. Esta abordagem está alinhada com as vantagens mencionadas, simplificando a configuração de objetos com múltiplas variações e melhorando a legibilidade e manutenção dos testes automatizados.
+
+![Aplicação Builder](../../assets/builderGofs.png)
+
 ## Modelagem
 
 > Diagrama de classes do builder
@@ -38,3 +44,4 @@ Dessa forma, o padrão Builder leva a um código mais limpo e modular, o que é 
 | Versão | Data       | Alterações Principais               | Autor(es)                      |
 |:------:|:----------:|-------------------------------------| ------------------------------ |
 | 0.0.1  | 24-05-2025 | Criação do documento                | Arthur Ribeiro, Pedro Henrique |
+| 0.0.2  | 01-06-2025 | Adição da Aplicação no projeto        | Rafael Melo Matuda                          |

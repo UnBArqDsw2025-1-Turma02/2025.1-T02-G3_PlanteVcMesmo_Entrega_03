@@ -8,6 +8,12 @@ O método Factory é um padrão de projeto criacional que permite a criação de
 
 O padrão de design Factory demonstrou ser uma solução eficaz para o chat com IA utilizado no projeto. Sua aplicação se dá na integração de diferentes modelos, como o ChatGPT e o Gemini, que exigem formas distintas de comunicação. [3] [4]. Dessa forma, o padrão permite encapsular essas variações por meio de uma interface unificada.
 
+## Aplicação do Padrão Factory no Projeto
+
+A classe `LLMFactory` encapsula a criação de instâncias de diferentes provedores, como `ChatGPTProvider` e `GeminiProvider`, utilizando um mapeamento baseado em um identificador (`LLMType`). Essa abordagem garante que o código cliente não precise conhecer os detalhes de implementação de cada provedor, promovendo flexibilidade e extensibilidade. 
+
+![Aplicação Factory](../../assets/factoryGofs.png)
+
 ## Vantagens e Justificativas
 
 A utilização do padrão de projeto Factory oferece uma vantagem significativa ao promover o desacoplamento entre o código que cria objetos e o código que os utiliza. Essa separação não só simplifica a padronização da instanciação de diferentes tipos de objetos que implementam a mesma interface ou herdam de uma classe abstrata, mas também facilita a extensibilidade. Isso significa que é possível introduzir novos tipos de produtos ou serviços dentro do mesmo contexto sem a necessidade de modificar o código cliente existente, tornando o sistema mais flexível e fácil de manter. [1].
@@ -43,3 +49,4 @@ A responsabilidade de instanciar os provedores é da classe *LLMFactory*, que ut
 | 0.0.3  | 22-05-2025 | Imagem da Modelagem                               | Caio Felipe e Mateus Vieira |
 | 0.0.4  | 24-05-2025 | Refatoração da Modelagem                          | Caio Felipe e Mateus Vieira |
 | 0.1.0  | 25-05-2025 | Melhora da escrita da introdução                  | Caio Habibe e Mateus Vieira |
+| 0.1.1  | 01-06-2025 | Adição da Aplicação/Conformidade no projeto        | Rafael Melo Matuda                          |
