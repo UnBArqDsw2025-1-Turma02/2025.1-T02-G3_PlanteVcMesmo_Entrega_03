@@ -1,5 +1,9 @@
 import { ServicesDI } from './services';
-import { LoginWithGoogleUsecase } from '@/application/usecases/auth';
+import {
+  LoginWithGoogleUsecase,
+  AuthenticationUseCase,
+  RefreshTokenUsecase,
+} from '@/application/usecases/auth';
 import { LoginWithGoogleUsecaseZodValidator } from '@/infra/services/shared/zod';
 import {
   CreatePostUsecase,
@@ -33,6 +37,14 @@ export function configureUseCases(container: ServicesDI) {
           EncryptionService,
           JwtService,
         ),
+    )
+    .add(
+      'AuthenticationUseCase',
+      ({ JwtService }) => new AuthenticationUseCase(JwtService),
+    )
+    .add(
+      'RefreshTokenUsecase',
+      ({ JwtService }) => new RefreshTokenUsecase(JwtService),
     )
     .add('ChatLLMUsecase', ({ LLMFactory }) => {
       return new ChatLLMUsecase(new ChatLLMUsecaseZodValidator(), LLMFactory);
