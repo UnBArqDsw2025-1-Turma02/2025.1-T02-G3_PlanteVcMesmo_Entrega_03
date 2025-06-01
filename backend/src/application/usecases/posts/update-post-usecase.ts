@@ -12,16 +12,17 @@ export class UpdatePostUsecase {
   ): Promise<UpdatePostUsecase.Output> {
     const validatedInput = await this.updatePostInputValidator.validate(input);
     const updatedPost = await this.postRepository.update(
-      validatedInput.id,
+      validatedInput.postId,
       validatedInput.fields,
     );
+
     return updatedPost;
   }
 }
 
 export namespace UpdatePostUsecase {
   export type Input = {
-    id: string;
+    postId: string;
     fields: PostRepository.Update.Input;
   };
   export type Output = PostRepository.Update.Output;

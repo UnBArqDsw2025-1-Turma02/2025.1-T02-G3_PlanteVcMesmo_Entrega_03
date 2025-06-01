@@ -7,7 +7,7 @@ export class DeletePostUsecaseZodValidator
   implements Validator<DeletePostUsecase.Input>
 {
   private schema = z.object({
-    id: z.string().uuid(),
+    postId: z.string().uuid(),
   });
 
   async validate(input: any): Promise<DeletePostUsecase.Input> {

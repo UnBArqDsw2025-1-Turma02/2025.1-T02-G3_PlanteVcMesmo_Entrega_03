@@ -15,11 +15,11 @@ export class LabelOrmRepository implements LabelRepository {
   ): Promise<LabelRepository.List.Output> {
     const queryBuilder = this.repo.createQueryBuilder('label');
 
-    if (input.filter?.ids) {
+    if (input.filter?.ids?.length) {
       queryBuilder.andWhere('label.id IN (:...ids)', { ids: input.filter.ids });
     }
 
-    if (input.filter?.names) {
+    if (input.filter?.names?.length) {
       queryBuilder.andWhere('label.name IN (:...names)', {
         names: input.filter.names,
       });
