@@ -90,3 +90,4 @@ export class PostBuilder {
 | Versão | Data       | Alterações Principais               | Autor(es)                      |
 |:------:|:----------:|-------------------------------------| ------------------------------ |
 | 0.0.1  | 24-05-2025 | Criação do documento                | Arthur Ribeiro, Pedro Henrique |
+| 0.0.2  | 01-06-2025 | Adição da Aplicação no projeto        | Rafael Melo Matuda                          |
