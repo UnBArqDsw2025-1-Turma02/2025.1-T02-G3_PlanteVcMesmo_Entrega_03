@@ -8,6 +8,34 @@ O método Factory é um padrão de projeto criacional que permite a criação de
 
 O padrão de design Factory demonstrou ser uma solução eficaz para o chat com IA utilizado no projeto. Sua aplicação se dá na integração de diferentes modelos, como o ChatGPT e o Gemini, que exigem formas distintas de comunicação. [3] [4]. Dessa forma, o padrão permite encapsular essas variações por meio de uma interface unificada.
 
+## Conformidade com os Padrões de Projeto GoF
+
+A implementação da classe `LLMFactory` no projeto "Plante Você Mesmo" segue os princípios do padrão de projeto GoF Criacional Factory. Este padrão é aplicado para desacoplar a lógica de criação de objetos específicos, como os provedores de LLM (Large Language Models), da lógica de uso desses objetos. 
+
+A classe `LLMFactory` encapsula a criação de instâncias de diferentes provedores, como `ChatGPTProvider` e `GeminiProvider`, utilizando um mapeamento baseado em um identificador (`LLMType`). Essa abordagem garante que o código cliente não precise conhecer os detalhes de implementação de cada provedor, promovendo flexibilidade e extensibilidade. 
+
+Além disso, a utilização do padrão Factory no projeto está alinhada com as boas práticas de design de software, permitindo a adição de novos provedores de LLM no futuro sem a necessidade de alterar o código existente, o que reforça a manutenibilidade e escalabilidade do sistema.
+
+``` ts
+export class LLMFactory {
+  constructor() {}
+
+  public getModuleInstance(item: LLMType): LLMProvider {
+    const itemsMap: Record<LLMType, LLMProvider> = {
+      [LLMTypes.CHATGPT]: new ChatGPTProvider(),
+      [LLMTypes.GEMINI]: new GeminiProvider(),
+    };
+
+    if (!itemsMap[item]) {
+      throw new Error('Invalid Type');
+    }
+
+    return itemsMap[item];
+  }
+}
+
+```
+
 ## Vantagens e Justificativas
 
 A utilização do padrão de projeto Factory oferece uma vantagem significativa ao promover o desacoplamento entre o código que cria objetos e o código que os utiliza. Essa separação não só simplifica a padronização da instanciação de diferentes tipos de objetos que implementam a mesma interface ou herdam de uma classe abstrata, mas também facilita a extensibilidade. Isso significa que é possível introduzir novos tipos de produtos ou serviços dentro do mesmo contexto sem a necessidade de modificar o código cliente existente, tornando o sistema mais flexível e fácil de manter. [1].
