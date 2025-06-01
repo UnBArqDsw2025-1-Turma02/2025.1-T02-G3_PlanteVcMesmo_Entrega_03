@@ -13,14 +13,14 @@ export class DeletePostUsecase {
     const validatedInput = await this.deletePostInputValidator.validate(input);
 
     await this.postRepository.delete({
-      id: validatedInput.id,
+      id: validatedInput.postId,
     });
   }
 }
 
 export namespace DeletePostUsecase {
   export type Input = {
-    id: string;
+    postId: string;
   };
 
   export type Output = Promise<void>;

@@ -7,7 +7,7 @@ export class UpdatePostUsecaseZodValidator
   implements Validator<UpdatePostUsecase.Input>
 {
   private schema = z.object({
-    id: z.string().uuid(),
+    postId: z.string().uuid(),
     fields: z.object({
       title: z.string().min(1).optional(),
       description: z.string().min(1).optional(),
