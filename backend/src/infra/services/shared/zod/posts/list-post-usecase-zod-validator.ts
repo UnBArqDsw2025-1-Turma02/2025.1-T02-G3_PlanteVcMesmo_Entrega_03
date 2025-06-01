@@ -11,8 +11,8 @@ export class ListPostUsecaseZodValidator
       userId: z.string().uuid().optional(),
     }),
     pagination: z.object({
-      page: z.number().int().min(1),
-      limit: z.number().int().min(1).max(100),
+      page: z.number().int().min(0).default(0),
+      limit: z.number().int().min(1).max(100).default(10),
     }),
   });
 

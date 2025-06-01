@@ -12,7 +12,11 @@ import {
   ListPostUsecase,
   UpdatePostUsecase,
 } from '@/application/usecases/posts';
-import { PlantStrategyUsecase, ChatLLMUsecase } from '@/application/usecases';
+import {
+  PlantStrategyUsecase,
+  ChatLLMUsecase,
+  ListLabelUsecase,
+} from '@/application/usecases';
 import {
   CreatePostUsecaseZodValidator,
   DeletePostUsecaseZodValidator,
@@ -23,6 +27,7 @@ import {
 import {
   PlantStrategyUsecaseZodValidator,
   ChatLLMUsecaseZodValidator,
+  ListLabelUsecaseZodValidator,
 } from '@/infra/services/shared/zod';
 
 export function configureUseCases(container: ServicesDI) {
@@ -88,6 +93,12 @@ export function configureUseCases(container: ServicesDI) {
       return new DeletePostUsecase(
         new DeletePostUsecaseZodValidator(),
         PostRepository,
+      );
+    })
+    .add('ListLabelUsecase', ({ LabelRepository }) => {
+      return new ListLabelUsecase(
+        new ListLabelUsecaseZodValidator(),
+        LabelRepository,
       );
     });
 }

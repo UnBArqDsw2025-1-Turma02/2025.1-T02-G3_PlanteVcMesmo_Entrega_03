@@ -25,12 +25,6 @@ export class LabelOrmRepository implements LabelRepository {
       });
     }
 
-    if (input.filter?.isActive !== undefined) {
-      queryBuilder.andWhere('label.isActive = :isActive', {
-        isActive: input.filter.isActive,
-      });
-    }
-
     const [labels, total] = await queryBuilder
       .skip((input.pagination?.page || 0) * (input.pagination?.limit || 10))
       .take(input.pagination?.limit || 10)

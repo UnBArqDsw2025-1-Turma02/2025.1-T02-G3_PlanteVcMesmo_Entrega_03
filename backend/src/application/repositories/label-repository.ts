@@ -8,7 +8,6 @@ export namespace LabelRepository {
       filter?: Partial<{
         ids: string[];
         names: string[];
-        isActive: boolean;
       }>;
       pagination?: {
         page: number;

@@ -27,7 +27,7 @@ router.get(
 
     const output = await usecase.execute({
       pagination: {
-        page: req.query.page ? Number(req.query.page) : 1,
+        page: req.query.page ? Number(req.query.page) : 0,
         limit: req.query.limit ? Number(req.query.limit) : 10,
       },
       filters: {},
