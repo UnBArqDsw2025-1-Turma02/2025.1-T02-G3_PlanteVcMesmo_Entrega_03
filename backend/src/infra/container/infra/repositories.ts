@@ -1,7 +1,9 @@
 import { DIContainer } from 'rsdi';
 import { dataSource } from '@/infra/orm/datasource';
-import { UserRepository } from '@/application/repositories';
-import { UserTypeOrmRepository } from '@/infra/orm/repositories';
+import { UserRepository, PostRepository, LabelRepository, CommentRepository } from '@/application/repositories'; 
+
+import { UserTypeOrmRepository, PostOrmRepository, LabelOrmRepository, CommentOrmRepository } from '@/infra/orm/repositories'; 
+
 
 export function configureRepositories() {
   return new DIContainer()
@@ -9,6 +11,17 @@ export function configureRepositories() {
     .add(
       UserRepository.name,
       ({ Datasource }) => new UserTypeOrmRepository(Datasource),
+    ).add( 
+      PostRepository.name,
+      ({ Datasource }) => new PostOrmRepository(Datasource),
+    )
+    .add( 
+      LabelRepository.name,
+      ({ Datasource }) => new LabelOrmRepository(Datasource),
+    )
+    .add( 
+      CommentRepository.name,
+      ({ Datasource }) => new CommentOrmRepository(Datasource),
     );
 }
 
