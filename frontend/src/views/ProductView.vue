@@ -17,12 +17,20 @@ import {
 import { Icon } from '@iconify/vue';
 import { Check } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
+import novidadesImage from '../assets/images/novidades.png';
+import bulbosDeFloresImage from '../assets/images/bulbos-de-flores.png';
+import fertilizantesImage from '../assets/images/fertilizantes.png';
+import mudasImage from '../assets/images/mudas.png';
+import substratosImage from '../assets/images/substratos.png';
+import vasosECacheposImage from '../assets/images/vasos-e-cachepos.png';
+import suportesEAcessoriosImage from '../assets/images/suportes-e-acessorios.png';
 
 interface Product {
   image: string;
   title: string;
   price: string;
   link?: string;
+  filter?: string
 }
 
 const brazilStates = [
@@ -76,6 +84,26 @@ const openProductLink = () => {
   } else {
     console.error('Link do produto não disponível');
   }
+};
+
+const selectCorrectImage = () => {
+    if (product.value && product.value.filter === 'Novidades') {
+        return novidadesImage;
+    } else if (product.value && product.value.filter === 'Bulbos de Flores') {
+        return bulbosDeFloresImage;
+    } else if (product.value && product.value.filter === 'Fertilizantes') {
+        return fertilizantesImage;
+    } else if (product.value && product.value.filter === 'Mudas') {
+        return mudasImage;
+    } else if (product.value && product.value.filter === 'Substratos') {
+        return substratosImage;
+    } else if (product.value && product.value.filter === 'Vasos e Cachepôs') {
+        return vasosECacheposImage;
+    } else if (product.value && product.value.filter === 'Suportes e Acessórios') {
+        return suportesEAcessoriosImage;
+    } else {
+        return novidadesImage;
+    }
 };
 </script>
 
@@ -137,7 +165,7 @@ const openProductLink = () => {
           class="flex justify-center items-center bg-white h-full rounded-2xl w-[70%] shadow-lg"
         >
           <img
-            src="../assets/images/bulbo.png"
+            :src="selectCorrectImage() || novidadesImage"
             alt="Imagem do produto"
             class="rounded-2xl w-full h-full object-cover"
           />
