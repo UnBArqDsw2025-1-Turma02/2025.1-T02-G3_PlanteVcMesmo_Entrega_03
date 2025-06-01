@@ -6,16 +6,16 @@ export function errorHandler(
   _req: Request,
   res: Response,
   _next: NextFunction,
-): Response {
+) {
   if (err instanceof ApiError) {
-    return res.status(err.status).json({
-      fields: err?.extraFields,
+    res.status(err.status).json({
+      fields: err.extraFields,
       message: err.message,
-      code: err?.code,
+      code: err.code,
+    });
+  } else {
+    res.status(500).json({
+      message: 'Internal Server Error',
     });
   }
-
-  return res.status(500).json({
-    message: 'Internal Server Error',
-  });
 }
