@@ -10,6 +10,8 @@ O padrão de design Factory demonstrou ser uma solução eficaz para o chat com 
 
 ## Aplicação do Padrão Factory no Projeto
 
+A classe `LLMFactory` encapsula a criação de instâncias de diferentes provedores, como `ChatGPTProvider` e `GeminiProvider`, utilizando um mapeamento baseado em um identificador (`LLMType`). Essa abordagem garante que o código cliente não precise conhecer os detalhes de implementação de cada provedor, promovendo flexibilidade e extensibilidade. 
+
 ![Aplicação Factory](../../assets/factoryGofs.png)
 
 ## Vantagens e Justificativas
