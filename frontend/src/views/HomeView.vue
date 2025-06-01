@@ -1,43 +1,44 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
+
+import type { User } from '@/types/models/user';
+
 import { useAuth } from '@/hooks/use-auth';
+import { useRoute, type LocationQueryValue } from 'vue-router';
 
 import { Button } from '@/components/ui/button';
 
 import router from '@/router';
-import { onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import { GoogleOAuthUrl } from '@/utils/google';
+
+import ApiService from '@/api/ApiService';
+import HttpStatusCode from '@/api/HttpStatusCode';
+import ApiRoutes, { type AuthRefresh } from '@/api/ApiRoutes';
 
 const route = useRoute();
-const { user } = useAuth();
+const { user, googleRedirect } = useAuth();
 
-const googleLogin = async () => {
-  user.value = {
-    name: 'Fulano da Silva',
-    email: 'fulanodasilva@gmail.com',
-    pictureUrl: 'https://picsum.photos/110',
-    role: 'user'
-  };
+const googleLogin = async (code: LocationQueryValue | LocationQueryValue[]) => {
+  let response = await ApiService.post(ApiRoutes.auth.login, { code });
+  if (response?.status === HttpStatusCode.CREATED_201) {
+    let data = await response.json();
+    ApiService.setAccessToken((data as AuthRefresh).access_token);
 
-  const redirect_uri = 'http://localhost:5173';
-  window.location.href = GoogleOAuthUrl({
-    client_id: import.meta.env.VITE_APP_GOOGLE_CLIENT_ID,
-    redirect_uri: redirect_uri
-  });
+    response = await ApiService.get(ApiRoutes.auth.me);
+    if (response?.ok) {
+      data = await response.json();
+      user.value = data as User;
+
+      router.push('/about');
+    }
+  }
 };
 
-onMounted(() => {
-  const code = route.query.code;
-
-  if (code) {
-    console.log(`[CODE]: ${code}`);
-    user.value = {
-      name: 'Fulano da Silva',
-      email: 'fulanodasilva@gmail.com',
-      pictureUrl: 'https://picsum.photos/110',
-      role: 'user'
-    };
+onMounted(async () => {
+  if (user.value) {
     router.push('/about');
+  } else {
+      const code = route.query.code;
+    if (code) await googleLogin(code);
   }
 });
 </script>
@@ -69,7 +70,7 @@ onMounted(() => {
         </span>
         <span class='block border-t-1 border-primary-green w-28'></span>
       </div>
-      <Button class='bg-primary-beige hover:bg-darker-beige' @click='googleLogin'>
+      <Button class='bg-primary-beige hover:bg-darker-beige' @click='googleRedirect'>
         Login com Google
       </Button>
     </div>

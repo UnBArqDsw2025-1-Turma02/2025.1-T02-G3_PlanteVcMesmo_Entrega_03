@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router';
 
 import { useAuth } from '@/hooks/use-auth';
 
-const { user } = useAuth();
+const { user, googleRedirect } = useAuth();
 
 const route = useRoute();
 </script>
@@ -13,12 +13,19 @@ const route = useRoute();
     class='shadow-lg row-span-3 bg-secondary-green'
   >
     <router-link
-      v-if="user && route.name !== 'profile'"
+      v-if="route.name !== 'profile'"
       to="/profile"
     >
       <img
+        v-if="user && route.name !== 'profile'"
         class="rounded-lg fixed right-3 top-3 h-[50px] w-[50px]"
-        src="https://picsum.photos/110"
+        :src="user.pictureUrl"
+      />
+      <img
+        v-else
+        class="rounded-lg bg-white fixed right-3 top-3 p-1.5 h-[50px] w-[50px]"
+        @click="googleRedirect"
+        src="/g.webp"
       />
     </router-link>
     <slot />

@@ -37,6 +37,7 @@ router.get(
 router.post('/refresh', async (req: Request, res: Response) => {
   if (!req.cookies.refresh_token) {
     res.status(401).json({ message: 'No refresh token provided' });
+    return;
   }
   const usecase = container.get('RefreshTokenUsecase');
 

@@ -17,4 +17,8 @@ const ApiRoutes = {
   }
 };
 
+export interface AuthRefresh {
+  access_token: string;
+}
+
 export default ApiRoutes;

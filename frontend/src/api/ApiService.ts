@@ -3,14 +3,18 @@ import { errorToast } from '@/utils/toast';
 type AVAILABLE_METHODS = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
 class ApiServiceSingleton {
+  private ACCESS_TOKEN = '';
+
   private ERROR_DESCRIPTION = 'Tente novamente mais tarde!';
 
   private API_URL: string = import.meta.env.VITE_APP_API_URL;
   private BASE_HEADERS: HeadersInit = {
     'Content-Type': 'application/json'
   };
-  private AUTH_HEADERS: HeadersInit = {
-    'Authorization': 'Bearer'
+  private AUTH_HEADERS = (token: string): HeadersInit  => {
+    return {
+      'Authorization': `Bearer ${token}`
+    };
   };
 
   async get(endpoint: string, auth: boolean = true): Promise<Response | undefined> {
@@ -59,10 +63,18 @@ class ApiServiceSingleton {
     }
   }
 
+  public setAccessToken(token: string): void {
+    this.ACCESS_TOKEN = token;
+  }
+
+  public clearAccessToken(): void {
+    this.ACCESS_TOKEN = '';
+  }
+
   private getHeaders(auth: boolean) {
     if (auth) return {
       ...this.BASE_HEADERS,
-      ...this.AUTH_HEADERS
+      ...this.AUTH_HEADERS(this.ACCESS_TOKEN)
     };
 
     return this.BASE_HEADERS;

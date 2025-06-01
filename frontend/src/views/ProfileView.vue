@@ -6,8 +6,22 @@ import { Input } from '@/components/ui/input';
 import Header from '@/components/base/Header/Header.vue';
 import Main from '@/components/base/Main/Main.vue';
 import Tutorial from '@/components/base/Tutorial/Tutorial.vue';
+import Button from '@/components/ui/button/Button.vue';
+import ApiService from '@/api/ApiService';
+import ApiRoutes from '@/api/ApiRoutes';
+import HttpStatusCode from '@/api/HttpStatusCode';
+import router from '@/router';
 
-const { user } = useAuth();
+const { user, removeUser } = useAuth();
+
+const logout = async () => {
+  const response = await ApiService.get(ApiRoutes.auth.logout);
+  if (response?.status === HttpStatusCode.NO_CONTENT_204) {
+    removeUser();
+
+    router.push('/about');
+  }
+};
 </script>
 
 <template>
@@ -23,7 +37,13 @@ const { user } = useAuth();
     >
       <span>{{ user?.name }}</span>
       <span class="font-thin">{{ user?.email }}</span>
-      <span class="font-thin">Brasília, DF</span>
+      <Button
+        class="w-fit text-white font-thin"
+        variant="link"
+        @click="logout"
+      >
+        Sair da conta
+      </Button>
     </section>
   </Header>
 

@@ -7,6 +7,7 @@ export const UserRoles = {
 export type UserRole = keyof typeof UserRoles;
 
 export type User = {
+  userId: string;
   email: string;
   name: string;
   pictureUrl: string;
