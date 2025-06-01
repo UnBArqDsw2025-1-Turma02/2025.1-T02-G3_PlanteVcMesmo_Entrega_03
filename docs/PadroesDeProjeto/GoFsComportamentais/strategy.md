@@ -53,4 +53,5 @@ A classe *Scheduler* define os métodos para configurar e executar a estratégia
 |--------|------------|---------------------------------------------------| ---------------- |
 | 1.0.0  | 22-05-2025 | Criação do Documento do padrão de projeto Strategy| Davi Casseb      |
 | 1.1.0  | 28-05-2025 | Recriação dos textos e referências                | Caio Felipe      |
-| 1.1.1  | 30-05-2025 | Conferindo bibliografia e atribuindo citações     | Gabriel Fernando |
+| 1.1.1  | 29-05-2025 | Imagem da modelagem e descrição                   | Mateus Vieira    |
+| 1.1.2  | 30-05-2025 | Conferindo bibliografia e atribuindo citações     | Gabriel Fernando |
