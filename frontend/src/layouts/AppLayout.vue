@@ -7,9 +7,9 @@ import { Toaster } from '@/components/ui/sonner';
 </script>
 
 <template>
-  <div
-      class='grid grid-rows-10 h-screen'
-  >
+    <div
+      class='grid grid-rows-10 grid-cols-[minmax(0,1fr)] h-screen'
+    >
     <slot />
     <Footer>
       <FooterLink target='about'>
