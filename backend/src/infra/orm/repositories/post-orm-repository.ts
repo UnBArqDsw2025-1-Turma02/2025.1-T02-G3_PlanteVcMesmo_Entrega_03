@@ -32,12 +32,11 @@ export class PostOrmRepository implements PostRepository {
     }
 
     const post = this.repo.create({
-      title: input.title,
-      description: input.description,
-      userId: input.userId,
+      ...input,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
+
     await this.repo.save(post);
     return post;
   }
