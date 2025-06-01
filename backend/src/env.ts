@@ -11,12 +11,13 @@ const schema = z.object({
   ALGORITHM: z.string().default('aes-256-cbc'),
   ACCESS_TOKEN_SECRET: z.string(),
   REFRESH_TOKEN_SECRET: z.string(),
-  JWT_EXPIRES_IN: z.string().default('15m'),
+  JWT_EXPIRES_IN: z.string().default('60m'),
   JWT_REFRESH_EXPIRES_IN: z.string().default('7d'),
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
   GOOGLE_REDIRECT_URI: z.string(),
   CHAT_API_KEY: z.string().default(''),
+  CORS_ORIGIN: z.string().default('http://localhost:5173'),
   CHAT_API_URL: z
     .string()
     .url()
