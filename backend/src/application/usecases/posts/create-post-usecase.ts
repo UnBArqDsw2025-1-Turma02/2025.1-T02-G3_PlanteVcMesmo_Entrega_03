@@ -1,5 +1,5 @@
 import { Post } from '@/domain';
-import { PostRepository } from '@/application/repositories';
+import { PostRepository, LabelRepository } from '@/application/repositories';
 import { Validator } from '@/application/services';
 
 export namespace CreatePostUsecase {
@@ -17,6 +17,7 @@ export class CreatePostUsecase {
   constructor(
     private readonly postInputValidator: Validator<CreatePostUsecase.Input>,
     private readonly postRepository: PostRepository,
+    private readonly labelRepository: LabelRepository,
   ) {}
 
   public async execute(
@@ -24,7 +25,17 @@ export class CreatePostUsecase {
   ): Promise<CreatePostUsecase.Output> {
     const validatedInput = await this.postInputValidator.validate(input);
 
-    const newPost = await this.postRepository.create(validatedInput);
+    const labelResults = await this.labelRepository.list({
+      filter: {
+        names: validatedInput.labels,
+      },
+    });
+
+    const newPost = await this.postRepository.create({
+      ...validatedInput,
+      labels: labelResults.labels,
+    });
+
     return newPost;
   }
 }

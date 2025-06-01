@@ -1,4 +1,4 @@
-import { Post } from '@/domain/post';
+import { Post, Label } from '@/domain';
 
 export namespace PostRepository {
   export const name = 'PostRepository';
@@ -16,7 +16,7 @@ export namespace PostRepository {
       userId: string;
       title: string;
       description: string;
-      labels: string[];
+      labels: Label[];
     };
     export type Output = Post;
   }
