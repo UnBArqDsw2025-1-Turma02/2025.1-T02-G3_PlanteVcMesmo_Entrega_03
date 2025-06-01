@@ -9,13 +9,14 @@ export function errorHandler(
 ) {
   if (err instanceof ApiError) {
     res.status(err.status).json({
-      fields: err.extraFields,
+      error: err.name,
+      fields: err.extraFields?.fields,
       message: err.message,
       code: err.code,
     });
   } else {
     res.status(500).json({
-      message: 'Internal Server Error',
+      message: err.message ?? 'Internal Server Error',
     });
   }
 }
