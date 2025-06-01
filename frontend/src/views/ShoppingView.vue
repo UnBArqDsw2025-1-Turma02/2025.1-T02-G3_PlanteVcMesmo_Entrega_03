@@ -20,6 +20,14 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import FilterBar from '@/components/ui/filters/FilterBar.vue';
+import { useRouter } from 'vue-router';
+
+interface Product {
+  image: string;
+  title: string;
+  price: string;
+  filter: string | number;
+}
 
 const brazilStates = [
   { label: 'Acre', value: 'AC' },
@@ -54,13 +62,6 @@ const brazilStates = [
 const values = ref({
   language: ''
 });
-
-interface Product {
-  image: string;
-  title: string;
-  price: string;
-  filter: string | number;
-}
 
 const products = ref<Product[]>([]);
 
@@ -115,15 +116,21 @@ onMounted(() => {
   loadProducts();
 });
 
-// Função para atualizar os filtros ativos
 const handleFilterChange = (selectedFilterIds: (string | number)[]) => {
   activeFilters.value = selectedFilterIds;
 };
 
-// Função para limitar o título a 5 palavras
+// Limita título em 5 palavras
 const truncateTitle = (title: string) => {
   const words = title.split(' ');
   return words.length > 5 ? words.slice(0, 5).join(' ') + '...' : title;
+};
+
+const router = useRouter();
+
+const goToProduct = (product: Product) => {
+  localStorage.setItem('selectedProduct', JSON.stringify(product)); //localStorage
+  router.push({ name: 'product' }); 
 };
 </script>
 
@@ -208,28 +215,25 @@ const truncateTitle = (title: string) => {
     </div>
   </header>
 
-  <main class='row-span-6 bg-gray-50 overflow-y-auto'>
-    <section class='p-4 md:p-8'>
+  <main class="row-span-6 bg-gray-50 overflow-y-auto">
+    <section class="p-4 md:p-8">
       <h2 class="text-xl font-semibold mb-4">Produtos</h2>
       <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
         <div  
           v-for="(product, index) in filteredProducts"
           :key="index"
-          class="flex flex-col items-center bg-white rounded-lg shadow-md p-4"
+          class="flex flex-col items-center bg-white rounded-lg shadow-md p-4 cursor-pointer"
+          @click="goToProduct(product)"
         >
           <img
             :src="product.image"
             :alt="product.title"
             class="w-full h-40 object-cover rounded-lg mb-4"
           />
-          <p 
-            class="text-xs text-primary-green font-semibold text-left w-full" 
-            style="margin-top: 10px;"
-          >
+          <h3 class="text-sm font-medium text-gray-800">{{ truncateTitle(product.title) }}</h3>
+          <p class="text-xs text-primary-green font-semibold text-left w-full mt-2">
             {{ product.price }}
           </p>
-          <hr />
-          <h3 class="text-sm font-medium text-gray-800">{{ truncateTitle(product.title) }}</h3>
         </div>
       </div>
     </section>
