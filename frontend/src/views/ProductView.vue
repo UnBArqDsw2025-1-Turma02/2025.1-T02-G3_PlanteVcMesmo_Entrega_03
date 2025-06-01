@@ -105,6 +105,27 @@ const selectCorrectImage = () => {
         return novidadesImage;
     }
 };
+
+const selectCorrectDescription = () => {
+    if (product.value && product.value.filter === 'Novidades') {
+        return 'Confira as novidades e lançamentos para deixar seu jardim ainda mais bonito! Acesse plantei.com.br e clique em Comprar Agora.';
+    } else if (product.value && product.value.filter === 'Bulbos de Flores') {
+        return 'Bulbos de flores são estruturas que armazenam energia para o crescimento e floração de plantas. Fáceis de plantar, garantem um jardim florido com pouca manutenção. Encontre este produto em plantei.com.br, clicando em Comprar Agora.';
+    } else if (product.value && product.value.filter === 'Fertilizantes') {
+        return 'Fertilizantes são essenciais para o crescimento saudável das plantas, fornecendo os nutrientes que elas precisam. Encontre as melhores opções em plantei.com.br e clique em Comprar Agora.';
+    } else if (product.value && product.value.filter === 'Mudas') {
+        return 'Mudas são ideais para começar seu jardim com praticidade e rapidez. Cultive flores, ervas, frutas e muito mais com qualidade. Garanta as suas em www.plantei.com.br, clicando em Comprar Agora';
+    } else if (product.value && product.value.filter === 'Substratos') {
+        return 'Substratos são misturas de materiais que proporcionam um ambiente ideal para o crescimento das raízes das plantas. Eles garantem drenagem, aeração e nutrientes adequados. Encontre substratos de qualidade em plantei.com.br e clique em Comprar Agora.';
+    } else if (product.value && product.value.filter === 'Vasos e Cachepôs') {
+        return 'Vasos e cachepôs são essenciais para o cultivo de plantas, oferecendo suporte e estilo. Descubra uma variedade de opções em plantei.com.br e clique em Comprar Agora.';
+    } else if (product.value && product.value.filter === 'Suportes e Acessórios') {
+        return 'Suportes e acessórios são fundamentais para organizar e embelezar seu jardim. Eles ajudam a manter as plantas saudáveis e bem posicionadas. Encontre tudo o que precisa em plantei.com.br, clicando em Comprar Agora.';
+    } else {
+        return 'Confira as novidades e lançamentos para deixar seu jardim ainda mais bonito! Acesse plantei.com.br e clique em Comprar Agora.';
+    }
+};
+
 </script>
 
 <template>
@@ -184,7 +205,7 @@ const selectCorrectImage = () => {
             Descrição:
         </p>
         <p class="text-xs text-[#686868] text-left w-full pt-2">
-            Bulbos de flores são estruturas que armazenam energia para o crescimento e floração de plantas. Fáceis de plantar, garantem um jardim florido com pouca manutenção. Encontre este produto em plantei.com.br, clicando em Comprar Agora.
+            {{ selectCorrectDescription() }}
         </p>
       </section>
       <div class='flex flex-col items-center justify-between pt-9 gap-2.5'>
