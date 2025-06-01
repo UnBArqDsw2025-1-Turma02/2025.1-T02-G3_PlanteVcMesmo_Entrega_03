@@ -1,8 +1,13 @@
 import { EntitySchema } from 'typeorm';
 import { BaseEntity } from '@/infra/orm/entities';
-import { Post } from "@/domain";
+import { Label, Post, User } from '@/domain';
 
-export const PostEntity = new EntitySchema<Post>({
+export type PostSchema = Post & {
+  user: User;
+  labels: Label[];
+};
+
+export const PostEntity = new EntitySchema<PostSchema>({
   name: 'post',
   columns: {
     ...BaseEntity,
@@ -16,6 +21,11 @@ export const PostEntity = new EntitySchema<Post>({
       type: 'varchar',
       nullable: false,
     },
+    userId: {
+      name: 'user_id',
+      type: 'uuid',
+      nullable: false,
+    },
   },
   relations: {
     user: {
@@ -26,5 +36,21 @@ export const PostEntity = new EntitySchema<Post>({
         name: 'user_id',
       },
     },
+    labels: {
+      type: 'many-to-many',
+      target: 'label',
+      inverseSide: 'posts',
+      joinTable: {
+        name: 'post_labels',
+        joinColumn: {
+          name: 'post_id',
+          referencedColumnName: 'id',
+        },
+        inverseJoinColumn: {
+          name: 'label_id',
+          referencedColumnName: 'id',
+        },
+      },
+    },
   },
-})
+});

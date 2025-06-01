@@ -1,22 +1,19 @@
-import { Post } from '@/domain';
-
 export const UserRoles = {
-  USER: 'user',
-  ADMIN: 'admin',
-  MOD: 'mod',
+  user: 'user',
+  admin: 'admin',
+  mod: 'mod',
 };
 
 export type UserRole = keyof typeof UserRoles;
 
 export type User = {
-  id: String,
-  createdAt: Date,
-  updatedAt: Date,
-  email: String,
-  name: String,
-  pictureUrl: String,
-  encryptedRefreshToken: String,
-  encryptionIV: String,
-  role: UserRole,
-  posts: Array<Post>,
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  email: string;
+  name: string;
+  pictureUrl: string;
+  encryptedRefreshToken: string;
+  encryptionIV: string;
+  role: UserRole;
 };

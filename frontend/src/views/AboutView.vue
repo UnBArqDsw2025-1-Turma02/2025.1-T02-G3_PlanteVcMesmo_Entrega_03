@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils';
 import { Icon } from '@iconify/vue';
 import { Check } from 'lucide-vue-next';
 
+import Header from '@/components/base/Header/Header.vue';
+import Main from '@/components/base/Main/Main.vue';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -53,12 +55,12 @@ const brazilStates = [
 ];
 
 const values = ref({
-  language: ''
+  state: ''
 });
 </script>
 
 <template>
-  <header class='flex flex-col gap-2 p-7 row-span-3 bg-secondary-green'>
+  <Header class='flex flex-col gap-2 p-7'>
     <div
       class='flex flex-col gap-4'
     >
@@ -72,8 +74,8 @@ const values = ref({
               role='combobox'
               class='h-0 justify-start text-white'
             >
-              {{ values.language ? brazilStates.find(
-                (language) => language.value === values.language,
+              {{ values.state ? brazilStates.find(
+                (state) => state.value === values.state,
               )?.label : 'Escolha seu estado...' }}
               <Icon
                 icon='ep:arrow-down'
@@ -88,16 +90,16 @@ const values = ref({
             <CommandList>
               <CommandGroup>
                 <CommandItem
-                  v-for='language in brazilStates'
-                  :key='language.value'
-                  :value='language.label'
+                  v-for='state in brazilStates'
+                  :key='state.value'
+                  :value='state.label'
                   @select='() => {
-                    values.language = language.value
+                    values.state = state.value
                   }'
                 >
-                  {{ language.label }}
+                  {{ state.label }}
                   <Check
-                    :class="cn('ml-auto h-4 w-4', language.value === values.language ? 'opacity-100' : 'opacity-0')"
+                    :class="cn('ml-auto h-4 w-4', state.value === values.state ? 'opacity-100' : 'opacity-0')"
                   />
                 </CommandItem>
               </CommandGroup>
@@ -132,8 +134,8 @@ const values = ref({
         </Button>
       </div>
     </div>
-  </header>
-  <main class='row-span-6'>
+  </Header>
+  <Main>
     <section
       class='flex items-center justify-center h-40 w-full absolute top-[22%]'
     >
@@ -177,5 +179,5 @@ const values = ref({
     >
       Body
     </section>
-  </main>
+  </Main>
 </template>

@@ -1,12 +1,13 @@
-<template>
-  <header
-    class='row-span-3 bg-secondary-green'
-  >
+<script setup lang="ts">
+import Header from '@/components/base/Header/Header.vue';
+import Main from '@/components/base/Main/Main.vue';
+</script>
 
-  </header>
-  <main
-    class='row-span-6'
-  >
+<template>
+  <Header>
+
+  </Header>
+  <Main>
     news
-  </main>
+  </Main>
 </template>

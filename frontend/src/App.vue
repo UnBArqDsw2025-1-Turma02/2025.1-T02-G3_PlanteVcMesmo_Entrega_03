@@ -11,6 +11,7 @@ import { useRoute } from 'vue-router';
 
 import EmptyLayout from './layouts/EmptyLayout.vue';
 import AppLayout from './layouts/AppLayout.vue';
+import ProtectedLayout from './layouts/ProtectedLayout.vue';
 
 export default defineComponent({
   setup() {
@@ -19,6 +20,7 @@ export default defineComponent({
     const layout = computed(() => {
       const layoutMap = {
         app: AppLayout,
+        protected: ProtectedLayout,
         empty: EmptyLayout
       } as const;
 
