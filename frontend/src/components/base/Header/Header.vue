@@ -11,8 +11,7 @@ const route = useRoute();
 </script>
 
 <template>
-  <header class="shadow-lg row-span-3 p-7 bg-secondary-green">
-    <!-- Avatar ou botão de voltar -->
+  <header class="shadow-lg row-span-2 p-7 bg-secondary-green">
     <div class="fixed top-3 right-3 flex flex-col items-end gap-2">
       <router-link
         v-if="!excluded.includes(route.name as string)"
@@ -33,18 +32,16 @@ const route = useRoute();
       </router-link>
 
       <router-link
-        v-if="route.name !== 'profile'"
+        v-if="route.name == 'profile'"
         to="/calendar"
       >
-        <Icon 
-          icon="solar:calendar-linear" 
-          class="w-[30px] h-[30px] text-white"
-          :class="{ 'opacity-50': route.name !== 'calendar' }"
+        <Icon
+          icon="solar:calendar-linear"
+          class="w-[30px] h-[30px] text-gray-300"
         />
       </router-link>
     </div>
 
-    <!-- Botão de voltar (à esquerda) apenas na página de novo post -->
     <router-link
       v-if="route.name === 'newpost'"
       to="/profile"

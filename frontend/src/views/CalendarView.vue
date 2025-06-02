@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { CalendarPlant, CalendarPeriod } from '@/types/models/calendar';
+
+import type { CalendarPlant, LLMAutoResponse } from '@/types/models/calendar';
 import { CalendarPeriods } from '@/types/models/calendar';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/base/Header/Header.vue';
@@ -38,42 +39,31 @@ const handleSubmit = async () => {
       }
     };
 
-    console.log('API_URL:', import.meta.env.VITE_APP_API_URL);
-    console.log('Payload enviado: ', payload);
+    const response = await ApiService.post(ApiRoutes.plant.root, payload);
+    if (response?.ok) {
+      const data: LLMAutoResponse = await response.json();
 
-    const mockResponse = {
-      period: 'DAILY',
-      timesPerPeriod: 1
-    };
-
-    await new Promise(resolve => setTimeout(resolve, 300));
-
-    result.value = `Período: ${mockResponse.period}, Vezes por período: ${mockResponse.timesPerPeriod}`;
-
+      result.value = `Período: ${data.period}, Vezes por período: ${data.timesPerPeriod}`;
+    }
   } catch (error) {
     console.error('Erro ao salvar:', error);
     alert('Erro ao salvar os dados da planta');
   }
 };
-
-
-
-
-
 </script>
 
 <template>
-  <Header class="flex flex-col gap-2 p-7">
+  <Header class="flex flex-col gap-2 p-7 pt-18">
     <div class="font-thin text-white text-2xl flex items-center gap-2">
       <Icon icon="solar:calendar-linear" class="w-6 h-6" />
       Calendário de Cuidados
     </div>
   </Header>
-  <Main>
-    <section class="flex items-center justify-center h-auto w-full absolute top-[22%]">
-      <div class="flex flex-col justify-start items-center gap-6 bg-white rounded-2xl w-[85%] p-6 shadow-lg">
+  <Main class="overflow-auto">
+    <section class="flex items-center justify-center h-auto w-full">
+      <div class="flex flex-col justify-start items-center gap-6 w-[85%] p-6">
         <form @submit.prevent="handleSubmit" class="w-full space-y-6">
-          <div class="space-y-4">
+          <div class="space-y-4 pb-2">
             <div class="relative">
               <label class="block text-sm font-medium text-gray-700 mb-1">Nome da Planta</label>
               <div class="relative">
@@ -103,22 +93,22 @@ const handleSubmit = async () => {
             <div class="flex flex-col gap-3 p-4 bg-gray-50 rounded-xl">
               <label class="text-sm font-medium text-gray-700">Ambiente</label>
               <div class="flex space-x-4">
-                <label class="flex items-center">
+                <label class="flex gap-2 items-center">
                   <input
                     v-model="plant.isOutdoor"
                     type="checkbox"
                     class="rounded border-gray-300 text-primary-green focus:ring-primary-green"
                   />
-                  <span class="ml-2 text-sm text-gray-700">Ambiente Externo</span>
+                  <span class="text-sm text-gray-700">Ambiente Externo</span>
                 </label>
 
-                <label class="flex items-center">
+                <label class="flex gap-2 items-center">
                   <input
                     v-model="plant.isIlluminated"
                     type="checkbox"
                     class="rounded border-gray-300 text-primary-green focus:ring-primary-green"
                   />
-                  <span class="ml-2 text-sm text-gray-700">Iluminação Natural</span>
+                  <span class="text-sm text-gray-700">Iluminação Natural</span>
                 </label>
               </div>
             </div>
@@ -138,7 +128,7 @@ const handleSubmit = async () => {
 
             <div class="flex flex-col gap-3 p-4 bg-gray-50 rounded-xl">
               <label class="text-sm font-medium text-gray-700">Tipo de Configuração</label>
-              <div class="flex space-x-6">
+              <div class="flex gap-3 space-x-6">
                 <label class="inline-flex items-center">
                   <input
                     v-model="isAutomatic"

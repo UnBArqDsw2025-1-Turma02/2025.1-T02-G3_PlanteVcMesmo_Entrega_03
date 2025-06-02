@@ -16,3 +16,8 @@ export type CalendarPlant = {
 };
 
 export type CalendarPeriod = keyof typeof CalendarPeriods;
+
+export type LLMAutoResponse = {
+  period: CalendarPeriod;
+  timesPerPeriod: number;
+}
