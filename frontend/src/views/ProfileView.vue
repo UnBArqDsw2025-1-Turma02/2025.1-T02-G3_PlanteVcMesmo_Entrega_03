@@ -28,13 +28,12 @@ function sendMessage() {
       } else {
       let errorMsg = 'Erro ao obter resposta da IA.';
       try {
-        const errorData = await response.json();
+        const errorData = response ? await response.json() : null;
         if (errorData && errorData.message) {
-        errorMsg += ` (${errorData.message})`;
+        errorMsg = ` ${errorMsg}`;
         }
-      } catch (e) {
-        
-      }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (e) { /* empty */ }
       messages.value.push(errorMsg);
       }
     }).catch(() => {
@@ -110,7 +109,11 @@ function sendMessage() {
           <div
             v-for="(msg, index) in messages"
             :key="index"
-            class="self-end max-w-[45%] bg-primary-green text-white p-4 rounded-xl text-sm"
+            :class="{
+              'self-end bg-primary-green text-white': index % 2 === 0, // Mensagens do usuário
+              'self-start bg-gray-200 text-black': index % 2 !== 0 // Respostas da IA
+            }"
+            class="max-w-[45%] p-4 rounded-xl text-sm"
           >
             {{ msg }}
           </div>
