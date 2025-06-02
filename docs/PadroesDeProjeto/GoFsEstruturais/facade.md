@@ -32,7 +32,7 @@ Além disso, aplicamos o padrão <i>Facade</i> na integração com o serviço de
 
 <font size="3"><p style="text-align: center"><b>Autores:</b> [Gabriel Fernando De Jesus Silva][MMcLovin], 2025</p></font>
 
-<p style="text-align:justify">Na Figura 1 temos a implementação do padrão, com a <code><b>PlantScheduleFacade</b></code> sendo a ligação para um subsistema. Ela permite que a aplicação crie lembretes de plantas <code><b>createPlantReminder</b></code> abstraindo as operações de autenticação e interação com a GoogleCalendarAPI.</p>
+<p style="text-align:justify">Na Figura 1 temos a modelagem do padrão, com a <code><b>PlantScheduleFacade</b></code> sendo a ligação para um subsistema. Ela permite que a aplicação crie lembretes de plantas <code><b>createPlantReminder</b></code> abstraindo as operações de autenticação e interação com a GoogleCalendarAPI.</p>
 
 <p style="text-align:justify">A função principal do <code><b>PlantScheduleFacade</b></code> é, uma vez passados os parâmetros <code><b>Plant</b></code> e <code><b>EventSchedule</b></code>, ocultar os processos de gerenciar credenciais via <code><b>GoogleAuthService</code></b> para poder manipular eventos com o <code><b>GoogleCalendarAPI</code></b>, como criar, atualizar ou deletar, desvinculando do "cliente" os detalhes de baixo nível dessas APIs e tornando o sistema mais limpo e fácil de usar.</p>
 <p style="text-align:justify">
