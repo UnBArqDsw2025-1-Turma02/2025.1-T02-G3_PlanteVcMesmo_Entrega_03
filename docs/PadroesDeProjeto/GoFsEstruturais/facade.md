@@ -9,6 +9,10 @@
 <p style="text-align:justify"> 
     O uso do <i>Facade</i> no nosso projeto oferece vantagens significativas considerando a arquitetura modular e a interação com serviços externos. Primeiramente, ele simplifica a interface de subsistemas como a interação com o <i>Google Cloud</i> (uso do Calendar, Shopping e Gmail) e a API da GeminiAI. Em vez de ter que lidar com múltiplas classes e chamadas de API para cada serviço, podemos ter, sedundo Gamma et al. (1994, p. 185)<sup><a href="https://unbarqdsw2025-1-turma02.github.io/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/#/PadroesDeProjeto/3.2.2.Facade?id=referências"><b>1</b></a></sup>, classes <i>Facade</i> que pode fornecer métodos que abstraem essa complexidade, tornando o uso desses serviços mais direto e simples para os demais módulos do sistema. <br><br>
     Em segundo lugar, o <i>Facade</i> reduz o acoplamento entre os módulos do sistema e os subsistemas externos ou internos. Quando um módulo como Plant precisa agendar um lembrete no <i>Google Calendar</i>, ele não precisa saber os detalhes de autenticação ou formatação de dados da API do Google. Ele simplesmente invoca um método na fachada correspondente, que se encarrega de toda a orquestração. Essa desassociação é benéfica para a manutenibilidade do sistema, pois mudanças em uma API externa ou na estrutura interna de um subsistema não exigirão uma reescrita completa do código que o utiliza, apenas de parte da respectiva <i>Facade</i><sup><a href="https://unbarqdsw2025-1-turma02.github.io/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/#/PadroesDeProjeto/3.2.2.Facade?id=referências"><b>2</b></a></sup>. </p>
+    <p style="text-align:justify">
+Além disso, aplicamos o padrão <i>Facade</i> na integração com o serviço de modelo de linguagem (LLM) por meio da classe <code>ChatGPTProvider</code>. Esta classe encapsula todos os detalhes técnicos da comunicação com a API externa do ChatGPT, como headers, corpo da requisição, tratamento de erros e autenticação. Com isso, os módulos da aplicação que desejam consumir esse serviço precisam apenas fornecer uma pergunta e receber uma resposta, sem se preocupar com os detalhes internos da API<sup><a href="#ref3"><b>3</b></a></sup>. Essa abordagem promove reutilização, clareza e facilidade de manutenção do sistema.
+</p>
+
 
 ## Cuidados
     
@@ -22,7 +26,7 @@
 
 <center>
 
-![Facade - calendario da planta](../assets/rascunho-facade.png)
+![Facade - calendario da planta](../../assets/rascunho-facade.png)
 
 </center>
 
@@ -31,6 +35,29 @@
 <p style="text-align:justify">Na Figura 1 temos a implementação do padrão, com a <code><b>PlantScheduleFacade</b></code> sendo a ligação para um subsistema. Ela permite que a aplicação crie lembretes de plantas <code><b>createPlantReminder</b></code> abstraindo as operações de autenticação e interação com a GoogleCalendarAPI.</p>
 
 <p style="text-align:justify">A função principal do <code><b>PlantScheduleFacade</b></code> é, uma vez passados os parâmetros <code><b>Plant</b></code> e <code><b>EventSchedule</b></code>, ocultar os processos de gerenciar credenciais via <code><b>GoogleAuthService</code></b> para poder manipular eventos com o <code><b>GoogleCalendarAPI</code></b>, como criar, atualizar ou deletar, desvinculando do "cliente" os detalhes de baixo nível dessas APIs e tornando o sistema mais limpo e fácil de usar.</p>
+<p style="text-align:justify">
+De forma análoga, o <code><b>ChatGPTProvider</b></code> pode ser modelado como uma fachada para o subsistema de comunicação com modelos de linguagem. Ele implementa a interface <code>LLMProvider</code>, expondo apenas o método <code>chat</code>, enquanto oculta as chamadas HTTP, o manuseio de erros e a formatação das mensagens. Essa arquitetura permite que o sistema envie perguntas e receba respostas de forma eficiente e desacoplada da tecnologia subjacente<sup><a href="#ref3"><b>3</b></a></sup>.
+</p>
+<p style="text-align:justify">
+Contudo, embora a modelagem apresentada contemple a utilização da <code><b>GoogleCalendarAPI</b></code> e do serviço de autenticação <code><b>GoogleAuthService</b></code>, a implementação dessas funcionalidades não foi realizada nesta etapa do projeto. Tal decisão deve-se à limitação de tempo disponível para o desenvolvimento, bem como à limitada familiaridade da equipe com os processos específicos de autenticação e integração oferecidos pelas APIs do Google. Ainda assim, a estrutura arquitetural foi mantida como forma de representar a intenção de evolução futura do sistema e de demonstrar a aplicabilidade do padrão Facade em cenários de integração com serviços externos.
+</p>
+<font size="3"><p style="text-align: center"><b>Figura 2:</b> Aplicação do padrão Facade para provedor LLM</p></font>
+
+<center>
+
+![Facade - ChatGPTProvider](../../assets/chatprovider-facade.png)
+
+</center>
+
+<font size="3"><p style="text-align: center"><b>Autores:</b> [Matheus Brant][MatheussBrant], 2025</p></font>
+
+## Implementação
+
+![Facade - ChatGPTProvider](../../assets/codigo-facade.png)
+
+<p style="text-align:justify">
+O código mostra a implementação da classe <code>ChatGPTProvider</code>, que atua como uma fachada para encapsular toda a complexidade da integração com a API de um modelo de linguagem natural. Essa classe estende <code>HTTPBase</code>, herdando funcionalidades genéricas de requisição HTTP, e implementa a interface <code>LLMProvider</code>, garantindo que siga um contrato comum com outros possíveis provedores. Através do método <code>chat</code>, ela oferece uma única porta de entrada para o consumo do serviço de IA, ocultando detalhes como headers de autenticação, estrutura da requisição e tratamento de erros. Com isso, os módulos da aplicação que precisam utilizar esse serviço lidam apenas com uma interface simples e de alto nível, representando fielmente o padrão <i>Facade</i>.
+</p>
 
 
 ## Referências
@@ -45,6 +72,9 @@
 | Versão | Data       | Alterações Principais                             | Autor(es)        |
 |--------|------------|---------------------------------------------------| ---------------- |
 | 1.0.0  | 22-05-2025 | Criação do documento e seções iniciais            | [Gabriel Fernando de Jesus Silva][MMcLovin] |
+| 1.0.1  | 01-06-2025 | Adição da implementação do facade no ChatProvider            | [Matheus Brant][MatheussBrant] |
+| 1.0.1  | 01-06-2025 | Adição na modelagem do Facade e documentação de limitações na integração com Google Calendar
+| [Pedro Henrique][PedroHenrique061] |
 
 [artrsousa1]: https://github.com/artrsousa1  
 [CaioHabibe]: https://github.com/CaioHabibe  
