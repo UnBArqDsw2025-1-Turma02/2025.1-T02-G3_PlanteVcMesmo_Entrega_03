@@ -24,12 +24,6 @@ import { Toaster } from '@/components/ui/sonner';
           active='solar:bag-4-bold'
         />
       </FooterLink>
-      <FooterLink target='news'>
-        <FooterIcon
-          normal='majesticons:note-text-line'
-          active='majesticons:note-text'
-        />
-      </FooterLink>
     </Footer>
   </div>
   <Toaster />

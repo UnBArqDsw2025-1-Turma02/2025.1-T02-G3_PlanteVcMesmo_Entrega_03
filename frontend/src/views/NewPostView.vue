@@ -17,20 +17,14 @@ import ApiRoutes from '@/api/ApiRoutes';
 
 const router = useRouter();
 
-const labels = ref<Label[]>([
-  { name: 'Adubos', color: 'green' },
-  { name: 'Arranjos', color: 'green' },
-  { name: 'Cuidados', color: 'green' },
-  { name: 'Ferramentas', color: 'green' },
-  { name: 'Flores', color: 'green' },
-  { name: 'Plantas', color: 'green' },
-  { name: 'Sementes', color: 'green' },
-  { name: 'Outros', color: 'green' }
-]);
+const labels = ref<Label[]>([]);
 
 const form = ref<Omit<Post, 'labels'> & { labels: string[]; }>({
+  id: '',
   title: '',
   description: '',
+  createdAt: '',
+  updatedAt: '',
   labels: []
 });
 
@@ -50,15 +44,16 @@ const sendPost = async () => {
 };
 
 onMounted(async () => {
-  const response = await ApiService.get(ApiRoutes.label.root);
+  const response = await ApiService.get(ApiRoutes.label.root(20));
   if (response) {
-    labels.value = await response.json();
+    const array = await response.json();
+    labels.value = array.labels;
   }
 });
 </script>
 
 <template>
-  <Header class="p-5 bg-primary-green text-white flex items-center justify-center">
+  <Header class="p-5 bg-primary-green row-span-3 text-white flex items-center justify-center">
     <div class="flex gap-4 items-center">
       <div class="flex flex-col gap-1 flex-1">
         <InputText
@@ -74,7 +69,7 @@ onMounted(async () => {
       </div>
     </div>
   </Header>
-  <Main class="flex flex-col gap-5 p-5">
+  <Main class="flex flex-col gap-5 p-5 row-span-7">
     <section class="h-full">
       <span class="flex gap-1 text-primary-green font-semibold">
         Corpo do Texto

@@ -51,7 +51,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <footer class='flex flex-col px-6 text-gray-500 relative pb-4'>
+  <footer class='flex flex-col px-6 text-gray-500 relative py-4'>
     <section ref='slot' class='flex justify-around gap-12 items-start relative pb-3'>
       <slot />
       <span

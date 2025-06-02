@@ -1,183 +1,110 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
-import { cn } from '@/lib/utils';
+import { onMounted, ref, watch } from 'vue';
 
 import { Icon } from '@iconify/vue';
-import { Check } from 'lucide-vue-next';
 
 import Header from '@/components/base/Header/Header.vue';
 import Main from '@/components/base/Main/Main.vue';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '@/components/ui/command';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 
-const brazilStates = [
-  { label: 'Acre', value: 'AC' },
-  { label: 'Alagoas', value: 'AL' },
-  { label: 'Amapá', value: 'AP' },
-  { label: 'Amazonas', value: 'AM' },
-  { label: 'Bahia', value: 'BA' },
-  { label: 'Ceará', value: 'CE' },
-  { label: 'Distrito Federal', value: 'DF' },
-  { label: 'Espírito Santo', value: 'ES' },
-  { label: 'Goiás', value: 'GO' },
-  { label: 'Maranhão', value: 'MA' },
-  { label: 'Mato Grosso', value: 'MT' },
-  { label: 'Mato Grosso do Sul', value: 'MS' },
-  { label: 'Minas Gerais', value: 'MG' },
-  { label: 'Pará', value: 'PA' },
-  { label: 'Paraíba', value: 'PB' },
-  { label: 'Paraná', value: 'PR' },
-  { label: 'Pernambuco', value: 'PE' },
-  { label: 'Piauí', value: 'PI' },
-  { label: 'Rio de Janeiro', value: 'RJ' },
-  { label: 'Rio Grande do Norte', value: 'RN' },
-  { label: 'Rio Grande do Sul', value: 'RS' },
-  { label: 'Rondônia', value: 'RO' },
-  { label: 'Roraima', value: 'RR' },
-  { label: 'Santa Catarina', value: 'SC' },
-  { label: 'São Paulo', value: 'SP' },
-  { label: 'Sergipe', value: 'SE' },
-  { label: 'Tocantins', value: 'TO' },
-];
+import type { Post } from '@/types/models/post';
 
-const values = ref({
-  state: ''
+import ApiService from '@/api/ApiService';
+import ApiRoutes from '@/api/ApiRoutes';
+
+const posts = ref<Post[]>([]);
+const filtered = ref<Post[]>([]);
+
+const search = ref<string>('');
+
+watch(
+  () => search.value,
+  () => {
+    const parsed = search.value.trim();
+    if (parsed) {
+      filtered.value = posts.value.filter(post => post.title.toLocaleLowerCase().includes(parsed.toLocaleLowerCase()));
+    } else filtered.value = posts.value;
+  }
+);
+
+onMounted(async () => {
+  const response = await ApiService.get(ApiRoutes.post.root);
+  if (response?.ok) {
+    posts.value = (await response.json()).posts;
+    filtered.value = posts.value;
+  }
 });
 </script>
 
 <template>
-  <Header class='flex flex-col gap-2 p-7'>
+  <Header>
     <div
-      class='flex flex-col gap-4'
+      class="flex gap-2 justify-evenly pt-10"
     >
-      <div class='font-thin text-white'>
-        Localização
-      </div>
-      <Popover>
-        <PopoverTrigger as-child>
-            <Button
-              variant='link'
-              role='combobox'
-              class='h-0 justify-start text-white'
-            >
-              {{ values.state ? brazilStates.find(
-                (state) => state.value === values.state,
-              )?.label : 'Escolha seu estado...' }}
-              <Icon
-                icon='ep:arrow-down'
-                class='w-6 h-6'
-              />
-            </Button>
-        </PopoverTrigger>
-        <PopoverContent class='w-[200px] p-0'>
-          <Command>
-            <CommandInput placeholder='Pesquise seu estado...' />
-            <CommandEmpty>Nenhum estado encontrado.</CommandEmpty>
-            <CommandList>
-              <CommandGroup>
-                <CommandItem
-                  v-for='state in brazilStates'
-                  :key='state.value'
-                  :value='state.label'
-                  @select='() => {
-                    values.state = state.value
-                  }'
-                >
-                  {{ state.label }}
-                  <Check
-                    :class="cn('ml-auto h-4 w-4', state.value === values.state ? 'opacity-100' : 'opacity-0')"
-                  />
-                </CommandItem>
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
       <div
-        class='flex pt-2 gap-4'
+        class='h-12 relative'
       >
-        <div
-          class='mt-2 h-12 relative'
-        >
-          <Icon
-            icon='iconamoon:search-thin'
-            class='absolute top-1/4 left-3 w-6 h-6'
-          />
-          <Input
-            type='text'
-            placeholder='Buscar uma planta'
-            class='bg-white w-64 h-full rounded-lg pl-10'
-          />
-        </div>
-        <Button
-          variant='link'
-          class='flex justify-center items-center h-12 w-12 bg-primary-beige hover:bg-darker-beige rounded-xl'
-        >
-          <Icon
-            icon='lets-icons:filter-big'
-            class='text-white stroke-2 scale-125'
-          />
-        </Button>
+        <Icon
+          icon='iconamoon:search-thin'
+          class='absolute top-1/4 left-3 w-6 h-6'
+        />
+        <Input
+          type='text'
+          :value="search"
+          @input="(event: InputEvent) => search = (event.target as HTMLInputElement).value"
+          placeholder='Buscar uma tutorial'
+          class='bg-white w-64 h-full rounded-lg pl-10'
+        />
       </div>
+      <Button
+        variant='link'
+        class='flex justify-center items-center h-12 w-12 bg-primary-beige hover:bg-darker-beige rounded-xl'
+      >
+        <Icon
+          icon='lets-icons:filter-big'
+          class='text-white stroke-2 scale-125'
+        />
+      </Button>
     </div>
   </Header>
   <Main>
     <section
-      class='flex items-center justify-center h-40 w-full absolute top-[22%]'
+      class='flex flex-col py-5 px-8 gap-5 overflow-y-auto'
     >
-      <div
-        class='flex flex-col justify-start items-center gap-1 bg-white h-full rounded-2xl w-[85%] p-3 shadow-lg'
+      <router-link
+        v-for="(post, index_post) in filtered"
+        :to="{ path: '/post/' + post.id }"
+        :key="index_post"
+        class="relative flex flex-col gap-1 justify-between rounded-2xl p-2.5 bg-gray-100 shadow-md"
       >
         <span
-          class='text-gray-500'
+          class="absolute right-1 text-sm text-gray-500"
         >
-          Produtos
+          {{ (new Date(post.updatedAt)).toLocaleDateString('PT-BR') }}
         </span>
-        <section
-          class='flex gap-4 justify-between items-center'
+        <div
+          class="pt-3.5"
         >
-          <div>
-            <img
-              class='rounded-2xl'
-              src='https://picsum.photos/90'
-              alt='plant'
+          <h2>
+            {{ post.title }}
+          </h2>
+          <div
+            class="flex flex-wrap gap-2"
+          >
+            <span
+              v-for="(label, index_label) in post.labels"
+              :key="index_label"
+              :style="{
+                background: label.color
+              }"
+              class="text-sm text-white py-0.5 px-2.5 rounded-xl"
             >
+              {{ label.name }}
+            </span>
           </div>
-          <div>
-            <img
-              class='rounded-2xl'
-              src='https://picsum.photos/90'
-              alt='plant'
-            >
-          </div>
-          <div>
-            <img
-              class='rounded-2xl'
-              src='https://picsum.photos/90'
-              alt='plant'
-            >
-          </div>
-        </section>
-      </div>
-    </section>
-    <section
-      class='pt-32 px-8'
-    >
-      Body
+        </div>
+      </router-link>
     </section>
   </Main>
 </template>

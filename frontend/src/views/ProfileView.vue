@@ -49,33 +49,6 @@ const logout = async () => {
 
   <Main class="flex flex-col gap-5 p-5">
     <section class="flex flex-col gap-2">
-      <span class="text-primary-green font-semibold">
-        Minha Galeria
-      </span>
-      <div class='flex gap-4 justify-between items-center'>
-        <div>
-          <img
-            class='rounded-2xl'
-            src='https://picsum.photos/125'
-            alt='plant'
-          >
-        </div>
-        <div>
-          <img
-            class='rounded-2xl'
-            src='https://picsum.photos/125'
-            alt='plant'
-          >
-        </div>
-        <div>
-          <img
-            class='rounded-2xl'
-            src='https://picsum.photos/125'
-            alt='plant'
-          >
-        </div>
-      </div>
-
       <div
         v-if="user?.role === 'admin'"
         class="flex justify-center items-center w-full p-5"

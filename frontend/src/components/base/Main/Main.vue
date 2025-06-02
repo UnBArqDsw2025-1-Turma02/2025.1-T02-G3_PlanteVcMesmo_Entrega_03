@@ -1,6 +1,6 @@
 <template>
   <main
-    class='row-span-6'
+    class='row-span-8 overflow-auto'
   >
     <slot />
   </main>

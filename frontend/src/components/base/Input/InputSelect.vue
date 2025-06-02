@@ -7,6 +7,7 @@ import { computed, ref, watch } from 'vue';
 
 import { Combobox, ComboboxAnchor, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxList } from '@/components/ui/combobox';
 import { TagsInput, TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText } from '@/components/ui/tags-input';
+import { errorToast } from '@/utils/toast';
 
 const props = defineProps<{
   items: Label[];
@@ -91,16 +92,22 @@ watch(
           </ComboboxInput>
         </TagsInput>
 
-        <ComboboxList class="w-[--reka-popper-anchor-width]">
+        <ComboboxList class="w-[--reka-popper-anchor-width] h-72">
           <ComboboxEmpty />
-          <ComboboxGroup>
+          <ComboboxGroup
+            class="overflow-y-auto"
+          >
             <ComboboxItem
               v-for="item in filtered"
               :key="item.name"
               :value="item.name"
               @select.prevent="() => {
                 searchTerm = '';
-                modelValue.push(item.name);
+                if (modelValue.length >= 5) {
+                  errorToast('Máximo de 5 assuntos atingido.');
+                } else {
+                  modelValue.push(item.name);
+                }
 
                 if (filtered.length === 0) {
                   open = false;

@@ -14,14 +14,14 @@ const appLayoutRoutes: RouteRecordRaw[] = [
     component: () => import('../views/ShoppingView.vue'),
   },
   {
-    path: '/news',
-    name: 'news',
-    component: () => import('../views/NewsView.vue'),
-  },
-  {
     path: '/product',
     name: 'product',
     component: () => import('../views/ProductView.vue'),
+  },
+  {
+    path: '/post/:postId',
+    name: 'post',
+    component: () => import('../views/PostView.vue'),
   }
 ];
 
