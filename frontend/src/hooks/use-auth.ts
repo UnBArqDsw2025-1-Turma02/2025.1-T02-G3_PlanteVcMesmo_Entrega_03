@@ -9,13 +9,7 @@ import { GoogleOAuthUrl } from '@/utils/google';
 
 import { ref } from 'vue';
 
-const user = ref<User | undefined>({
-  userId: '1',
-  name: 'Fulano da Silva',
-  email: 'fulanodasilva@gmail.com',
-  pictureUrl: 'https://picsum.photos/110',
-  role: 'admin'
-});
+const user = ref<User>();
 
 const refreshUser = async () => {
   let response = await ApiService.post(ApiRoutes.auth.refresh, {});
