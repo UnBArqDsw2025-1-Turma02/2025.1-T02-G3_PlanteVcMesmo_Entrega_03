@@ -34,13 +34,44 @@ No contexto do projeto, caso surjam novas ideias relacionadas aos cuidados com p
 
 ## Modelagem
 
-Com base na seção Aplicação no Projeto, foi elaborada uma modelagem semelhante a um Diagrama de Classes, que servirá como protótipo para a futura implementação do sistema. Nessa modelagem, o padrão Strategy é aplicado para permitir diferentes formas de agendamento, através da interface *SchedulerStrategy* e suas implementações: *ManualStrategy* e *AutomaticStrategy*.
+Com base na seção Aplicação no Projeto, foi elaborada uma modelagem semelhante a um Diagrama de Classes (Figura 1), que servirá como protótipo para a futura implementação do sistema. Nessa modelagem, o padrão Strategy é aplicado para permitir diferentes formas de agendamento, através da interface *SchedulerStrategy* e suas implementações: *ManualStrategy* e *AutomaticStrategy*.
 
 A classe *Scheduler* define os métodos para configurar e executar a estratégia escolhida. A classe *AutomaticStrategy* utiliza o *LLMProvider* para apoiar decisões automáticas no agendamento, baseando-se em algum sistema de IA. O provedor da IA será instanciado por meio de classes Factory, conforme o identificador do modelo utilizado. Para entender melhor a utilização do Factory no projeto, acesse: [3.1.1. Factory](./PadroesDeProjeto/GoFsCriacionais/factory.md)
 
-![Strategy Model](../../assets/strategy.png)
+<font size="3"><p style="text-align: center"><b>Figura 1:</b> Modelagem do Strategy </p></font>
+
+![Strategy Model](../../../assets/strategy.png)
 
 <font size="3"><p style="text-align: center"><b>Autor:</b> [Mateus Vieira Rocha da Silva](https://github.com/mateusvrs), 2025 </p></font>
+
+## Implementação
+
+A interface ``SchedulerStrategy`` (Figura 2) define a operação comum, schedule, que cada estratégia concreta (``ManualSchedulerStrategy`` e ``AutomaticSchedulerStrategy``) deve implementar. A ``ManualSchedulerStrategy`` (Figura 3) lida com agendamentos definidos pelo usuário com base em um período e frequência específicos, enquanto a ``AutomaticSchedulerStrategy`` utiliza um modelo de linguagem grande (LLM Gemini) para sugerir um cronograma, considerando características da planta e do ambiente.
+
+O nosso ``SchedulerStrategyExecutor`` (Figura 2) atua como o contexto, mantendo uma referência para a estratégia de agendamento atualmente selecionada e delegando a execução da tarefa schedule a ela. A ``StrategyFactory`` é responsável por instanciar a estratégia (Manual ou Automatic) com base na escolha do usuário, garantindo que o ``PlantStrategyUsecase`` (o cliente, Figura 4) interaja apenas com a interface genérica do agendador, sem se preocupar com a implementação de cada algoritmo. 
+
+Os PRs responsáveis pela implementação do strategy podem ser conferidos nos links abaixo:
+* [feat: chat llm and scheduler strategy #27](https://github.com/UnBArqDsw2025-1-Turma02/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/pull/27)
+* [feat: general fixes for post and strategy #35](https://github.com/UnBArqDsw2025-1-Turma02/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/pull/35) 
+
+<font size="3"><p style="text-align: center"><b>Figura 2:</b> Interface ``SchedulerStrategy`` e ``SchedulerStrategyExecutor``, que atua como contexto</p></font>
+
+![scheduler-strategy e executor](../../assets/strategy/scheduler-strategy.png)
+
+<font size="3"><p style="text-align: center"><b>Autor:</b> [Arthur Ribeiro e Sousa][artrsousa1], [Caio Felipe Rocha][caio-felipee], [Caio Magalhães Lamego][caiolamego], [Gabriel Fernando De Jesus Silva][MMcLovin], [Mateus Vieira Rocha da Silva][mateusvrs], [Rafael Melo Matuda][rmatuda], 2025 </p></font>
+
+
+<font size="3"><p style="text-align: center"><b>Figura 3:</b> Strategy concreta de cronograma manual </p></font>
+
+![manual schedule](../../assets/strategy/manual-scheduler.png)
+
+<font size="3"><p style="text-align: center"><b>Autor:</b> [Arthur Ribeiro e Sousa][artrsousa1], [Caio Felipe Rocha][caio-felipee], [Caio Magalhães Lamego][caiolamego], [Gabriel Fernando De Jesus Silva][MMcLovin], [Mateus Vieira Rocha da Silva][mateusvrs], [Rafael Melo Matuda][rmatuda], 2025 </p></font>
+
+<font size="3"><p style="text-align: center"><b>Figura 4:</b> Uso do strategy dentro da lógica de use case </p></font>
+
+![use case](../../assets/strategy/PlantStrategyUseCase.png)
+
+<font size="3"><p style="text-align: center"><b>Autor:</b> [Caio Felipe Rocha][caio-felipee], 2025 </p></font>
 
 ## Referências
 
@@ -51,7 +82,19 @@ A classe *Scheduler* define os métodos para configurar e executar a estratégia
 
 | Versão | Data       | Alterações Principais                             | Autor(es)        |
 |--------|------------|---------------------------------------------------| ---------------- |
-| 1.0.0  | 22-05-2025 | Criação do Documento do padrão de projeto Strategy| Davi Casseb      |
-| 1.1.0  | 28-05-2025 | Recriação dos textos e referências                | Caio Felipe      |
-| 1.1.1  | 29-05-2025 | Imagem da modelagem e descrição                   | Mateus Vieira    |
-| 1.1.2  | 30-05-2025 | Conferindo bibliografia e atribuindo citações     | Gabriel Fernando |
+| 1.0.0  | 22-05-2025 | Criação do Documento do padrão de projeto Strategy| [Davi Araújo Bady Casseb][dcasseb]      |
+| 1.1.0  | 28-05-2025 | Recriação dos textos e referências                | [Caio Felipe Rocha][caio-felipee]      |
+| 1.1.1  | 29-05-2025 | Imagem da modelagem e descrição                   | [Mateus Vieira Rocha da Silva][mateusvrs]    |
+| 1.1.2  | 30-05-2025 | Conferindo bibliografia e atribuindo citações     | [Gabriel Fernando De Jesus Silva][MMcLovin] |
+| 1.1.4  | 01-06-2025 | Adiciona seção de implementação | [Gabriel Fernando De Jesus Silva][MMcLovin] e [Pedro Henrique Fernandino da Silva][PedroHenrique061] |
+
+[artrsousa1]: https://github.com/artrsousa1  
+[CaioHabibe]: https://github.com/CaioHabibe  
+[caio-felipee]: https://github.com/caio-felipee  
+[caiolamego]: https://github.com/caiolamego  
+[dcasseb]: https://github.com/dcasseb  
+[MMcLovin]: https://github.com/MMcLovin  
+[mateusvrs]: https://github.com/mateusvrs  
+[MatheussBrant]: https://github.com/MatheussBrant  
+[PedroHenrique061]: https://github.com/PedroHenrique061  
+[rmatuda]: https://github.com/rmatuda
