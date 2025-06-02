@@ -22,7 +22,12 @@ const appLayoutRoutes: RouteRecordRaw[] = [
     path: '/product',
     name: 'product',
     component: () => import('../views/ProductView.vue'),
-  }
+  },
+  {
+      path: '/calendar',
+      name: 'calendar',
+      component: () => import('../views/CalendarView.vue'),
+    }
 ];
 
 const protectedLayoutRoutes: RouteRecordRaw[] = [
