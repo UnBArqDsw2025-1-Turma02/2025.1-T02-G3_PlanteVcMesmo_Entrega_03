@@ -9,6 +9,7 @@ import Main from '@/components/base/Main/Main.vue';
 import Tutorial from '@/components/base/Tutorial/Tutorial.vue';
 
 const { user } = useAuth();
+import ApiService from '../api/ApiService';
 
 const messages = ref<string[]>([]);
 const inputText = ref('');
@@ -16,6 +17,17 @@ const inputText = ref('');
 function sendMessage() {
   if (inputText.value.trim()) {
     messages.value.push(inputText.value);
+    
+    ApiService.post('/chat', {
+      llmType: 'GEMINI',
+      question: inputText.value
+    }, false).then(async (response) => {
+      if (response && response.ok) {
+        const data = await response.json();
+        messages.value.push(data.answer);
+      }
+    });
+
     inputText.value = '';
   }
 }
