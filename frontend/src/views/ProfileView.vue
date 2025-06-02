@@ -23,9 +23,22 @@ function sendMessage() {
       question: inputText.value
     }, false).then(async (response) => {
       if (response && response.ok) {
-        const data = await response.json();
-        messages.value.push(data.answer);
+      const data = await response.json();
+      messages.value.push(data.answer);
+      } else {
+      let errorMsg = 'Erro ao obter resposta da IA.';
+      try {
+        const errorData = await response.json();
+        if (errorData && errorData.message) {
+        errorMsg += ` (${errorData.message})`;
+        }
+      } catch (e) {
+        
       }
+      messages.value.push(errorMsg);
+      }
+    }).catch(() => {
+      messages.value.push('Erro de conexão com o servidor.');
     });
 
     inputText.value = '';
