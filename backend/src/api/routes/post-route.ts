@@ -23,37 +23,29 @@ router.post(
   },
 );
 
-router.get(
-  '/',
-  authenticationMiddleware,
-  async (req: Request, res: Response) => {
-    const usecase = container.get('ListPostUsecase');
+router.get('/', async (req: Request, res: Response) => {
+  const usecase = container.get('ListPostUsecase');
 
-    const output = await usecase.execute({
-      pagination: {
-        page: req.query.page ? Number(req.query.page) : 0,
-        limit: req.query.limit ? Number(req.query.limit) : 10,
-      },
-      filters: {},
-    });
+  const output = await usecase.execute({
+    pagination: {
+      page: req.query.page ? Number(req.query.page) : 0,
+      limit: req.query.limit ? Number(req.query.limit) : 10,
+    },
+    filters: {},
+  });
 
-    res.status(200).json(output);
-  },
-);
+  res.status(200).json(output);
+});
 
-router.get(
-  '/:postId',
-  authenticationMiddleware,
-  async (req: Request, res: Response) => {
-    const usecase = container.get('FindPostUsecase');
+router.get('/:postId', async (req: Request, res: Response) => {
+  const usecase = container.get('FindPostUsecase');
 
-    const output = await usecase.execute({
-      postId: req.params.postId,
-    });
+  const output = await usecase.execute({
+    postId: req.params.postId,
+  });
 
-    res.status(200).json(output);
-  },
-);
+  res.status(200).json(output);
+});
 
 router.delete(
   '/:postId',
