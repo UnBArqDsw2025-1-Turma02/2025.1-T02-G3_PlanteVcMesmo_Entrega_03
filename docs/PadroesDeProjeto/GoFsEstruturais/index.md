@@ -1,8 +1,8 @@
-# 3.3. Módulo Padrões de Projeto GoFs Comportamentais
+# 3.2. Módulo Padrões de Projeto GoFs Estruturais
 
-Os padrões comportamentais propostos pelo Gang of Four ajudam a organizar como os objetos se comunicam e tomam decisões dentro de um sistema (Gamma, E., et al, 1994, p. 221)<sup><a><b>1</b></a></sup>. Em vez de focar na estrutura ou na criação dos objetos, esses padrões lidam com o comportamento e a interação entre eles, tornando o código mais flexível, reutilizável e fácil de manter.
+Ao desenvolver sistemas complexos e de larga escala, a organização do comportamento entre objetos se torna um aspecto central para manter a legibilidade, manutenção e evolução do código. Os padrões de projeto comportamentais, definidos pelos autores do clássico Design Patterns: Elements of Reusable Object-Oriented Software, conhecido como Gang of Four (GoF), têm como foco a forma como os objetos interagem entre si e distribuem responsabilidades de maneira eficiente (Gamma, E., et al, 1994, p. 137)<sup><a><b>1</b></a></sup>.
 
-No projeto Plante Vc Mesmo, esses padrões foram especialmente úteis para lidar com situações em que era necessário oferecer diferentes formas de executar uma mesma ação — como, por exemplo, permitir que o usuário escolha entre uma configuração manual ou automática para cuidar de uma planta. Para resolver esse tipo de problema, adotamos o padrão Strategy, que nos permitiu alternar entre diferentes lógicas de forma simples e organizada, em tempo de execução.
+Diferentemente dos padrões estruturais, que lidam com a organização física do código, os padrões comportamentais promovem flexibilidade na comunicação entre os componentes do sistema. Nesta seção, exploramos alguns desses padrões aplicados ao projeto, como Composite e Facade, destacando seus benefícios, justificativas de uso e reflexões práticas da equipe durante a modelagem e implementação.
 
 ## Referências
 
@@ -23,5 +23,4 @@ No projeto Plante Vc Mesmo, esses padrões foram especialmente úteis para lidar
 [MatheussBrant]: https://github.com/MatheussBrant  
 [PedroHenrique061]: https://github.com/PedroHenrique061  
 [rmatuda]: https://github.com/rmatuda
-
 
