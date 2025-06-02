@@ -7,12 +7,16 @@ import {
   CommentEntity,
   LabelEntity,
 } from '@/infra/orm/entities';
-import { InitDb, AddPostLabelRelations } from '@/infra/orm/migrations';
+import {
+  AddColor,
+  InitDb,
+  AddPostLabelRelations,
+} from '@/infra/orm/migrations';
 
 const defaultConfig = {
   migrationsRun: true,
   entities: [UserEntity, PostEntity, CommentEntity, LabelEntity],
-  migrations: [InitDb, AddPostLabelRelations],
+  migrations: [InitDb, AddPostLabelRelations, AddColor],
 };
 
 export const dataSource = new DataSource({

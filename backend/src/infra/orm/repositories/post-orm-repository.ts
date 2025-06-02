@@ -16,6 +16,9 @@ export class PostOrmRepository implements PostRepository {
   ): Promise<PostRepository.FindBy.Output> {
     const post = await this.repo.findOne({
       where: { id: input.id },
+      relations: {
+        labels: true,
+      },
     });
 
     return post || null;
@@ -46,8 +49,15 @@ export class PostOrmRepository implements PostRepository {
   ): Promise<PostRepository.List.Output> {
     const [posts, total] = await this.repo.findAndCount({
       where: input.filters,
-      skip: (input.pagination.page - 1) * input.pagination.limit,
+      skip: input.pagination.page * input.pagination.limit,
       take: input.pagination.limit,
+      relations: {
+        labels: true,
+      },
+      order: {
+        updatedAt: 'DESC',
+        createdAt: 'DESC',
+      },
     });
 
     return { posts, total };
