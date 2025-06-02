@@ -1,11 +1,5 @@
 # 3.2.2. Facade
 
-<!-- COLOQUE AS REFERÊNCIAS POR PARÁGRAFO ESCRITO, PODE ENUMERAR E COLOCAR POR NÚMERO, TIPO EM ARTIGO MSM -->
-
-<!-- ESCREVA PELO MENOS 3 PARÁGRAFOS DE CADA TÓPICO, CADA UM COM NO MíNIMO 70 PALAVRAS -->
-
-<!-- NÂO SE LIMITE A ESSES TÓPICOS, MAS MANTENHA A ORDEM RELATIVA -->
-
 ## Introdução
 
 <p style="text-align:justify">O padrão de projeto <i>Facade</i> é um dos padrões estruturais descritos no livro <i>"Design Patterns: Elements of Reusable Object-Oriented Software"<sup><a href="https://unbarqdsw2025-1-turma02.github.io/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/#/PadroesDeProjeto/3.2.2.Facade?id=referências"><b>1</b></a></sup></i> dos autores conhecidos como <i>Gang of Four (GoF)</i>. Sua principal função é fornecer uma comunicação simplificada entre um componente e um conjunto de interfaces de um subsistema complexo<sup><a href="https://unbarqdsw2025-1-turma02.github.io/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/#/PadroesDeProjeto/3.2.2.Facade?id=referências"><b>2</b></a></sup>, tornando-o mais fácil de usar e entender. Ao encapsular as complexidades internas desse subsistema, o <i>Facade</i> permite que os clientes interajam com o sistema de forma mais intuitiva, com uma só fachada (ou conjunto de fachadas) que delegam as chamadas para os métodos necessários, retirando a a necessidade de conhecer os detalhes internos de sua implementação<sup><a href="https://unbarqdsw2025-1-turma02.github.io/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/#/PadroesDeProjeto/3.2.2.Facade?id=referências"><b>3</b></a></sup>.</p>
@@ -24,7 +18,6 @@
 
 ## Modelagem
 
-<!-- pode fazer um protótipo do que podemos utilizar, tipo um rascunho, mas tente usar o máximo das regras UML -->
 <font size="3"><p style="text-align: center"><b>Figura 1:</b> Rascunho do <i>Facade</i></p></font>
 
 <center>
@@ -40,12 +33,8 @@
 <p style="text-align:justify">A função principal do <code><b>PlantScheduleFacade</b></code> é, uma vez passados os parâmetros <code><b>Plant</b></code> e <code><b>EventSchedule</b></code>, ocultar os processos de gerenciar credenciais via <code><b>GoogleAuthService</code></b> para poder manipular eventos com o <code><b>GoogleCalendarAPI</code></b>, como criar, atualizar ou deletar, desvinculando do "cliente" os detalhes de baixo nível dessas APIs e tornando o sistema mais limpo e fácil de usar.</p>
 
 
-
-
-
 ## Referências
 
-<!-- padrão mais próximo do ABNT possível -->
 1. <a id="#ref1"></a>Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994). Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley. Disponível em: https://www.javier8a.com/itc/bd1/articulo.pdf
 2. <a id="#ref2"></a>Refactoring.Guru. Facade. Disponível em: https://refactoring.guru/design-patterns/facade
 3. <a id="#ref3"></a>Cloudaffle. Introduction to Facade Pattern. Disponível em: https://cloudaffle.com/series/structural-design-patterns/facade-pattern-classic-implementation/
