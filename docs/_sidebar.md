@@ -1,7 +1,6 @@
 <!-- docs/_sidebar.md -->
 
 - [Home](./)
-- [Projeto](./Projeto/Projeto.md)
 
 - **Padrões de Projeto**
   - [3. Desenho de Software](./PadroesDeProjeto/3.PadroesDeProjeto.md)
