@@ -14,6 +14,9 @@ const ApiRoutes = {
   },
   chat: {
     root: '/chat'
+  },
+  plant: {
+    root: '/plant'
   }
 };
 

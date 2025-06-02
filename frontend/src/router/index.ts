@@ -19,10 +19,16 @@ const appLayoutRoutes: RouteRecordRaw[] = [
     component: () => import('../views/ProductView.vue'),
   },
   {
+    path: '/calendar',
+    name: 'calendar',
+    component: () => import('../views/CalendarView.vue'),
+  },
+  {
     path: '/post/:postId',
     name: 'post',
     component: () => import('../views/PostView.vue'),
   }
+
 ];
 
 const protectedLayoutRoutes: RouteRecordRaw[] = [
