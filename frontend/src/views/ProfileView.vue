@@ -1,27 +1,49 @@
 <script setup lang="ts">
 import { useAuth } from '@/hooks/use-auth';
+import { ref } from 'vue';
 
 import { Input } from '@/components/ui/input';
 
 import Header from '@/components/base/Header/Header.vue';
 import Main from '@/components/base/Main/Main.vue';
 import Tutorial from '@/components/base/Tutorial/Tutorial.vue';
-import Button from '@/components/ui/button/Button.vue';
-import ApiService from '@/api/ApiService';
-import ApiRoutes from '@/api/ApiRoutes';
-import HttpStatusCode from '@/api/HttpStatusCode';
-import router from '@/router';
 
-const { user, removeUser } = useAuth();
+const { user } = useAuth();
+import ApiService from '../api/ApiService';
 
-const logout = async () => {
-  const response = await ApiService.get(ApiRoutes.auth.logout);
-  if (response?.status === HttpStatusCode.NO_CONTENT_204) {
-    removeUser();
+const messages = ref<string[]>([]);
+const inputText = ref('');
 
-    router.push('/about');
+function sendMessage() {
+  if (inputText.value.trim()) {
+    messages.value.push(inputText.value);
+    
+    ApiService.post('/chat', {
+      llmType: 'GEMINI',
+      question: inputText.value
+    }, false).then(async (response) => {
+      if (response && response.ok) {
+      const data = await response.json();
+      messages.value.push(data.answer);
+      } else {
+      let errorMsg = 'Erro ao obter resposta da IA.';
+      try {
+        const errorData = response ? await response.json() : null;
+        if (errorData && errorData.message) {
+        errorMsg = ` ${errorMsg}`;
+        }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (e) { /* empty */ }
+      messages.value.push(errorMsg);
+      }
+    }).catch(() => {
+      messages.value.push('Erro de conexão com o servidor.');
+    });
+
+    inputText.value = '';
   }
-};
+}
+
 </script>
 
 <template>
@@ -37,35 +59,48 @@ const logout = async () => {
     >
       <span>{{ user?.name }}</span>
       <span class="font-thin">{{ user?.email }}</span>
-      <Button
-        class="w-fit text-white font-thin"
-        variant="link"
-        @click="logout"
-      >
-        Sair da conta
-      </Button>
+      <span class="font-thin">Brasília, DF</span>
     </section>
   </Header>
 
-  <Main class="flex flex-col gap-5 p-5">
+  <Main class="flex flex-col gap-1 p-5">
     <section class="flex flex-col gap-2">
       <div
         v-if="user?.role === 'admin'"
-        class="flex justify-center items-center w-full p-5"
+        class="flex justify-center items-center w-full p-3"
       >
-        <Tutorial />
+      <Tutorial />
       </div>
     </section>
     <section class="h-full">
       <span class="flex gap-1 text-primary-green font-semibold">
         Converse com nossa IA <img src="/happy-plant.png" />
       </span>
-      <div class="relative flex items-end h-[95%] rounded-lg border-2 border-primary-green">
-        <Input
-          type='text'
-          placeholder='Faça sua pergunta...'
-          class='border-primary-green absolute left-[-1px] border-r-0 border-b-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:outline-none bg-white h-12 w-full rounded-[7px]'
-        />
+      <div class="flex flex-col h-[220px] max-h-[220px] border border-primary-green rounded-lg overflow-hidden">
+        <!-- Área de mensagens -->
+        <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-2">
+          <div
+            v-for="(msg, index) in messages"
+            :key="index"
+            :class="{
+              'self-end bg-primary-green text-white': index % 2 === 0, // Mensagens do usuário
+              'self-start bg-gray-200 text-black': index % 2 !== 0 // Respostas da IA
+            }"
+            class="max-w-[45%] p-4 rounded-xl text-sm"
+          >
+            {{ msg }}
+          </div>
+        </div>
+        <!-- Campo de input -->
+        <div class="border-t border-primary-green p-2">
+          <Input
+            v-model="inputText"
+            @keyup.enter="sendMessage"
+            type="text"
+            placeholder="Faça sua pergunta..."
+            class="w-full border-primary-green focus-visible:ring-0 focus-visible:ring-transparent focus-visible:outline-none"
+          />
+        </div>
       </div>
     </section>
   </Main>
