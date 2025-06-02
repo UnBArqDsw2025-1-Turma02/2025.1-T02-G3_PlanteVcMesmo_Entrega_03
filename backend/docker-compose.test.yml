@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test
+    ports:
+      - "5432:5432"
+    container_name: test-postgres
+    command: ["postgres", "-c", "ssl=off"]

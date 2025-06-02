@@ -54,6 +54,10 @@ export class PostOrmRepository implements PostRepository {
       relations: {
         labels: true,
       },
+      order: {
+        updatedAt: 'DESC',
+        createdAt: 'DESC',
+      },
     });
 
     return { posts, total };

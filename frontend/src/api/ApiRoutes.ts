@@ -7,10 +7,10 @@ const ApiRoutes = {
   },
   post: {
     root: '/post',
-    by_id: (id: number) => `/post/${id}`,
+    by_id: (id: string) => `/post/${id}`,
   },
   label: {
-    root: '/label'
+    root: (limit: number) => `/label/?limit=${limit}`
   },
   chat: {
     root: '/chat'

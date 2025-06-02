@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import Header from '@/components/base/Header/Header.vue';
-import Main from '@/components/base/Main/Main.vue';
 </script>
 
 <template>
-  <Header>
-
+  <Header class="flex flex-col gap-3.5 row-span-3 px-7 pt-16">
+    <slot name="header"></slot>
   </Header>
-  <Main>
-    news
-  </Main>
+  <slot name="main"></slot>
 </template>

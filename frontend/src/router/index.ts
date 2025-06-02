@@ -14,20 +14,21 @@ const appLayoutRoutes: RouteRecordRaw[] = [
     component: () => import('../views/ShoppingView.vue'),
   },
   {
-    path: '/news',
-    name: 'news',
-    component: () => import('../views/NewsView.vue'),
-  },
-  {
     path: '/product',
     name: 'product',
     component: () => import('../views/ProductView.vue'),
   },
   {
-      path: '/calendar',
-      name: 'calendar',
-      component: () => import('../views/CalendarView.vue'),
-    }
+    path: '/calendar',
+    name: 'calendar',
+    component: () => import('../views/CalendarView.vue'),
+  },
+  {
+    path: '/post/:postId',
+    name: 'post',
+    component: () => import('../views/PostView.vue'),
+  }
+
 ];
 
 const protectedLayoutRoutes: RouteRecordRaw[] = [
