@@ -39,7 +39,8 @@ Além disso, aplicamos o padrão <i>Facade</i> na integração com o serviço de
 De forma análoga, o <code><b>ChatGPTProvider</b></code> pode ser modelado como uma fachada para o subsistema de comunicação com modelos de linguagem. Ele implementa a interface <code>LLMProvider</code>, expondo apenas o método <code>chat</code>, enquanto oculta as chamadas HTTP, o manuseio de erros e a formatação das mensagens. Essa arquitetura permite que o sistema envie perguntas e receba respostas de forma eficiente e desacoplada da tecnologia subjacente<sup><a href="#ref3"><b>3</b></a></sup>.
 </p>
 <p style="text-align:justify">
-Contudo, embora a modelagem apresentada contemple a utilização da <code><b>GoogleCalendarAPI</b></code> e do serviço de autenticação <code><b>GoogleAuthService</b></code>, a implementação dessas funcionalidades não foi realizada nesta etapa do projeto. Tal decisão deve-se à limitação de tempo disponível para o desenvolvimento, bem como à limitada familiaridade da equipe com os processos específicos de autenticação e integração oferecidos pelas APIs do Google. Ainda assim, a estrutura arquitetural foi mantida como forma de representar a intenção de evolução futura do sistema e de demonstrar a aplicabilidade do padrão Facade em cenários de integração com serviços externos.
+Contudo, embora a modelagem apresentada contemple a utilização da <code><b>GoogleCalendarAPI</b></code> e do serviço de autenticação <code><b>GoogleAuthService</b></code>, a funcionalidade específica de integração com o Google Calendar ainda não foi implementada. Isso ocorreu devido à limitação de tempo e à pouca familiaridade da equipe com os processos de autenticação e consumo da API do Google. Ainda assim, o restante da estrutura do padrão Facade está em uso, garantindo a organização do sistema e facilitando uma futura expansão para incluir essa funcionalidade.
+
 </p>
 <font size="3"><p style="text-align: center"><b>Figura 2:</b> Aplicação do padrão Facade para provedor LLM</p></font>
 
@@ -73,7 +74,8 @@ O código mostra a implementação da classe <code>ChatGPTProvider</code>, que a
 |--------|------------|---------------------------------------------------| ---------------- |
 | 1.0.0  | 22-05-2025 | Criação do documento e seções iniciais            | [Gabriel Fernando de Jesus Silva][MMcLovin] |
 | 1.0.1  | 01-06-2025 | Adição da implementação do facade no ChatProvider            | [Matheus Brant][MatheussBrant] |
-| 1.0.2  | 01-06-2025 | Adição na modelagem do Facade- limitações na integração com Google Calendar| [Pedro Henrique][PedroHenrique061] |
+| 1.0.2  | 01-06-2025 | Adição na modelagem do Facade, limitações na integração com Google Calendar| [Pedro Henrique][PedroHenrique061] |
+
 
 [artrsousa1]: https://github.com/artrsousa1  
 [CaioHabibe]: https://github.com/CaioHabibe  
