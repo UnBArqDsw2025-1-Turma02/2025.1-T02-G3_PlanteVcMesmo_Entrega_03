@@ -8,8 +8,11 @@ const route = useRoute();
 </script>
 
 <template>
-  <header class="shadow-lg row-span-3 bg-secondary-green">
-    <div class="fixed right-3 top-3 flex flex-col items-end gap-2">
+  <header 
+    class="shadow-lg row-span-3 bg-secondary-green">
+    <div 
+      class="fixed right-3 top-3 flex flex-col items-end gap-2">
+
       <router-link v-if="route.name !== 'profile'" to="/profile">
         <img
           v-if="user"
