@@ -75,6 +75,61 @@ Sendo aplicado desta maneira:
 ```
 O commit completo desta implementação pode ser encontrado aqui: [AppLayout.vue](https://github.com/UnBArqDsw2025-1-Turma02/2025.1-T02-G3_PlanteVcMesmo_Entrega_03/commit/304e3f4f1087c6e578c69702039e3648be0f9591)
 
+## Modelagem
+Diante deste contexto de uso tem-se, por exemplo, analogamente ao UML: uma classe abstrata PostDisplayElement, as Leafs: PostHeaderDisplay (responsável por exibir título, autor e metadados), PostContentDisplay (apresentando o corpo principal da publicação, como texto e mídias) e PostInteractionControls (agrupando elementos de engajamento como botões de curtir, comentar e compartilhar), e por fim o Composite: PostView. Cada Leaf representa uma seção visual e funcional distinta da publicação, enquanto o Composite PostView agrega essas seções para formar a apresentação completa de uma publicação na interface [1]. É importante ressaltar que o PostView é formado pela combinação dessas Leafs, o que permite variações na apresentação e inclusão seletiva de funcionalidades conforme o contexto. Essa estrutura permite que a visualização da publicação (PostView) seja tratada como uma única entidade, simplificando sua construção, manipulação pela lógica da interface e a aplicação de atualizações visuais ou comportamentais de forma coesa.
+
+Esboço:
+![UML Composite post](../../assets/postdiagram.png)
+
+<font size="3"><p style="text-align: center"><b>Autor:</b> [Rafael Melo Matuda](https://github.com/rmatuda), 2025 </p></font>
+
+## Implementação
+A implementação do Composite é feita em diversos componentes do projeto, seguindo um padrão estrutural como no exemplo a seguir:
+```ts
+<Post>
+  <PostHeader>
+
+    <PostLabelGroup>
+      <PostLabel />
+    </PostLabelGroup>
+  </PostHeader>
+  <PostText>
+
+  </PostText>
+</Post>
+```
+Com isso, o projeto segue este padrão organizacional com todos os componentes, permitindo uma melhor manutenção e legibilidade do código. A imagem a seguir ilustra a estrutura do exemplo Footer citado anteriormente:
+
+[![UML Composite-post](../../assets/postcomposite.png)]
+(link do commit)
+
+Sendo aplicado desta maneira:
+```ts
+<template>
+  <Post>
+    <template v-slot:header>
+      <PostHeader
+        :title="post?.title"
+        :labels="post?.labels"
+      >
+        <PostLabelGroup>
+          <PostLabel
+            v-for="(label, index_label) in post?.labels"
+            :key="index_label"
+            :label="label"
+          />
+        </PostLabelGroup>
+      </PostHeader>
+    </template>
+    <template v-slot:main>
+      <PostText>
+        {{ post?.description }}
+      </PostText>
+    </template>
+  </Post>
+</template>
+```
+
 ## Referências
 
 1. LUQUE, LEANDRO; SILVA, RODRIGO ROCHA. *Builder e Composite: padrões para a sua caixa de ferramentas*. 2014.
@@ -88,3 +143,4 @@ O commit completo desta implementação pode ser encontrado aqui: [AppLayout.vue
 |--------|------------|---------------------------------------------------| ---------------- |
 | 0.0.1  | 24-05-2025 | Adição do Padrão Composite na Docmentação         | Caio Magalhães Lamego
 | 0.0.2  | 30-05-2025 | Revisão e detalhamento na documentação do Composite   | Caio Magalhães Lamego |
+| 0.0.3  | 01-06-2025 | Detalhamento na documentação do Composite (Post)  | Rafael Melo Matuda |
