@@ -1,11 +1,26 @@
 # 3.2. Módulo Padrões de Projeto GoFs Estruturais
 
-Foco_2: Padrões de Projeto GoFs Estruturais.
+Ao desenvolver sistemas complexos e de larga escala, a organização do comportamento entre objetos se torna um aspecto central para manter a legibilidade, manutenção e evolução do código. Os padrões de projeto comportamentais, definidos pelos autores do clássico Design Patterns: Elements of Reusable Object-Oriented Software, conhecido como Gang of Four (GoF), têm como foco a forma como os objetos interagem entre si e distribuem responsabilidades de maneira eficiente (Gamma, E., et al, 1994, p. 137)<sup><a><b>1</b></a></sup>.
 
-Entrega Mínima: 1 Padrão GoF Estrutural, com nível de modelagem e nível de implementação evidenciados (ou seja, código rodando e hospedado no repositório do projeto).
+Diferentemente dos padrões estruturais, que lidam com a organização física do código, os padrões comportamentais promovem flexibilidade na comunicação entre os componentes do sistema. Nesta seção, exploramos alguns desses padrões aplicados ao projeto, como Composite e Facade, destacando seus benefícios, justificativas de uso e reflexões práticas da equipe durante a modelagem e implementação.
 
-Apresentação (em sala) explicando o GoF Estrutural, com: (i) rastro claro aos membros participantes (MOSTRAR QUADRO DE PARTICIPAÇÕES & COMMITS); (ii) justificativas & senso crítico sobre o padrão GOF estrutural; e (iii) comentários gerais sobre o trabalho em equipe. Tempo da Apresentação: +/- 5min. Recomendação: Apresentar diretamente via Wiki ou GitPages do Projeto. Baixar os conteúdos com antecedência, evitando problemas de internet no momento de exposição nas Dinâmicas de Avaliação.
+## Referências
 
-A Wiki ou GitPages do Projeto deve conter um tópico dedicado ao Módulo Padrões de Projeto GoFs Estruturais, com 1 padrão GoF Estrutural (modelagem & implementação), histórico de versões, referências, e demais detalhamentos gerados pela equipe nesse escopo.
+1. <a id="#ref1"></a>Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994). Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley. Disponível em: https://www.javier8a.com/itc/bd1/articulo.pdf
 
-Demais orientações disponíveis nas Diretrizes (vide Moodle).
+| Versão | Data       | Alterações Principais                             | Autor(es)        |
+|--------|------------|---------------------------------------------------| ---------------- |
+| 1.0.0  | 01-06-2025 | Adição de introdução | [Caio Felipe Rocha][caio-felipee] |
+| 1.0.1  | 01-06-2025 | Revisão bibliográfica | [Gabriel Fernando De Jesus Silva][MMcLovin] e [Pedro Henrique Fernandino da Silva][PedroHenrique061] |
+
+[artrsousa1]: https://github.com/artrsousa1  
+[CaioHabibe]: https://github.com/CaioHabibe  
+[caio-felipee]: https://github.com/caio-felipee  
+[caiolamego]: https://github.com/caiolamego  
+[dcasseb]: https://github.com/dcasseb  
+[MMcLovin]: https://github.com/MMcLovin  
+[mateusvrs]: https://github.com/mateusvrs  
+[MatheussBrant]: https://github.com/MatheussBrant  
+[PedroHenrique061]: https://github.com/PedroHenrique061  
+[rmatuda]: https://github.com/rmatuda
+
