@@ -79,7 +79,7 @@ function sendMessage() {
       <span class="flex gap-1 text-primary-green font-semibold">
         Converse com nossa IA <img src="/happy-plant.png" />
       </span>
-      <div class="flex flex-col h-[300px] border border-primary-green rounded-lg overflow-hidden">
+      <div class="flex flex-col h-[220px] max-h-[220px] border border-primary-green rounded-lg overflow-hidden">
         <!-- Área de mensagens -->
         <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-2">
           <div
