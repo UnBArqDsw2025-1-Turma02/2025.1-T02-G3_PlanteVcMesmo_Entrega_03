@@ -73,8 +73,7 @@ O código mostra a implementação da classe <code>ChatGPTProvider</code>, que a
 |--------|------------|---------------------------------------------------| ---------------- |
 | 1.0.0  | 22-05-2025 | Criação do documento e seções iniciais            | [Gabriel Fernando de Jesus Silva][MMcLovin] |
 | 1.0.1  | 01-06-2025 | Adição da implementação do facade no ChatProvider            | [Matheus Brant][MatheussBrant] |
-| 1.0.1  | 01-06-2025 | Adição na modelagem do Facade e documentação de limitações na integração com Google Calendar
-| [Pedro Henrique][PedroHenrique061] |
+| 1.0.1  | 01-06-2025 | Adição na modelagem do Facade- limitações na integração com Google Calendar| [Pedro Henrique][PedroHenrique061] |
 
 [artrsousa1]: https://github.com/artrsousa1  
 [CaioHabibe]: https://github.com/CaioHabibe  
